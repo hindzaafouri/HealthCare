@@ -21,6 +21,8 @@ public interface IThreadService {
 
     public Iterable<Thread> findAll () ;
 
+    public List<String> getTopics () ;
+
     public void upThread (Long id) ;
     public void downThread (Long id) ;
 

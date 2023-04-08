@@ -6,10 +6,8 @@ import tn.esprit.healthcare.Entities.Thread;
 import tn.esprit.healthcare.Entities.Topic;
 import tn.esprit.healthcare.Repositories.ThreadRepository;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class ThreadService implements IThreadService {
@@ -49,6 +47,14 @@ public class ThreadService implements IThreadService {
     @Override
     public Iterable<Thread> findAll() {
         return threadRepository.findAll();
+    }
+
+    @Override
+    public List<String> getTopics() {
+            List<String> topics = Arrays.stream(Topic.values())
+                    .map(Topic::name)
+                    .collect(Collectors.toList());
+            return topics ;
     }
 
     @Override

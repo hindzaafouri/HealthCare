@@ -13,6 +13,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/thread-op")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ThreadController {
 
     @Autowired
@@ -63,6 +64,11 @@ public class ThreadController {
     public ResponseEntity<Void> downThread (@PathVariable long id) {
         threadService.downThread(id);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/topics")
+    public List<String> getTopics () {
+        return threadService.getTopics();
     }
 
 
