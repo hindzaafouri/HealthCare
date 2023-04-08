@@ -6,9 +6,11 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { RouterModule , Routes} from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { ThreadComponent } from './thread/thread.component';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
-   
+   { path : 'threads'  , component:ThreadComponent }
 ]
 
 @NgModule({
@@ -16,12 +18,15 @@ const routes: Routes = [
     AppComponent,
     HeaderComponent,
     FooterComponent,
+    ThreadComponent,
     HomeComponent
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    HttpClientModule
   ],
+  exports: [RouterModule],
   providers: [],
   bootstrap: [AppComponent]
 })
