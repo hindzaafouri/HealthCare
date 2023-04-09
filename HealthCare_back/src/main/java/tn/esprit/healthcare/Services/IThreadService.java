@@ -26,5 +26,7 @@ public interface IThreadService {
     public void upThread (Long id) ;
     public void downThread (Long id) ;
 
+    public List<Thread> getThreadsSortedByVotes() ;
+
 
 }

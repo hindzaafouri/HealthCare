@@ -11,15 +11,17 @@ import tn.esprit.healthcare.Services.IThreadService;
 import java.util.List;
 import java.util.Set;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/thread-op")
-@CrossOrigin(origins = "http://localhost:4200")
+
 public class ThreadController {
 
     @Autowired
     IThreadService threadService ;
 
-    @PostMapping("/addUpdate-thread")
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping("/add-thread")
     public ResponseEntity<Void> addUpdateThread (@RequestBody Thread thread) {
         threadService.addUpdateThread(thread);
         return ResponseEntity.status(HttpStatus.CREATED).build() ;
@@ -54,6 +56,8 @@ public class ThreadController {
         return threadService.findThreadByKeyWord(keyword) ;
     }
 
+
+
     @PostMapping("up/{id}")
     public ResponseEntity<Void> upThread (@PathVariable long id) {
         threadService.upThread(id);
@@ -69,6 +73,12 @@ public class ThreadController {
     @GetMapping("/topics")
     public List<String> getTopics () {
         return threadService.getTopics();
+    }
+
+    @GetMapping("/threads-ByVotes")
+    public ResponseEntity<List<Thread>> getThreadsSortedByVotes () {
+        List<Thread> threads = threadService.getThreadsSortedByVotes() ;
+        return ResponseEntity.ok(threads) ;
     }
 
 

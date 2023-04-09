@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/answer-op")
+@CrossOrigin(origins = "http://localhost:4200")
 public class AnswerController {
     @Autowired
     IAnswerService answerService ;

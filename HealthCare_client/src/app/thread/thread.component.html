@@ -1,246 +1,145 @@
 <div class="st-content">
-    <div class="st-page-heading st-size-md st-dynamic-bg" data-src="assets/img/hero-bg6.jpg">
-      <div class="container">
-        <div class="st-page-heading-in text-center">
-          <h1 class="st-page-heading-title">Our Latest News</h1>
-          <div class="st-page-heading-subtitle">Gate all update news here</div>
+  <div class="st-page-heading st-size-md st-dynamic-bg" data-src="assets/img/hero-bg6.jpg">
+    <div class="container">
+      <div class="st-page-heading-in text-center">
+        <h1 class="st-page-heading-title">Our Latest News</h1>
+        <div class="st-page-heading-subtitle">Gate all update news here</div>
+      </div>
+    </div>
+  </div><!-- .st-page-heading -->
+  <div class="st-height-b100 st-height-lg-b80"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="st-height-b0 st-height-lg-b40"></div>
+        <div class="row">
+
+          <div class="col-lg-6" *ngFor="let thread of threads">
+            <div class="st-post st-style3 st-zoom">
+              <a href="blog-details-right-sidebar.html" class="st-post-thumb">
+                <img class="st-zoom-in" src="assets/img/blog13.jpg" alt="blog1">
+              </a>
+              <div class="st-post-info">
+                <h2 class="st-post-title"><a href="blog-details-right-sidebar.html">{{ thread.titleThread }}</a></h2>
+                <div class="st-post-meta">
+                  <span>
+                    <a href="#" class="st-post-avatar">
+                      <span class="st-post-avatar-text">Admin</span>
+                    </a>
+                  </span>
+                  <span class="st-post-date">{{ thread.createdAt | date:'yyyy-MM-yyyy'}}</span>
+                </div>
+                <div class="st-post-text truncate-text">{{ thread.questionThread }}</div>
+              </div>
+              <div class="st-post-footer">
+                <a href="blog-details-right-sidebar.html" class="st-btn st-style2 st-color1 st-size-medium">Read
+                  More</a>
+              </div>
+            </div>
+            <div class="st-height-b30 st-height-lg-b30"></div>
+          </div>
+
+          <div class="col-lg-12">
+            <ul class="pagination st-post-pagination">
+              <li class="page-item disabled"><a class="page-link" href="#">Prev</a></li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item active"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div><!-- .st-page-heading -->
-    <div class="st-height-b100 st-height-lg-b80"></div>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8">
-          <div class="st-height-b0 st-height-lg-b40"></div>
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="st-post st-style3 st-zoom">
-                <a href="blog-details-right-sidebar.html" class="st-post-thumb">
-                  <img class="st-zoom-in" src="assets/img/blog13.jpg" alt="blog1">
-                </a>
-                <div class="st-post-info">
-                  <h2 class="st-post-title"><a href="blog-details-right-sidebar.html">Working in emergency on...</a></h2>
-                  <div class="st-post-meta">
-                    <span>
-                      <a href="#" class="st-post-avatar">
-                        <span class="st-post-avatar-text">Admin</span>
-                      </a>
-                    </span>
-                    <span class="st-post-date">August 07, 2020</span>
-                  </div>
-                  <div class="st-post-text">Lorem Ipsum is simply dummy text of the print ing and typesetting industry. lorem Ipsum the standard.</div>
-                </div>
-                <div class="st-post-footer">
-                  <a href="blog-details-right-sidebar.html" class="st-btn st-style2 st-color1 st-size-medium">Read More</a>
-                </div>
-              </div>
-              <div class="st-height-b30 st-height-lg-b30"></div>
-            </div>
-            <div class="col-lg-6">
-              <div class="st-post st-style3 st-zoom">
-                <a href="blog-details-right-sidebar.html" class="st-post-thumb">
-                  <img class="st-zoom-in" src="assets/img/blog5.jpg" alt="blog1">
-                </a>
-                <div class="st-post-info">
-                  <h2 class="st-post-title"><a href="blog-details-right-sidebar.html">Individual treatment & as...</a></h2>
-                  <div class="st-post-meta">
-                    <span>
-                      <a href="#" class="st-post-avatar">
-                        <span class="st-post-avatar-text">Admin</span>
-                      </a>
-                    </span>
-                    <span class="st-post-date">August 02, 2020</span>
-                  </div>
-                  <div class="st-post-text">Lorem Ipsum is simply dummy text of the print ing and typesetting industry. lorem Ipsum the standard.</div>
-                </div>
-                <div class="st-post-footer">
-                  <a href="blog-details-right-sidebar.html" class="st-btn st-style2 st-color1 st-size-medium">Read More</a>
-                </div>
-              </div>
-              <div class="st-height-b30 st-height-lg-b30"></div>
-            </div>
-            <div class="col-lg-6">
-              <div class="st-post st-style3 st-zoom">
-                <a href="blog-details-right-sidebar.html" class="st-post-thumb">
-                  <img class="st-zoom-in" src="assets/img/blog6.jpg" alt="blog1">
-                </a>
-                <div class="st-post-info">
-                  <h2 class="st-post-title"><a href="blog-details-right-sidebar.html">Child’s first hospital...</a></h2>
-                  <div class="st-post-meta">
-                    <span>
-                      <a href="#" class="st-post-avatar">
-                        <span class="st-post-avatar-text">Admin</span>
-                      </a>
-                    </span>
-                    <span class="st-post-date">August 01, 2020</span>
-                  </div>
-                  <div class="st-post-text">Lorem Ipsum is simply dummy text of the print ing and typesetting industry. lorem Ipsum the standard.</div>
-                </div>
-                <div class="st-post-footer">
-                  <a href="blog-details-right-sidebar.html" class="st-btn st-style2 st-color1 st-size-medium">Read More</a>
-                </div>
-              </div>
-              <div class="st-height-b30 st-height-lg-b30"></div>
-            </div>
-            <div class="col-lg-6">
-              <div class="st-post st-style3 st-zoom">
-                <a href="blog-details-right-sidebar.html" class="st-post-thumb">
-                  <img class="st-zoom-in" src="assets/img/blog9.jpg" alt="blog1">
-                </a>
-                <div class="st-post-info">
-                  <h2 class="st-post-title"><a href="blog-details-right-sidebar.html">Working in emergency on...</a></h2>
-                  <div class="st-post-meta">
-                    <span>
-                      <a href="#" class="st-post-avatar">
-                        <span class="st-post-avatar-text">Admin</span>
-                      </a>
-                    </span>
-                    <span class="st-post-date">August 07, 2020</span>
-                  </div>
-                  <div class="st-post-text">Lorem Ipsum is simply dummy text of the print ing and typesetting industry. lorem Ipsum the standard.</div>
-                </div>
-                <div class="st-post-footer">
-                  <a href="blog-details-right-sidebar.html" class="st-btn st-style2 st-color1 st-size-medium">Read More</a>
-                </div>
-              </div>
-              <div class="st-height-b30 st-height-lg-b30"></div>
-            </div>
-            <div class="col-lg-6">
-              <div class="st-post st-style3 st-zoom">
-                <a href="blog-details-right-sidebar.html" class="st-post-thumb">
-                  <img class="st-zoom-in" src="assets/img/blog10.jpg" alt="blog1">
-                </a>
-                <div class="st-post-info">
-                  <h2 class="st-post-title"><a href="blog-details-right-sidebar.html">Individual treatment & as...</a></h2>
-                  <div class="st-post-meta">
-                    <span>
-                      <a href="#" class="st-post-avatar">
-                        <span class="st-post-avatar-text">Admin</span>
-                      </a>
-                    </span>
-                    <span class="st-post-date">August 02, 2020</span>
-                  </div>
-                  <div class="st-post-text">Lorem Ipsum is simply dummy text of the print ing and typesetting industry. lorem Ipsum the standard.</div>
-                </div>
-                <div class="st-post-footer">
-                  <a href="blog-details-right-sidebar.html" class="st-btn st-style2 st-color1 st-size-medium">Read More</a>
-                </div>
-              </div>
-              <div class="st-height-b30 st-height-lg-b30"></div>
-            </div>
-            <div class="col-lg-6">
-              <div class="st-post st-style3 st-zoom">
-                <a href="blog-details-right-sidebar.html" class="st-post-thumb">
-                  <img class="st-zoom-in" src="assets/img/blog11.jpg" alt="blog1">
-                </a>
-                <div class="st-post-info">
-                  <h2 class="st-post-title"><a href="blog-details-right-sidebar.html">Child’s first hospital...</a></h2>
-                  <div class="st-post-meta">
-                    <span>
-                      <a href="#" class="st-post-avatar">
-                        <span class="st-post-avatar-text">Admin</span>
-                      </a>
-                    </span>
-                    <span class="st-post-date">August 01, 2020</span>
-                  </div>
-                  <div class="st-post-text">Lorem Ipsum is simply dummy text of the print ing and typesetting industry. lorem Ipsum the standard.</div>
-                </div>
-                <div class="st-post-footer">
-                  <a href="blog-details-right-sidebar.html" class="st-btn st-style2 st-color1 st-size-medium">Read More</a>
-                </div>
-              </div>
-              <div class="st-height-b30 st-height-lg-b30"></div>
-            </div>
-            <div class="col-lg-12">
-              <ul class="pagination st-post-pagination">
-                <li class="page-item disabled"><a class="page-link" href="#">Prev</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        
 
-        <div class="col-lg-4">
-            <div class="">
-                <div _ngcontent-wua-c20="" class="st-post-footer">
-                    <a _ngcontent-wua-c20="" href="blog-details-right-sidebar.html" class="st-btn st-style2 st-color1 st-size-medium">Add Thread</a>
-                </div>
-                <div class="st-height-b30 st-height-lg-b30"></div>
-           </div>
-          <div class="st-height-b0 st-height-lg-b40"></div>
-          <div class="st-widget st-sidebar-widget">
-            <h3 class="st-widget-title">Topics</h3>
-            <ul class="st-widget-list">
-              <li *ngFor="let topic of topics" [value]="topic"><a href="#">{{topic}}</a></li>
-            </ul>
+
+      <div class="col-lg-4">
+        <div class="">
+          <div _ngcontent-wua-c20="" class="st-post-footer">
+            <a _ngcontent-wua-c20="" href="#add-thread-forum" class="st-btn st-style2 st-color1 st-size-medium"><i
+                class="fas fa-plus" style="position: relative; margin-top: 5px; margin-right: 10px;"></i> Add Thread
+            </a>
           </div>
           <div class="st-height-b30 st-height-lg-b30"></div>
-          <div class="st-widget st-sidebar-widget">
-            <h3 class="st-widget-title">Arachives</h3>
-            <ul class="st-widget-list">
-              <li><a href="#">March 2020</a></li>
-              <li><a href="#">May 2020</a></li>
-              <li><a href="#">June 2020</a></li>
-              <li><a href="#">August 2020</a></li>
-              <li><a href="#">September 2020</a></li>
-              <li><a href="#">October 2020</a></li>
-            </ul>
-          </div>
-          <div class="st-height-b30 st-height-lg-b30"></div>
-          <div class="st-widget st-sidebar-widget">
-            <h3 class="st-widget-title">Recent Post</h3>
-            <ul class="st-post-widget-list st-mp0">
-              <li>
-                <div class="st-post st-style1">
-                  <a href="#" class="st-post-thumb st-zoom"><img src="assets/img/rs-post1.jpg" alt="post1" class="st-zoom-in"></a>
-                  <div class="st-post-info">
-                    <h2 class="st-post-title"><a href="blog-details-right-sidebar.html">Top Medical Tourism Destination...</a></h2>
-                    <div class="st-post-date">Jan 22, 2020</div>
-                  </div>
+        </div>
+        <div class="st-height-b0 st-height-lg-b40"></div>
+        <div class="st-widget st-sidebar-widget">
+          <h3 class="st-widget-title">Topics</h3>
+          <ul class="st-widget-list">
+            <li *ngFor="let topic of topics" [value]="topic" (click)="getThreadsByTopic(topic)"><a>{{ topic }}</a></li>
+          </ul>
+        </div>
+        <div class="st-height-b30 st-height-lg-b30"></div>
+        
+        <div class="st-widget st-sidebar-widget">
+          <h3 class="st-widget-title">Trending threads</h3>
+          <ul class="st-post-widget-list st-mp0">
+            <li *ngFor="let thread of threadsSortedByVote">
+              <div class="st-post st-style1">
+                <a href="#" class="st-post-thumb st-zoom"><img src="assets/img/rs-post1.jpg" alt="post1"
+                    class="st-zoom-in"></a>
+                <div class="st-post-info">
+                  <h2 class="st-post-title"><a href="blog-details-right-sidebar.html">{{ thread.titleThread }}</a></h2>
+                  <div class="st-post-date">{{ thread.createdAt | date:'yyyy-MM-yyyy'}}</div>
                 </div>
-              </li>
-              <li>
-                <div class="st-post st-style1">
-                  <a href="#" class="st-post-thumb st-zoom"><img src="assets/img/rs-post2.jpg" alt="post2" class="st-zoom-in"></a>
-                  <div class="st-post-info">
-                    <h2 class="st-post-title"><a href="blog-details-right-sidebar.html">Overview Malaysia as a medical tourism...</a></h2>
-                    <div class="st-post-date">Jan 15, 2020</div>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="st-post st-style1">
-                  <a href="#" class="st-post-thumb st-zoom"><img src="assets/img/rs-post3.jpg" alt="post2" class="st-zoom-in"></a>
-                  <div class="st-post-info">
-                    <h2 class="st-post-title"><a href="blog-details-right-sidebar.html">World Parkinson’s Day 2020 comes...</a></h2>
-                    <div class="st-post-date">Jan 05, 2020</div>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div class="st-height-b30 st-height-lg-b30"></div>
-          <div class="st-widget st-sidebar-widget">
-            <h3 class="st-widget-title">Popular Tags</h3>
-            <div class="st-tagcloud">
-              <a href="#" class="st-tag">Gallery</a>
-              <a href="#" class="st-tag">Quote</a>
-              <a href="#" class="st-tag">Video</a>
-              <a href="#" class="st-tag">Quote</a>
-              <a href="#" class="st-tag">Audio</a>
-              <a href="#" class="st-tag">Doctor</a>
-              <a href="#" class="st-tag">Link</a>
-              <a href="#" class="st-tag">Ipsum</a>
-              <a href="#" class="st-tag">Enviroment</a>
-              <a href="#" class="st-tag">Corporate</a>
-            </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="st-height-b30 st-height-lg-b30"></div>
+        <div class="st-widget st-sidebar-widget">
+          <h3 class="st-widget-title">Popular Tags</h3>
+          <div class="st-tagcloud">
+            <a href="#" class="st-tag">Gallery</a>
+            <a href="#" class="st-tag">Quote</a>
+            <a href="#" class="st-tag">Video</a>
+            <a href="#" class="st-tag">Quote</a>
+            <a href="#" class="st-tag">Audio</a>
+            <a href="#" class="st-tag">Doctor</a>
+            <a href="#" class="st-tag">Link</a>
+            <a href="#" class="st-tag">Ipsum</a>
+            <a href="#" class="st-tag">Enviroment</a>
+            <a href="#" class="st-tag">Corporate</a>
           </div>
         </div>
       </div>
     </div>
-    <div class="st-height-b100 st-height-lg-b80"></div>
   </div>
+  <div class="st-height-b100 st-height-lg-b80"></div>
+
+  <div class="st-height-b100 st-height-lg-b80"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="st-height-b60 st-height-lg-b60"></div>
+        <div class="" id="add-thread-forum">
+          <div class="comment-respond">
+            <h2 class="comment-reply-title">Add new Thread</h2>
+            <form method="post" class="comment-form" (ngSubmit)="addThreadOnSubmit()">
+              <p class="comment-form-author">
+                <input name="title" type="text" placeholder="Title*" required="" [(ngModel)]="thread.titleThread">
+              </p>
+
+              <div class="col-lg-6">
+                <div class="st-form-field st-style1">
+                  <div class="st-custom-select-wrap">
+                    <select name="topic" [(ngModel)]="thread.topicThread" class="" data-placeholder="Select topic" required>
+                      <option *ngFor="let topic of topics" [ngValue]="topic">{{topic}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <p class="comment-form-comment">
+                <textarea name="question" cols="40" rows="5" [(ngModel)]="thread.questionThread" placeholder="Write your question here ...*" required=""></textarea>
+              </p>
+              <p class="form-submit">
+                <button type="submit" class="st-btn st-style1 st-color1 st-size-medium">Add thread</button>
+              </p>
+            </form>
+            <div class="st-height-b60 st-height-lg-b60"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

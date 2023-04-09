@@ -1,13 +1,18 @@
 package tn.esprit.healthcare.Services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+import tn.esprit.healthcare.Entities.Answer;
 import tn.esprit.healthcare.Entities.Thread;
 import tn.esprit.healthcare.Entities.Topic;
 import tn.esprit.healthcare.Repositories.ThreadRepository;
 
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class ThreadService implements IThreadService {
@@ -17,6 +22,7 @@ public class ThreadService implements IThreadService {
 
     @Override
     public void addUpdateThread(Thread thread) {
+        thread.setCreatedAt(LocalDateTime.now());
         threadRepository.save(thread) ;
     }
 
@@ -91,7 +97,14 @@ public class ThreadService implements IThreadService {
         return matchingThreads;
     }
 
+    @Override
+    public List<Thread> getThreadsSortedByVotes() {
+        Iterable<Thread> optionalThread = threadRepository.findAll();
+        List<Thread> threads = StreamSupport.stream(optionalThread.spliterator(), false).collect(Collectors.toList());
+            threads.sort(Comparator.comparingInt(Thread::getVotes).reversed());
+        threads = threads.subList(0, 3) ;
+            return threads;
+        }
+    }
 
 
-
-}

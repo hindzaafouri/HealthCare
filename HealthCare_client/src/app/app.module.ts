@@ -8,9 +8,11 @@ import { RouterModule , Routes} from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ThreadComponent } from './thread/thread.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
-   { path : 'threads'  , component:ThreadComponent }
+   { path : 'threads'  , component:ThreadComponent },
+   { path : 'threads/:topic' , component:ThreadComponent }
 ]
 
 @NgModule({
@@ -24,7 +26,8 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   exports: [RouterModule],
   providers: [],
