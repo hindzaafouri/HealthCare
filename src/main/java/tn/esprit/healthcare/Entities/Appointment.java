@@ -12,12 +12,15 @@ public class Appointment implements Serializable{
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(nullable= false, updatable= false)
     private Long id_appointment;
-    // @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
     private String heure ;
     @Enumerated()
     @Column(name = "StateAppointment", nullable = false)
     private StateAppointment stateAppointment;
+
+    @OneToOne
+    @JoinColumn(name="id")
+    private User users;
     public Appointment(){}
     public Appointment(Long id_appointment, Date date, String Heure ,StateAppointment stateAppointment){}
 
@@ -51,5 +54,13 @@ public class Appointment implements Serializable{
 
     public void setStateAppointment(StateAppointment stateAppointment) {
         this.stateAppointment = stateAppointment;
+    }
+
+    public User getUsers() {
+        return users;
+    }
+
+    public void setUsers(User users) {
+        this.users = users;
     }
 }

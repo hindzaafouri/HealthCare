@@ -58,6 +58,7 @@ public class AppointmentController {
             appointmentO.setDate(appointment.getDate());
             appointmentO.setHeure(appointment.getHeure());
             appointmentO.setStateAppointment(appointment.getStateAppointment());
+            appointmentO.setUsers(appointment.getUsers());
             return new ResponseEntity<>(appointmentService.save(appointmentO), HttpStatus.CREATED);
         }catch(DataAccessException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

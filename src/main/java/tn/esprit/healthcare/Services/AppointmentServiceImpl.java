@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.esprit.healthcare.Entities.Appointment;
 import tn.esprit.healthcare.Repositories.AppointmentRepository;
+import tn.esprit.healthcare.Repositories.UserRepository;
 
 import java.util.List;
 
