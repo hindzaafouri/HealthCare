@@ -20,7 +20,6 @@ public class ThreadController {
     @Autowired
     IThreadService threadService ;
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/add-thread")
     public ResponseEntity<Void> addUpdateThread (@RequestBody Thread thread) {
         threadService.addUpdateThread(thread);

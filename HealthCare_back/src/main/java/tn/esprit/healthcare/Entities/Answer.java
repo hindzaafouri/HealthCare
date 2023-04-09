@@ -1,5 +1,6 @@
 package tn.esprit.healthcare.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -13,6 +14,7 @@ import java.util.Set;
 @Setter
 @ToString
 @Entity
+@JsonIgnoreProperties({"thread" , "comments"})
 public class Answer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,11 +24,13 @@ public class Answer implements Serializable {
     private int votes ;
 
     @ManyToOne
+
     Thread thread ;
 
     private LocalDateTime createdAt ;
 
     @OneToMany(cascade = CascadeType.ALL , mappedBy = "answer")
+
     private Set<Comment> comments ;
 
     /*@ManyToOne

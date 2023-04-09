@@ -14,6 +14,7 @@ import java.util.Set;
 @Setter
 @ToString
 @Entity
+@JsonIgnoreProperties("answers")
 public class Thread implements Serializable  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,9 +28,9 @@ public class Thread implements Serializable  {
     private String questionThread ;
 
     private LocalDateTime createdAt ;
+    private String coverPhotoThread ;
 
     @OneToMany(cascade = CascadeType.ALL , mappedBy = "thread")
-    @JsonIgnoreProperties("thread")
     private Set<Answer> answers ;
 
     /*@ManyToOne

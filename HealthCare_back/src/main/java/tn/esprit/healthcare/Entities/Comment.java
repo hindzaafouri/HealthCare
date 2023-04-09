@@ -1,5 +1,6 @@
 package tn.esprit.healthcare.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -11,6 +12,7 @@ import java.io.Serializable;
 @Setter
 @ToString
 @Entity
+@JsonIgnoreProperties("answer")
 public class Comment implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
