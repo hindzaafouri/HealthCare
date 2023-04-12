@@ -6,5 +6,6 @@ export interface Thread {
     questionThread: string;
     createdAt: Date;
     status: boolean;
+    coverPhotoThread:string ;
     //answers: Answer[];
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { Thread } from 'src/models/Thread';
 import { Topic } from 'src/models/Topic';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,12 +11,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ThreadComponent implements OnInit {
 
+  public message!: string;
   thread: Thread = {} as Thread;
   topics: Topic[] = [];
   threads: any[] = [];
   threadsSortedByVote: any[] = [];
   threadsByTopic: any[] = [];
   topicsValues: Topic[] = Object.values(Topic);
+  coverPhotoThread: File | null = null;
 
   constructor(private http: HttpClient , private router: Router , private route: ActivatedRoute) { }
 
@@ -51,9 +53,13 @@ export class ThreadComponent implements OnInit {
     
   }
 
+
+
   addThreadOnSubmit(): void {
     console.log(this.thread.topicThread);
+    const formData = new FormData();
     this.thread.topicThread = this.thread.topicThread.toString();
+    
     this.http.post('http://localhost:8080/healthcare/thread-op/add-thread', this.thread).subscribe(
       data => {
         console.log(data);
@@ -65,6 +71,10 @@ export class ThreadComponent implements OnInit {
     );
     this.thread = {} as Thread;
   }
+
+
+
+
 
   getThreadsByTopic(topic: Topic): void  {
     const topicString = topic.toString();

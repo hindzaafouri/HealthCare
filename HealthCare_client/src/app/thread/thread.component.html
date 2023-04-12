@@ -69,7 +69,7 @@
           </ul>
         </div>
         <div class="st-height-b30 st-height-lg-b30"></div>
-        
+
         <div class="st-widget st-sidebar-widget">
           <h3 class="st-widget-title">Trending threads</h3>
           <ul class="st-post-widget-list st-mp0">
@@ -105,41 +105,66 @@
     </div>
   </div>
   <div class="st-height-b100 st-height-lg-b80"></div>
+  <section id="appointment" class="st-shape-wrap st-gray-bg" style="background-color:white">
+    <div class="st-shape1"><img src="assets/img/shape/contact-shape1.svg" alt="shape1"></div>
+    <div class="st-shape4">
+      <img src="assets/img/shape/section_shape.png" alt="shape1">
+    </div>
+    <div class="st-shape6">
+      <img src="assets/img/shape/contact-shape3.svg" alt="shape3">
+    </div>
+    <div class="st-height-b120 st-height-lg-b80"></div>
+    <div class="container">
+      <div class="st-section-heading st-style1">
+        <h2 class="st-section-heading-title">Add a new Thread</h2>
+        <div class="st-seperator">
+          <div class="st-seperator-left wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.2s"></div>
+          <div class="st-seperator-center"><img src="assets/img/icons/4.png" alt="icon"></div>
+          <div class="st-seperator-right wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.2s"></div>
+        </div>
+        <div class="st-section-heading-subtitle">Lorem Ipsum is simply dummy text of the printing and typesetting
+          industry. <br>Lorem Ipsum the industry's standard dummy text.</div>
+      </div>
+      <div class="st-height-b40 st-height-lg-b40"></div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-10 offset-lg-1">
+          <form method="post" class="comment-form" (ngSubmit)="addThreadOnSubmit()">
+            <p class="comment-form-author">
+              <input name="title" type="text" placeholder="Title*" required="" [(ngModel)]="thread.titleThread">
+            </p>
 
-  <div class="st-height-b100 st-height-lg-b80"></div>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8">
-        <div class="st-height-b60 st-height-lg-b60"></div>
-        <div class="" id="add-thread-forum">
-          <div class="comment-respond">
-            <h2 class="comment-reply-title">Add new Thread</h2>
-            <form method="post" class="comment-form" (ngSubmit)="addThreadOnSubmit()">
-              <p class="comment-form-author">
-                <input name="title" type="text" placeholder="Title*" required="" [(ngModel)]="thread.titleThread">
-              </p>
 
-              <div class="col-lg-6">
-                <div class="st-form-field st-style1">
-                  <div class="st-custom-select-wrap">
-                    <select name="topic" [(ngModel)]="thread.topicThread" class="" data-placeholder="Select topic" required>
-                      <option *ngFor="let topic of topics" [ngValue]="topic">{{topic}}</option>
-                    </select>
-                  </div>
-                </div>
+            <div class="st-form-field st-style1" style="width: 50%;">
+              <div class="st-custom-select-wrap">
+                <select name="topic" [(ngModel)]="thread.topicThread" class="" data-placeholder="Select topic" required>
+                  <option *ngFor="let topic of topics" [ngValue]="topic">{{topic}}</option>
+                </select>
               </div>
+            </div>
 
-              <p class="comment-form-comment">
-                <textarea name="question" cols="40" rows="5" [(ngModel)]="thread.questionThread" placeholder="Write your question here ...*" required=""></textarea>
-              </p>
+            <p class="comment-form-comment">
+              <textarea name="question" cols="40" rows="5" [(ngModel)]="thread.questionThread"
+                placeholder="Write your question here ...*" required=""></textarea>
+            </p>
+
+            <p class="comment-form-comment">
+              <label>File Upload </label>
+              <input type="file" accept="image/*">
+              <img [src]="thread.coverPhotoThread" height="200" *ngIf="thread.coverPhotoThread">
+            </p>
+
+
+            <div class="row">
               <p class="form-submit">
                 <button type="submit" class="st-btn st-style1 st-color1 st-size-medium">Add thread</button>
               </p>
-            </form>
-            <div class="st-height-b60 st-height-lg-b60"></div>
-          </div>
+            </div>
+            <div class="st-height-b100 st-height-lg-b80"></div>
+          </form>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </div>
