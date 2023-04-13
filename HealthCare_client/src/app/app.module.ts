@@ -6,6 +6,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { RouterModule , Routes} from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { AppRoutingModule } from './app-routing.module';
 
 const routes: Routes = [
    // { path : "path_name" , component : "component_name"}
@@ -20,7 +21,8 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
