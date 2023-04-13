@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { ThreadComponent } from './thread/thread.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
 
 const routes: Routes = [
    { path : 'threads'  , component:ThreadComponent },
@@ -27,7 +28,8 @@ const routes: Routes = [
     BrowserModule,
     RouterModule.forRoot(routes),
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   exports: [RouterModule],
   providers: [],
