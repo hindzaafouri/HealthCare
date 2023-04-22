@@ -3,7 +3,6 @@ package tn.esprit.healthcare.controllers;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import tn.esprit.healthcare.EmailPackage.EmailDetails;
 import tn.esprit.healthcare.EmailPackage.EmailService;
 import tn.esprit.healthcare.entities.PatientFile;
 import tn.esprit.healthcare.services.IPatientFileService;
@@ -22,10 +21,13 @@ public class PatientFileController {
     IPatientFileService IPatientFileService;
   //  @Autowired
     IPatientFileServiceImpl iPatientFileServiceimpl;
+    @Autowired
+
     EmailService emailService;
-    EmailDetails emailDetails;
     @GetMapping("/all")
     public List<PatientFile> getAll(){
+        String body="test";
+        emailService.sendMail("moatez.oueslati@esprit.tn","invitation",body);
         return IPatientFileService.getAllPatientFile();
 
     }
