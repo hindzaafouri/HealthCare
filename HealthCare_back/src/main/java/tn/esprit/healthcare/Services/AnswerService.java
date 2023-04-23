@@ -45,7 +45,8 @@ public class AnswerService implements IAnswerService{
         answerRepository.delete(answer);
     }
 
-    @Override
+
+    /*@Override
     public Answer findAnswerByIdForThread(Long idAnswer, Long idThread) {
         Optional<Thread> optionalThread = threadRepository.findById(idThread);
         if (optionalThread.isPresent()) {
@@ -57,7 +58,7 @@ public class AnswerService implements IAnswerService{
             }
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Thread not found");
-    }
+    }*/
 
     @Override
     public Answer findAnswerById(Long idAnswer) {
@@ -75,6 +76,11 @@ public class AnswerService implements IAnswerService{
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Thread not found");
         }
+    }
+
+    @Override
+    public Set<Answer> findAnswersByThreadOrderByCreatedAt(Thread thread) {
+        return answerRepository.findAnswersByThreadOrderByCreatedAt(thread) ;
     }
 
 

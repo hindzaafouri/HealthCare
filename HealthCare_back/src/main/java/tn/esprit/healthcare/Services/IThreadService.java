@@ -13,8 +13,6 @@ public interface IThreadService {
 
     public void deleteThread (Thread thread) ;
 
-    public Set<Thread> findThreadByTopic (Topic topic) ;
-
     public Thread findThreadById(Long id) ;
 
     public Set<Thread> findThreadByKeyWord (String keyword) ;
@@ -27,6 +25,8 @@ public interface IThreadService {
     public void downThread (Long id) ;
 
     public List<Thread> getThreadsSortedByVotes() ;
+
+    public Set<Thread> findThreadByTopic (Topic topic) ;
 
 
 }

@@ -31,19 +31,6 @@ public class ThreadService implements IThreadService {
         threadRepository.delete(thread);
     }
 
-    @Override
-    public Set<Thread> findThreadByTopic(Topic topic) {
-        List<Thread> listThread = (List)threadRepository.findAll();
-        Set<Thread> listThreadByTopic = new HashSet<>() ;
-
-        for (Thread thread : listThread) {
-            Topic topicFromThread = thread.getTopicThread();
-            if(topicFromThread == topic) {
-                listThreadByTopic.add(thread) ;
-            }
-        }
-        return listThreadByTopic ;
-    }
 
     @Override
     public Thread findThreadById(Long id) {
@@ -105,6 +92,13 @@ public class ThreadService implements IThreadService {
         threads = threads.subList(0, 3) ;
             return threads;
         }
+
+    @Override
+    public Set<Thread> findThreadByTopic(Topic topic) {
+        return threadRepository.findByTopicThread(topic) ;
     }
+}
+
+
 
 

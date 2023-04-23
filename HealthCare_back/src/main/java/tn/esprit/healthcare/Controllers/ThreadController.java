@@ -20,6 +20,7 @@ public class ThreadController {
     @Autowired
     IThreadService threadService ;
 
+
     @PostMapping("/add-thread")
     public ResponseEntity<Void> addUpdateThread (@RequestBody Thread thread) {
         threadService.addUpdateThread(thread);
@@ -44,6 +45,7 @@ public class ThreadController {
         Iterable<Thread> threads = threadService.findAll();
         return ResponseEntity.ok(threads) ;
     }
+
 
     @GetMapping("/thread-byTopic/{topic}")
     public Set<Thread> getThreadByTopic (@PathVariable Topic topic) {

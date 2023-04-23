@@ -2,8 +2,8 @@
   <div class="st-page-heading st-size-md st-dynamic-bg" data-src="assets/img/hero-bg6.jpg">
     <div class="container">
       <div class="st-page-heading-in text-center">
-        <h1 class="st-page-heading-title">Our Latest News</h1>
-        <div class="st-page-heading-subtitle">Gate all update news here</div>
+        <h1 class="st-page-heading-title">Forum</h1>
+        <div class="st-page-heading-subtitle">Find answers and ask questions here !</div>
       </div>
     </div>
   </div><!-- .st-page-heading -->
@@ -13,8 +13,18 @@
       <div class="col-lg-8">
         <div class="st-height-b0 st-height-lg-b40"></div>
         <div class="row">
+          <div class="col-lg-12">
+            <div class="st-form-field st-style1">
+             <label>Search Thread By Key Word</label>
+              <input type="text" id="keyword" name="keyword" placeholder="Key Word" [(ngModel)]="searchByKeyWord">
+            </div>
+          </div>
+        </div>
+        <div class="row">
 
-          <div class="col-lg-6" *ngFor="let thread of threads">
+          
+          <div class="col-lg-6" *ngFor="let thread of (selectedTopic ? filteredThreads : threads)  ">
+            <div *ngIf="(thread.titleThread.toLowerCase().includes(searchByKeyWord.toLowerCase()) || thread.questionThread.toLowerCase().includes(searchByKeyWord.toLowerCase()) || thread.topicThread.toLowerCase().includes(searchByKeyWord.toLowerCase()) || searchByKeyWord == '')">
             <div class="st-post st-style3 st-zoom">
               <a href="blog-details-right-sidebar.html" class="st-post-thumb">
                 <img class="st-zoom-in" src="assets/img/blog13.jpg" alt="blog1">
@@ -32,11 +42,11 @@
                 <div class="st-post-text truncate-text">{{ thread.questionThread }}</div>
               </div>
               <div class="st-post-footer">
-                <a href="blog-details-right-sidebar.html" class="st-btn st-style2 st-color1 st-size-medium">Read
-                  More</a>
+                <a  [routerLink]="['/threads', thread.idThread]" class="st-btn st-style2 st-color1 st-size-medium">Read More</a>
               </div>
             </div>
             <div class="st-height-b30 st-height-lg-b30"></div>
+          </div>
           </div>
 
           <div class="col-lg-12">
@@ -48,6 +58,7 @@
               <li class="page-item"><a class="page-link" href="#">Next</a></li>
             </ul>
           </div>
+
         </div>
       </div>
 
@@ -64,11 +75,16 @@
         <div class="st-height-b0 st-height-lg-b40"></div>
         <div class="st-widget st-sidebar-widget">
           <h3 class="st-widget-title">Topics</h3>
-          <ul class="st-widget-list">
+          <!--<ul class="st-widget-list">
             <li *ngFor="let topic of topics" [value]="topic" (click)="getThreadsByTopic(topic)"><a>{{ topic }}</a></li>
-          </ul>
+          </ul>-->
+          <div *ngFor="let topic of topics">
+            <input type="radio" name="topic" [(ngModel)]="selectedTopic" [value]="topic" (change)="onTopicChange()"> {{topic}}
+          </div>
+
         </div>
         <div class="st-height-b30 st-height-lg-b30"></div>
+        
 
         <div class="st-widget st-sidebar-widget">
           <h3 class="st-widget-title">Trending threads</h3>
@@ -144,6 +160,7 @@
               </div>
             </div>
 
+
             <p class="comment-form-comment">
               <textarea name="question" cols="40" rows="5" [(ngModel)]="thread.questionThread"
                 placeholder="Write your question here ...*" required=""></textarea>
@@ -151,7 +168,7 @@
 
             <p class="comment-form-comment">
               <label>File Upload </label>
-              <input type="file" accept="image/*">
+              <input type="file" accept="image/*" (change)="onFileSelected($event)">
               <img [src]="thread.coverPhotoThread" height="200" *ngIf="thread.coverPhotoThread">
             </p>
 
@@ -168,3 +185,4 @@
     </div>
   </section>
 </div>
+<router-outlet></router-outlet>

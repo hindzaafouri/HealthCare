@@ -7,9 +7,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import tn.esprit.healthcare.Entities.Answer;
+import tn.esprit.healthcare.Entities.Thread;
 import tn.esprit.healthcare.Services.IAnswerService;
+import tn.esprit.healthcare.Services.IThreadService;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/answer-op")
@@ -17,6 +21,9 @@ import java.util.List;
 public class AnswerController {
     @Autowired
     IAnswerService answerService ;
+
+    @Autowired
+    IThreadService threadService ;
 
     @PostMapping("/add-answer/{idThread}")
     public ResponseEntity<Void> addAnswerAndAssignToThread (@RequestBody Answer answer , @PathVariable Long idThread) {
@@ -30,16 +37,16 @@ public class AnswerController {
         answerService.deleteAnswer(answer);
     }
 
-    @GetMapping("/{idAnswer}/{idThread}")
+   /*@GetMapping("/{idAnswer}/{idThread}")
     public ResponseEntity<?> findAnswerByIdForThread(@PathVariable  Long idAnswer, @PathVariable Long idThread) {
         try {
             Answer result = answerService.findAnswerByIdForThread(idAnswer, idThread);
-            return ResponseEntity.status(HttpStatus.OK).body(result);
+            return ResponseEntity.status(HttpStatus.FOUND).body(result);
         } catch (ResponseStatusException e) {
             return ResponseEntity.status(e.getStatus()).body(e.getMessage());
         }
+    }*/
 
-    }
 
     @GetMapping("/sortedByVotes/{idThread}")
     public ResponseEntity<?> getAnswersSortedByVotes (@PathVariable Long idThread) {
@@ -51,6 +58,12 @@ public class AnswerController {
         }
     }
 
+    @GetMapping("/answers-byThread/{idThread}")
+    public ResponseEntity<Set<Answer>> findAnswersByThreadOrderByCreatedAt (@PathVariable Long idThread) {
+        Thread thread = threadService.findThreadById(idThread) ;
+        Set<Answer> result = answerService.findAnswersByThreadOrderByCreatedAt(thread) ;
+        return ResponseEntity.status(HttpStatus.FOUND).body(result);
+    }
 
 
 }

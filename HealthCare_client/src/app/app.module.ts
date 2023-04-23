@@ -10,10 +10,11 @@ import { ThreadComponent } from './thread/thread.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
+import { ThreadDetailsComponent } from './thread-details/thread-details.component';
 
 const routes: Routes = [
    { path : 'threads'  , component:ThreadComponent },
-   { path : 'threads/:topic' , component:ThreadComponent }
+   { path : 'threads/:idThread', component:ThreadDetailsComponent }
 ]
 
 @NgModule({
@@ -22,7 +23,8 @@ const routes: Routes = [
     HeaderComponent,
     FooterComponent,
     ThreadComponent,
-    HomeComponent
+    HomeComponent,
+    ThreadDetailsComponent
   ],
   imports: [
     BrowserModule,

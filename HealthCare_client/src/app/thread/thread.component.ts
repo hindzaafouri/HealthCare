@@ -18,7 +18,11 @@ export class ThreadComponent implements OnInit {
   threadsSortedByVote: any[] = [];
   threadsByTopic: any[] = [];
   topicsValues: Topic[] = Object.values(Topic);
-  coverPhotoThread: File | null = null;
+  selectedFile: File | null = null;
+  searchByKeyWord : string = '';
+  selectedTopic: string = '';
+  filteredThreads: Thread[] = [];
+
 
   constructor(private http: HttpClient , private router: Router , private route: ActivatedRoute) { }
 
@@ -40,6 +44,8 @@ export class ThreadComponent implements OnInit {
     );
   }
 
+  
+
   getThreadsSortedByVotes() : void {
     this.http.get<Thread[]>('http://localhost:8080/healthcare/thread-op/threads-ByVotes').subscribe(
       data => {
@@ -56,27 +62,59 @@ export class ThreadComponent implements OnInit {
 
 
   addThreadOnSubmit(): void {
-    console.log(this.thread.topicThread);
     const formData = new FormData();
     this.thread.topicThread = this.thread.topicThread.toString();
-    
-    this.http.post('http://localhost:8080/healthcare/thread-op/add-thread', this.thread).subscribe(
-      data => {
-        console.log(data);
-        this.getThreads();
-      },
-      error => {
-        console.log(error);
-      }
-    );
-    this.thread = {} as Thread;
+  
+    if (this.selectedFile) {
+      const reader = new FileReader();
+      reader.readAsDataURL(this.selectedFile);
+      reader.onload = () => {
+        const imageString = reader.result as string;
+        this.thread.coverPhotoThread = imageString;
+        if (this.selectedFile) {
+          formData.append('imageThread', this.selectedFile, this.selectedFile.name);
+        }
+        formData.append('thread', JSON.stringify(this.thread));
+
+        const httpOptions = {
+          headers: new HttpHeaders({
+            'Content-Type': 'multipart/form-data'
+          })
+        };
+
+        this.http.post('http://localhost:8080/healthcare/thread-op/add-thread', formData , httpOptions).subscribe(
+          data => {
+            console.log(data);
+            this.getThreads();
+          },
+          error => {
+            console.log(error);
+          }
+        );
+        this.thread = {} as Thread;
+      };
+    } else {
+      formData.append('thread', JSON.stringify(this.thread));
+      this.http.post('http://localhost:8080/healthcare/thread-op/add-thread', formData).subscribe(
+        data => {
+          console.log(data);
+          this.getThreads();
+        },
+        error => {
+          console.log(error);
+        }
+      );
+      this.thread = {} as Thread;
+    }
   }
 
+  onFileSelected(event: Event) {
+    if (event.target && event.target instanceof HTMLInputElement && event.target.files) {
+      this.selectedFile = event.target.files[0];
+    }
+  }
 
-
-
-
-  getThreadsByTopic(topic: Topic): void  {
+  /*getThreadsByTopic(topic: Topic): void  {
     const topicString = topic.toString();
     this.http.get<Thread[]>(`http://localhost:8080/healthcare/thread-op/thread-byTopic/${topic}`).subscribe((threadsByTopic) => {
       this.threadsByTopic = threadsByTopic;
@@ -86,21 +124,24 @@ export class ThreadComponent implements OnInit {
       //Update displayed threads
       this.threads = threadsByTopic;
     });
+  }*/
+
+  
+
+  onTopicChange() {
+    if (this.selectedTopic) {
+      this.filteredThreads = this.threads.filter(thread => thread.topicThread === this.selectedTopic);
+    } else {
+      this.filteredThreads = this.threads;
+    }
   }
 
   ngOnInit(): void {
     this.getTopics() ;
     this.getThreads() ;
     this.getThreadsSortedByVotes() ;
-    this.route.params.subscribe(params => {
-      const topic = params['topic'];
-      if (topic) {
-        this.getThreadsByTopic(topic);
-      } else {
-        this.getThreads();
-      }
-    });
   }
+
 
   
 

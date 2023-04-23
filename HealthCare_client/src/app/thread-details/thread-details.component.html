@@ -1,0 +1,108 @@
+<div class="st-content">
+    <div class="container">
+        <!-- test -->
+        <p>thread-details works!</p>
+        <p>Thread ID: {{ threadId }}</p>
+
+        <div *ngIf="thread">
+            <h1>{{ thread.titleThread }}</h1>
+            <p>{{ thread.questionThread }}</p>
+            <p>{{ thread.topicThread }}</p>
+            <p>{{ thread.createdAt | date:'yyyy-MM-dd HH:mm:ss' }}</p>
+            <!-- Add any other properties of the thread object as needed -->
+        </div>
+
+        <div *ngIf="!thread">
+            <p>Loading thread details...</p>
+        </div>
+
+        <!--test-->
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="comments-area">
+                    <div class="comment-list-outer">
+                        <h2 class="comments-title">Comments(3)</h2>
+                        <ol class="comment-list">
+                            <li class="comment">
+                                <div class="comment-body">
+                                    <div class="comment-meta">
+                                        <div class="comment-author">
+                                            <img src="assets/img/comment1.jpg" alt="comment1" class="avatar">
+                                            <a href="#" class="nm">Smith Jhon</a>
+                                        </div><!-- .comment-author -->
+                                        <div class="comment-metadata">
+                                            <a href="#"><span>15 Jan, 2020</span></a>
+                                        </div><!-- .comment-metadata -->
+                                    </div><!-- .comment-meta -->
+                                    <div class="comment-content">
+                                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+                                    </div>
+                                    <div class="reply"><a href="#" class="comment-reply-link">Reply</a></div>
+                                </div>
+                                <ol class="children">
+                                    <li class="comment">
+                                        <div class="comment-body">
+                                            <div class="comment-meta">
+                                                <div class="comment-author">
+                                                    <img src="assets/img/comment2.jpg" alt="comment1" class="avatar">
+                                                    <span class="nm"><a href="#">Robat Newman</a></span>
+                                                </div><!-- .comment-author -->
+                                                <div class="comment-metadata">
+                                                    <a href="#"><span>15 Jan, 2020</span></a>
+                                                </div><!-- .comment-metadata -->
+                                            </div><!-- .comment-meta -->
+                                            <div class="comment-content">
+                                                <p>Consectetuer adipiscing elit. Lorem ipsum dolor sit amet,
+                                                    consectetuer.</p>
+                                            </div>
+                                            <div class="reply"><a href="#" class="comment-reply-link">Reply</a></div>
+                                        </div>
+                                    </li>
+                                </ol><!-- .children -->
+                            </li>
+                            <li class="comment">
+                                <div class="comment-body">
+                                    <div class="comment-meta">
+                                        <div class="comment-author">
+                                            <img src="assets/img/comment1.jpg" alt="comment1" class="avatar">
+                                            <span class="nm"><a href="#">Hannibal Lecter</a></span>
+                                        </div><!-- .comment-author -->
+                                        <div class="comment-metadata">
+                                            <a href="#"><span>26 Jan, 2016</span></a>
+                                        </div><!-- .comment-metadata -->
+                                    </div><!-- .comment-meta -->
+                                    <div class="comment-content">
+                                        <p>Lorem ipsum dolor sit amet. Lorem ipsum adipiscing elit.</p>
+                                    </div>
+                                    <div class="reply"><a href="#" class="comment-reply-link">Reply</a></div>
+                                </div>
+                            </li>
+                        </ol><!-- .comment-list -->
+                    </div><!-- .comment-list-outer -->
+                    <div class="comment-respond">
+                        <h2 class="comment-reply-title">Add your comment</h2>
+                        <form method="post" class="comment-form">
+                            <p class="comment-form-author">
+                                <input name="author" type="text" placeholder="Name*" required="">
+                            </p>
+                            <p class="comment-form-email">
+                                <input name="email" type="email" placeholder="E-mail*" required="">
+                            </p>
+                            <p class="comment-form-url">
+                                <input id="url" name="url" type="url" placeholder="Website">
+                            </p>
+                            <p class="comment-form-comment">
+                                <textarea name="comment" cols="40" rows="5" placeholder="Write here...*"
+                                    required=""></textarea>
+                            </p>
+                            <p class="form-submit">
+                                <button type="submit" class="st-btn st-style1 st-color1 st-size-medium">Send
+                                    Message</button>
+                            </p>
+                        </form>
+                    </div><!-- .comment-respond -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
