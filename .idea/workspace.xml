@@ -5,20 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="88b97019-5370-459d-82cc-fb995786e058" name="Changes" comment="front project added">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/healthcare/Controllers/ControllerTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/healthcare/Entities/EntityTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/healthcare/HealthcareApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/healthcare/Repositories/RepositoryTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/healthcare/Security/SecurityTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/healthcare/Services/ServiceTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/tn/esprit/healthcare/HealthcareApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HealthCare_back/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/HealthCare_back/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HealthCare_back/src/main/java/tn/esprit/healthcare/Controllers/ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/HealthCare_back/src/main/java/tn/esprit/healthcare/Controllers/ControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HealthCare_back/src/main/java/tn/esprit/healthcare/HealthcareApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/HealthCare_back/src/main/java/tn/esprit/healthcare/HealthcareApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HealthCare_back/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/HealthCare_back/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,23 +51,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Esprit/pi-cloud/HealthCare&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;9ff28bfa80b1beaca18e167df071db6e&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/Cyrine/workspace_intellij/HealthCare/HealthCare_back",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "spring.configuration.checksum": "9ff28bfa80b1beaca18e167df071db6e",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="HealthcareApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="healthcare" />
@@ -99,6 +89,7 @@
       <workItem from="1680022221427" duration="42000" />
       <workItem from="1680909164867" duration="102000" />
       <workItem from="1680909286939" duration="2794000" />
+      <workItem from="1681737219114" duration="89000" />
     </task>
     <task id="LOCAL-00001" summary="packages added final">
       <created>1679864198263</created>
