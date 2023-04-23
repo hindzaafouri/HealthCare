@@ -2,26 +2,25 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
 import { RouterModule , Routes} from '@angular/router';
-import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
+import { AllTemplateClientComponent } from './frontOffice/all-template-client/all-template-client.component';
+import { HeaderComponent } from './frontOffice/header/header.component';
+import { FooterComponent } from './frontOffice/footer/footer.component';
+import { BodyComponent } from './frontOffice/body/body.component';
 
-const routes: Routes = [
-   // { path : "path_name" , component : "component_name"}
-]
 
 @NgModule({
   declarations: [
     AppComponent,
+    AllTemplateClientComponent,
     HeaderComponent,
     FooterComponent,
-    HomeComponent
+    BodyComponent
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes),
+    RouterModule,
     AppRoutingModule
   ],
   providers: [],
