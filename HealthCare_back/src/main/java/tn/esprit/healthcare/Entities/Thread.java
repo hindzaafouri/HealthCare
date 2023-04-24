@@ -33,6 +33,6 @@ public class Thread implements Serializable  {
     @OneToMany(cascade = CascadeType.ALL , mappedBy = "thread")
     private Set<Answer> answers ;
 
-    /*@ManyToOne
-    User user ; */
+    @ManyToOne
+    User user ;
 }

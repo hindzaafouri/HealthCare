@@ -16,7 +16,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Table(name = "user")
-public class User{
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -38,10 +38,11 @@ public class User{
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Role> userRoles = new HashSet<>();
-    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "code_id")
     @JsonIgnore
     private Code code;
+
     public Set<Role> getUserRoles() {
         return userRoles;
     }
@@ -101,4 +102,17 @@ public class User{
     public void setCode(Code code) {
         this.code = code;
     }
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private Set<Answer> answers;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private Set<Thread> threads;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private Set<Comment> comments;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private Set<Appointment> appointments;
+
 }

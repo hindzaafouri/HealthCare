@@ -33,7 +33,7 @@ public class Answer implements Serializable {
 
     private Set<Comment> comments ;
 
-    /*@ManyToOne
-    User user ; */
+    @ManyToOne
+    User user ;
 
 }

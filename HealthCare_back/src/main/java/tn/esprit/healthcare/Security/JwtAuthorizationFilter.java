@@ -14,7 +14,6 @@ import tn.esprit.healthcare.Entities.User;
 import tn.esprit.healthcare.Payload.JwtProperties;
 import tn.esprit.healthcare.Payload.UserPrincipal;
 import tn.esprit.healthcare.Repositories.UserRepository;
-import tn.esprit.healthcare.Services.LoginAttemptService;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -27,8 +26,7 @@ import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter{
 
     private UserRepository userRepository;
-    @Autowired
-    private LoginAttemptService loginAttemptService;
+
 
     public JwtAuthorizationFilter(AuthenticationManager authenticationManager, UserRepository userRepository) {
         super(authenticationManager);
@@ -48,11 +46,11 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter{
 
         if ("/signin".equals(request.getRequestURI()) && request.getMethod().equals(HttpMethod.POST.name())) {
             String username = request.getParameter("username");
-            int failedAttempts = loginAttemptService.getFailedLoginAttempts(username);
-            if (failedAttempts >= 3) {
+            //int failedAttempts = loginAttemptService.getFailedLoginAttempts(username);
+            /*if (failedAttempts >= 3) {
                 response.sendError(HttpStatus.FORBIDDEN.value(), "Maximum login attempts exceeded. Please try again later or contact support.");
                 return;
-            }
+            }*/
         }
         // If header is present, try grab user principal from database and perform authorization
         Authentication authentication = getUsernamePasswordAuthentication(request);
