@@ -2,6 +2,7 @@ package tn.esprit.healthcare.Controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +10,7 @@ import tn.esprit.healthcare.Entities.Appointment;
 import tn.esprit.healthcare.Repositories.AppointmentRepository;
 import tn.esprit.healthcare.Services.AppointmentService;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -64,4 +66,28 @@ public class AppointmentController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    // find by date
+
+    @GetMapping("/getByDate/{date}")
+    public ResponseEntity<List<Appointment>> getAppointmentsByDate(@PathVariable("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date){
+
+        return new ResponseEntity<List<Appointment>>(appointmentService.findAllByDate(date), HttpStatus.OK);
+    }
+
+
+// find defore date for sending mail
+
+    @GetMapping("/getByDateBefore")
+    public List<Appointment> getAppointmentsBeforeDate(   @RequestParam("day") Double day) {
+        return  appointmentService.findAllByDateBefore(day);
+
+    }
+
+
+    @GetMapping("/countApp")
+    public int countAppointment(@RequestParam("date")  @DateTimeFormat(pattern = "yyyy-MM-dd") Date date){
+        return appointmentService.countAppointment(date);
+
+    }
+
 }
