@@ -1,27 +1,35 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
 import { RouterModule , Routes} from '@angular/router';
-import { HomeComponent } from './home/home.component';
-
-const routes: Routes = [
-   // { path : "path_name" , component : "component_name"}
-]
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
+import { AllTemplateClientComponent } from './frontOffice/all-template-client/all-template-client.component';
+import { FooterComponent } from './frontOffice/footer/footer.component';
+import { BodyComponent } from './frontOffice/body/body.component';
+import { HeaderComponent } from './frontOffice/header/header.component';
+import { ThreadComponent } from './frontOffice/thread/thread.component';
+import { ThreadDetailsComponent } from './frontOffice/thread-details/thread-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
+    BodyComponent,
+    AllTemplateClientComponent,
     FooterComponent,
-    HomeComponent
+    HeaderComponent,
+    ThreadComponent,
+    ThreadDetailsComponent,
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes)
+    HttpClientModule,
+    FormsModule,
+    RouterModule,
+    AppRoutingModule,
   ],
+  exports: [RouterModule],
   providers: [],
   bootstrap: [AppComponent]
 })
