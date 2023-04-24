@@ -11,6 +11,7 @@ import tn.esprit.healthcare.Payload.*;
 import tn.esprit.healthcare.Repositories.UserRepository;
 import tn.esprit.healthcare.Services.*;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 // http://localhost:8080/
@@ -76,6 +77,7 @@ public class UserController {
         return accountResponse;
     }
 
+
     // http://localhost:8080/active
     @PostMapping("/active")
     public UserActive getActiveUser(@RequestBody JwtLogin jwtLogin){
@@ -113,6 +115,11 @@ public class UserController {
         }
         return accountResponse;
     }
+    @GetMapping("/getPatients")
+    public List<User> fetchSkieurList()
+    {
+        return userService.fetchSkieurList();
+    }
 
     // http://localhost:8080/checkEmail
     @PostMapping("/checkEmail")
@@ -143,6 +150,7 @@ public class UserController {
                 userService.addUser(user);
                 accountResponse.setResult(1);
             } else {
+
                 accountResponse.setResult(0);
             }
         } else {

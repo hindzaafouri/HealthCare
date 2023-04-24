@@ -1,5 +1,6 @@
 package tn.esprit.healthcare.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,8 +20,11 @@ public class Role {
     private Long id;
 
     @Column(name = "role_name")
+
     private String roleName;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
 
     public Long getId() {

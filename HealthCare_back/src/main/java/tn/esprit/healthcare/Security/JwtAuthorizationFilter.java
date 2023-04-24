@@ -2,6 +2,9 @@ package tn.esprit.healthcare.Security;
 
 import com.auth0.jwt.JWT;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -11,6 +14,7 @@ import tn.esprit.healthcare.Entities.User;
 import tn.esprit.healthcare.Payload.JwtProperties;
 import tn.esprit.healthcare.Payload.UserPrincipal;
 import tn.esprit.healthcare.Repositories.UserRepository;
+import tn.esprit.healthcare.Services.LoginAttemptService;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -23,6 +27,8 @@ import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter{
 
     private UserRepository userRepository;
+    @Autowired
+    private LoginAttemptService loginAttemptService;
 
     public JwtAuthorizationFilter(AuthenticationManager authenticationManager, UserRepository userRepository) {
         super(authenticationManager);
@@ -38,6 +44,15 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter{
         if (header == null || !header.startsWith(JwtProperties.TOKEN_PREFIX)) {
             chain.doFilter(request, response);
             return;
+        }
+
+        if ("/signin".equals(request.getRequestURI()) && request.getMethod().equals(HttpMethod.POST.name())) {
+            String username = request.getParameter("username");
+            int failedAttempts = loginAttemptService.getFailedLoginAttempts(username);
+            if (failedAttempts >= 3) {
+                response.sendError(HttpStatus.FORBIDDEN.value(), "Maximum login attempts exceeded. Please try again later or contact support.");
+                return;
+            }
         }
         // If header is present, try grab user principal from database and perform authorization
         Authentication authentication = getUsernamePasswordAuthentication(request);

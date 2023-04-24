@@ -24,6 +24,8 @@ public class TokenService {
     public TokenService(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
     }
+
+
     private String generateToken(Authentication authResult) {
 
         // Grab principal

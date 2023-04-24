@@ -23,6 +23,8 @@ import tn.esprit.healthcare.Services.UserService;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 // http://localhost:8080
 @CrossOrigin("http://localhost:4200")
@@ -78,7 +80,13 @@ public class SocialController {
             user.setPassword(passwordEncoder.encode("kasdjhfkadhsY776ggTyUU65khaskdjfhYuHAwjñlji"));
             user.setActive(1);
             List<Role> authorities = authoritiesService.getAuthorities();
-            user.getUserRoles().add(authorities.get(0));
+            Set<Role> roles = user.getUserRoles();
+            Role newRole = new Role();
+            newRole.setRoleName("Patient");
+            newRole.setUser(user);
+            roles.add(newRole); // add the new role to the set
+            user.setUserRoles(roles); // update the roles set in the user object
+          //  user.getUserRoles().add(authorities.get(0));
             userService.addUser(user);
         }
         JwtLogin jwtLogin = new JwtLogin();

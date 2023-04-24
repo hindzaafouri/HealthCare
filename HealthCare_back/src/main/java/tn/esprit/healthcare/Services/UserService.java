@@ -2,6 +2,7 @@ package tn.esprit.healthcare.Services;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -10,6 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import tn.esprit.healthcare.Entities.User;
 import tn.esprit.healthcare.Payload.UserPrincipal;
 import tn.esprit.healthcare.Repositories.UserRepository;
+
+import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -53,5 +57,13 @@ public class UserService implements UserDetailsService {
     }
     public void editUser(User user){
         this.userRepository.save(user);
+    }
+
+    public List<User> fetchSkieurList() {
+        try {
+            return userRepository.findAllPatients();
+        } catch (DataAccessException ex) {
+            throw new RuntimeException("Error fetching users: " + ex.getMessage(), ex);
+        }
     }
 }

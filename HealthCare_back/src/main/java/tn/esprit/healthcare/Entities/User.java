@@ -1,5 +1,6 @@
 package tn.esprit.healthcare.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ public class User{
     private Long id;
     @Column
     private String username;
+
     @Column(name = "email")
     private String email;
 
@@ -34,9 +36,11 @@ public class User{
 
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnore
     private Set<Role> userRoles = new HashSet<>();
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "code_id")
+    @JsonIgnore
     private Code code;
     public Set<Role> getUserRoles() {
         return userRoles;

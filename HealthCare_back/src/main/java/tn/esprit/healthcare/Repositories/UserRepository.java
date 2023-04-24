@@ -5,6 +5,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import tn.esprit.healthcare.Entities.User;
 
+import java.util.List;
+import java.util.Set;
+
 @Repository
 public interface UserRepository extends JpaRepository<User,Long> {
 
@@ -17,6 +20,9 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
     @Query("select u.password from User u where u.email=?1")
     public String getPasswordByEmail(String email);
+
+    @Query("SELECT u FROM User u JOIN u.userRoles r WHERE r.roleName = 'Doctor'")
+    List<User> findAllPatients();
 
 
 }
