@@ -1,5 +1,7 @@
+
+<app-all-template-client></app-all-template-client>
 <div class="st-content">
-  <div class="st-page-heading st-size-md st-dynamic-bg" data-src="assets/img/hero-bg6.jpg">
+  <div class="st-page-heading st-size-md st-dynamic-bg" data-src="/assets/frontTemplate/img/hero-bg6.jpg">
     <div class="container">
       <div class="st-page-heading-in text-center">
         <h1 class="st-page-heading-title">Forum</h1>
@@ -27,7 +29,7 @@
             <div *ngIf="(thread.titleThread.toLowerCase().includes(searchByKeyWord.toLowerCase()) || thread.questionThread.toLowerCase().includes(searchByKeyWord.toLowerCase()) || thread.topicThread.toLowerCase().includes(searchByKeyWord.toLowerCase()) || searchByKeyWord == '')">
             <div class="st-post st-style3 st-zoom">
               <a href="blog-details-right-sidebar.html" class="st-post-thumb">
-                <img class="st-zoom-in" src="assets/img/blog13.jpg" alt="blog1">
+                <img class="st-zoom-in" src="/assets/frontTemplate/img/blog13.jpg" alt="blog1">
               </a>
               <div class="st-post-info">
                 <h2 class="st-post-title"><a href="blog-details-right-sidebar.html">{{ thread.titleThread }}</a></h2>
@@ -91,7 +93,7 @@
           <ul class="st-post-widget-list st-mp0">
             <li *ngFor="let thread of threadsSortedByVote">
               <div class="st-post st-style1">
-                <a href="#" class="st-post-thumb st-zoom"><img src="assets/img/rs-post1.jpg" alt="post1"
+                <a href="#" class="st-post-thumb st-zoom"><img src="/assets/frontTemplate/img/rs-post1.jpg" alt="post1"
                     class="st-zoom-in"></a>
                 <div class="st-post-info">
                   <h2 class="st-post-title"><a href="blog-details-right-sidebar.html">{{ thread.titleThread }}</a></h2>
@@ -122,12 +124,12 @@
   </div>
   <div class="st-height-b100 st-height-lg-b80"></div>
   <section id="appointment" class="st-shape-wrap st-gray-bg" style="background-color:white">
-    <div class="st-shape1"><img src="assets/img/shape/contact-shape1.svg" alt="shape1"></div>
+    <div class="st-shape1"><img src="/assets/frontTemplate/img/shape/contact-shape1.svg" alt="shape1"></div>
     <div class="st-shape4">
-      <img src="assets/img/shape/section_shape.png" alt="shape1">
+      <img src="/assets/frontTemplate/img/shape/section_shape.png" alt="shape1">
     </div>
     <div class="st-shape6">
-      <img src="assets/img/shape/contact-shape3.svg" alt="shape3">
+      <img src="/assets/frontTemplate/img/shape/contact-shape3.svg" alt="shape3">
     </div>
     <div class="st-height-b120 st-height-lg-b80"></div>
     <div class="container">
@@ -135,7 +137,7 @@
         <h2 class="st-section-heading-title">Add a new Thread</h2>
         <div class="st-seperator">
           <div class="st-seperator-left wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.2s"></div>
-          <div class="st-seperator-center"><img src="assets/img/icons/4.png" alt="icon"></div>
+          <div class="st-seperator-center"><img src="/assets/frontTemplate/img/icons/4.png" alt="icon"></div>
           <div class="st-seperator-right wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.2s"></div>
         </div>
         <div class="st-section-heading-subtitle">Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -185,4 +187,5 @@
     </div>
   </section>
 </div>
+
 <router-outlet></router-outlet>
