@@ -6,10 +6,11 @@ import { ThreadComponent } from './frontOffice/thread/thread.component';
 import { ThreadDetailsComponent } from './frontOffice/thread-details/thread-details.component';
 
 const routes: Routes = [
-  { path: "front" , component: AllTemplateClientComponent},
+    { path: "front" , component: AllTemplateClientComponent},
   { path : 'threads'  , component:ThreadComponent },
   { path : 'threads/:idThread', component:ThreadDetailsComponent }
 ];
+
 
 
 @NgModule({
