@@ -9,6 +9,7 @@ import tn.esprit.healthcare.Entities.Thread;
 import tn.esprit.healthcare.Repositories.AnswerRepository;
 import tn.esprit.healthcare.Repositories.ThreadRepository;
 
+import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -41,9 +42,30 @@ public class AnswerService implements IAnswerService{
     }
 
     @Override
-    public void deleteAnswer(Answer answer) {
-        answerRepository.delete(answer);
+    public void updateAnswer(Answer updatedAnswer) {
+        // Check if the answer already exists in the database
+        Optional<Answer> answerOptional = answerRepository.findById(updatedAnswer.getIdAnswer());
+        if (answerOptional.isPresent()) {
+            Answer answer = answerOptional.get();
+            // Update the answer fields
+            answer.setAnswer(updatedAnswer.getAnswer());
+            updatedAnswer.setCreatedAt(answer.getCreatedAt());
+            updatedAnswer.setUser(answer.getUser());
+            updatedAnswer.setThread(answer.getThread());
+
+            // Save the updated answer to the database
+            answerRepository.save(answer);
+        } else {
+            throw new EntityNotFoundException("Answer with ID " + updatedAnswer.getIdAnswer() + " not found");
+
+        }
     }
+
+
+            @Override
+                public void deleteAnswer(Answer answer) {
+                    answerRepository.delete(answer);
+                }
 
 
     /*@Override

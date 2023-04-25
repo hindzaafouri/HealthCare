@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Thread } from 'src/models/Thread';
 import { Topic } from 'src/models/Topic';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-thread',

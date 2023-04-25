@@ -11,6 +11,7 @@ public interface IAnswerService {
     public void addAnswerAndAssignToThread (Answer answer , Long idThread) ;
     public void deleteAnswer (Answer answer) ;
 
+    public void updateAnswer (Answer answer) ;
 
     public Answer findAnswerById (Long idAnswer) ;
     public List<Answer> getAnswersSortedByVotes (Long idThread) ;

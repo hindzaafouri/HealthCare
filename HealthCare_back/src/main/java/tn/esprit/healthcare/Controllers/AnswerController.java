@@ -31,6 +31,17 @@ public class AnswerController {
            return ResponseEntity.status(HttpStatus.CREATED).build() ;
     }
 
+    @PutMapping("/update-answer/{idAnswer}")
+    public ResponseEntity<Void> updateAnswer(@RequestBody Answer updatedAnswer, @PathVariable Long idAnswer) {
+        // Set the id of the updated answer to the id in the path variable
+        updatedAnswer.setIdAnswer(idAnswer);
+        // Call the service method to update the answer
+        answerService.updateAnswer(updatedAnswer);
+        // Return a response with no content and a status of OK
+        return ResponseEntity.ok().build();
+    }
+
+
     @DeleteMapping("/delete-answer/{idAnswer}")
     public void deleteAnswer (@PathVariable Long idAnswer) {
         Answer answer = answerService.findAnswerById(idAnswer) ;
@@ -62,7 +73,7 @@ public class AnswerController {
     public ResponseEntity<Set<Answer>> findAnswersByThreadOrderByCreatedAt (@PathVariable Long idThread) {
         Thread thread = threadService.findThreadById(idThread) ;
         Set<Answer> result = answerService.findAnswersByThreadOrderByCreatedAt(thread) ;
-        return ResponseEntity.status(HttpStatus.FOUND).body(result);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
 

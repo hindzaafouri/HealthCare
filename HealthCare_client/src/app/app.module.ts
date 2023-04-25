@@ -12,6 +12,7 @@ import { HeaderComponent } from './frontOffice/header/header.component';
 import { ThreadComponent } from './frontOffice/thread/thread.component';
 import { ThreadDetailsComponent } from './frontOffice/thread-details/thread-details.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +29,7 @@ import { ThreadDetailsComponent } from './frontOffice/thread-details/thread-deta
     FormsModule,
     RouterModule,
     AppRoutingModule,
-  ],
+    ],
   exports: [RouterModule],
   providers: [],
   bootstrap: [AppComponent]
