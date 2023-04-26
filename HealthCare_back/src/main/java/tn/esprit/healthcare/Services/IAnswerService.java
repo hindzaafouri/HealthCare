@@ -13,6 +13,9 @@ public interface IAnswerService {
 
     public void updateAnswer (Answer answer) ;
 
+    public void upAnswer (Long id) ;
+    public void downAnswer (Long id) ;
+
     public Answer findAnswerById (Long idAnswer) ;
     public List<Answer> getAnswersSortedByVotes (Long idThread) ;
 

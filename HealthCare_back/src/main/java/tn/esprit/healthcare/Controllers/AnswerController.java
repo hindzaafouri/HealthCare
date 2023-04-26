@@ -69,6 +69,18 @@ public class AnswerController {
         }
     }
 
+    @PutMapping("/up/{id}")
+    public ResponseEntity<Void> upAnswer (@PathVariable long id) {
+        answerService.upAnswer(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/down/{id}")
+    public ResponseEntity<Void> downAnswer (@PathVariable long id) {
+        answerService.downAnswer(id);
+        return ResponseEntity.ok().build();
+    }
+
     @GetMapping("/answers-byThread/{idThread}")
     public ResponseEntity<Set<Answer>> findAnswersByThreadOrderByCreatedAt (@PathVariable Long idThread) {
         Thread thread = threadService.findThreadById(idThread) ;

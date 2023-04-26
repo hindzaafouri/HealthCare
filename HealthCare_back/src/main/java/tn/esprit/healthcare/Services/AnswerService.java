@@ -61,8 +61,26 @@ public class AnswerService implements IAnswerService{
         }
     }
 
+    @Override
+    public void upAnswer(Long id) {
+        Answer answer = answerRepository.findById(id).get() ;
+        int votes = answer.getVotes() ;
+        votes++ ;
+        answer.setVotes(votes);
+        answerRepository.save(answer) ;
+    }
 
-            @Override
+    @Override
+    public void downAnswer(Long id) {
+        Answer answer = answerRepository.findById(id).get() ;
+        int votes = answer.getVotes() ;
+        votes-- ;
+        answer.setVotes(votes);
+        answerRepository.save(answer) ;
+    }
+
+
+    @Override
                 public void deleteAnswer(Answer answer) {
                     answerRepository.delete(answer);
                 }

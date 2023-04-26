@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Answer } from 'src/models/Answer';
+import { Comment } from 'src/models/Comment';
 import { Thread } from 'src/models/Thread';
 
 declare var window:any ; 
@@ -17,12 +18,15 @@ export class ThreadDetailsComponent implements OnInit {
   answerId!: number;
   thread!: Thread;
   answers: Answer[] = [];
+  comments: Comment[] = [];
   answer: Answer = {} as Answer;
+  comment: Comment = {} as Comment;
   showSuccessAlert = false;
   showErrorAlert = false;
   showSuccessAlertUpdate=false ; 
   showErrorsAlertUpdate=false;
   formModal:any ;
+  formModalAddComment:any ;
   currentAnswer: Answer = {} as Answer;
   answerToUpdate: Answer = {} as Answer;
 
@@ -38,9 +42,13 @@ export class ThreadDetailsComponent implements OnInit {
     this.formModal = new window.bootstrap.Modal(
       document.getElementById("updateAnswerModal")
     );
+
+    this.formModalAddComment = new window.bootstrap.Modal(
+      document.getElementById("addCommentModal")
+    );
   }
 
-  openModal(answer: Answer) {
+  openModalUpdateAnswer(answer: Answer) {
     this.currentAnswer = answer;
     this.answerToUpdate = { ...answer };
     this.formModal.show();
@@ -48,9 +56,46 @@ export class ThreadDetailsComponent implements OnInit {
 
   closeModal() {
     this.formModal.hide() ;
+    this.formModalAddComment.hide();
   }
 
-  updateAnswer(answerId: number,threadId:number) {
+  openModalAddComment (answer:Answer ,event:Event) {
+    event.preventDefault();
+    this.getCommentsByAnswer(answer.idAnswer) ;
+    this.answerToUpdate = { ...answer };
+    this.formModalAddComment.show();
+  }
+
+
+  getCommentsByAnswer (idAnswer: number) {
+    this.http.get<Comment[]>('http://localhost:8080/healthcare/comment-op/comments-ByAnswer/' + idAnswer).subscribe(
+      data => {
+        console.log(this.comments);
+        this.comments = data; // Assign the retrieved thread data to the thread property
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  addComment (idAnswer:number) {
+    const url = `http://localhost:8080/healthcare/comment-op/add-comment/${idAnswer}`;
+    this.http.post<void>(url, this.comment).subscribe(
+      () => {
+        console.log('Comment added successfully');
+        this.getCommentsByAnswer(idAnswer) ;
+      },
+      (error) => {
+        console.error('Error adding comment:', error);
+      }
+    );
+    this.comment = {} as Comment;
+  }
+
+
+
+  updateAnswer(answerId: number) {
     const url = `http://localhost:8080/healthcare/answer-op/update-answer/${answerId}`;
     const body = JSON.stringify(this.answerToUpdate);
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
@@ -59,7 +104,7 @@ export class ThreadDetailsComponent implements OnInit {
         console.log('Answer updated successfully');
         this.showSuccessAlertUpdate = true;
         this.showErrorsAlertUpdate = false;
-        this.getAnswersByThread(threadId) ;
+        this.getAnswersByThread(this.threadId) ;
         this.closeModal();
       },
       (error) => {
@@ -81,6 +126,33 @@ export class ThreadDetailsComponent implements OnInit {
     }
   }
 
+  upAnswer(idAnswer: number) {
+    const url = `http://localhost:8080/healthcare/answer-op/up/${idAnswer}`;
+  
+    this.http.put(url, {}).subscribe(
+      () => {
+        console.log('Answer upvoted successfully');
+        this.getAnswersByThread(this.threadId) ;
+      },
+      (error) => {
+        console.error('Error upvoting answer: ', error);
+      }
+    );
+  }
+
+  downAnswer(idAnswer: number) {
+    const url = `http://localhost:8080/healthcare/answer-op/down/${idAnswer}`;
+  
+    this.http.put(url, {}).subscribe(
+      () => {
+        console.log('Answer downVoting successfully');
+        this.getAnswersByThread(this.threadId) ;
+      },
+      (error) => {
+        console.error('Error downVoting answer: ', error);
+      }
+    );
+  }
 
 
   getThreadDetails(threadId: number): void {

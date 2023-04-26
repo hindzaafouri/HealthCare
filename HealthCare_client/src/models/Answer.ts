@@ -6,4 +6,5 @@ export interface Answer {
     votes: number ;
     createdAt: Date;
     thread: Thread ;
+    comments: Comment[]
 }
