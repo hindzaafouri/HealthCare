@@ -11,6 +11,10 @@ import { BodyComponent } from './frontOffice/body/body.component';
 import { HeaderComponent } from './frontOffice/header/header.component';
 import { ThreadComponent } from './frontOffice/thread/thread.component';
 import { ThreadDetailsComponent } from './frontOffice/thread-details/thread-details.component';
+import { AllTemplateAdminComponent } from './backOffice/all-template-admin/all-template-admin.component';
+import { HeaderBackComponent } from './backOffice/header-back/header-back.component';
+import { AsideComponent } from './backOffice/aside/aside.component';
+import { DashboardComponent } from './backOffice/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +25,10 @@ import { ThreadDetailsComponent } from './frontOffice/thread-details/thread-deta
     HeaderComponent,
     ThreadComponent,
     ThreadDetailsComponent,
+    AllTemplateAdminComponent,
+    HeaderBackComponent,
+    AsideComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
