@@ -1,5 +1,6 @@
 package tn.esprit.healthcare.Payload;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -9,34 +10,70 @@ import tn.esprit.healthcare.Entities.User;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class UserPrincipal implements UserDetails {
 
-    private User user;
 
-    @Autowired
-    public UserPrincipal(User user) {
-        this.user = user;
+    private Long id;
+
+    private String username;
+
+    private String email;
+
+    @JsonIgnore
+    private String password;
+
+    private Collection<? extends GrantedAuthority> authorities;
+
+    public UserPrincipal(Long id, String username, String email, String password,
+                           Collection<? extends GrantedAuthority> authorities) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.authorities = authorities;
+    }
+
+    public UserPrincipal(String username) {
+        this.username = username;
+    }
+
+    public static UserPrincipal build(User user) {
+        List<GrantedAuthority> authorities = user.getUserRoles().stream()
+                .map(role -> new SimpleGrantedAuthority(role.getRoleName()))
+                .collect(Collectors.toList());
+
+        return new UserPrincipal(
+                user.getId(),
+                user.getUsername(),
+                user.getEmail(),
+                user.getPassword(),
+                authorities);
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        user.getUserRoles().forEach(temp -> {
-            GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(temp.getRoleName());
-            authorities.add(grantedAuthority);
-        });
         return authorities;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return user.getEmail();
+        return username;
     }
 
     @Override
@@ -56,6 +93,16 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return user.getActive() == 1;
+        return true;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        UserPrincipal user = (UserPrincipal) o;
+        return Objects.equals(id, user.id);
     }
 }

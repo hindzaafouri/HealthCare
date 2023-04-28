@@ -14,6 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import tn.esprit.healthcare.Repositories.UserRepository;
 import tn.esprit.healthcare.Services.UserService;
 
@@ -41,25 +42,21 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+    @Bean
+    public JwtAuthorizationFilter authenticationJwtTokenFilter() {
+        return new JwtAuthorizationFilter();
+    }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .addFilter(new JwtAuthorizationFilter(authenticationManager(),userRepository))
-                .authorizeRequests()
-                .antMatchers(HttpMethod.OPTIONS,"/**").permitAll()
-                .antMatchers("/signin").permitAll()
-                .antMatchers("/signup").permitAll()
-                .antMatchers("/active").permitAll()
-                .antMatchers("/activated").permitAll()
-                .antMatchers("/checkEmail").permitAll()
-                .antMatchers("/resetPassword").permitAll()
-                .antMatchers("/social/**").permitAll()
-                .antMatchers("/getPatients").permitAll()
+        http.cors().and().csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                .authorizeRequests().antMatchers("/**").permitAll()
+                .antMatchers("/api/test/**").permitAll()
                 .anyRequest().authenticated();
+
+        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }
+
     @Bean
     DaoAuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
