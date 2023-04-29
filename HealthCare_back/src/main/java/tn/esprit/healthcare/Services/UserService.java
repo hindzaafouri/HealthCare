@@ -37,6 +37,9 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 
+    public void deletePatient(Long id) {
+        userRepository.deleteById(id);
+    }
     public boolean ifEmailExist(String email){
         return userRepository.existsByEmail(email);
     }
@@ -72,5 +75,16 @@ public class UserService implements UserDetailsService {
             authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getRoleName()));
         });
         return authorities;
+    }
+
+    public User updateUser(User user) {
+        Long id = user.getId();
+        User std = userRepository.findById(id).get();
+        std.setUsername(user.getUsername());
+        std.setEmail(user.getEmail());
+        std.setPhone_number(user.getPhone_number());
+        std.setActive(user.getActive());
+
+        return userRepository.save(std);
     }
 }

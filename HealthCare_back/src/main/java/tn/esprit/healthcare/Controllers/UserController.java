@@ -14,6 +14,7 @@ import tn.esprit.healthcare.Payload.*;
 import tn.esprit.healthcare.Repositories.UserRepository;
 import tn.esprit.healthcare.Services.*;
 
+import javax.transaction.Transactional;
 import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -120,7 +121,7 @@ public class UserController {
         return accountResponse;
     }
     @GetMapping("/getPatients")
-    public List<User> fetchSkieurList()
+    public List<User> fetchPatientList()
     {
         return userService.fetchSkieurList();
     }
@@ -173,7 +174,15 @@ public class UserController {
                 userDetails.getUsername()+" "+userDetails.getId()+" "+userDetails.getEmail()
                 ;
     }
+    @DeleteMapping("/deletePatient")
+    @Transactional
+    public void deleteStudent(@RequestParam Long id) {
+        userService.deletePatient(id);
+    }
 
-
+    @PutMapping("/updateUser")
+    public User updateStudent(@RequestBody User user) {
+        return  userService.updateUser(user);
+    }
 
 }

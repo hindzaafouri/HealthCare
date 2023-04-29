@@ -6,11 +6,19 @@ import { ThreadComponent } from './frontOffice/thread/thread.component';
 import { ThreadDetailsComponent } from './frontOffice/thread-details/thread-details.component';
 import { HeaderBackComponent } from './backOffice/header-back/header-back.component';
 import { AllTemplateAdminComponent } from './backOffice/all-template-admin/all-template-admin.component';
+import { UserListComponent } from './backOffice/user/user-list/user-list.component';
+import { UserAddComponent } from './backOffice/user/user-add/user-add.component';
+import { LoginComponent } from './frontOffice/user/login/login.component';
 
 const routes: Routes = [
     { path: "front" , component: AllTemplateClientComponent},
     { path: "admin" , component: AllTemplateAdminComponent},
   { path : 'threads'  , component:ThreadComponent },
+  { path : 'user_list'  , component:UserListComponent },
+    { path : 'user_add'  , component:UserAddComponent },
+    { path : 'login'  , component:LoginComponent },
+
+
   { path : 'threads/:idThread', component:ThreadDetailsComponent }
 ];
 

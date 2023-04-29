@@ -1,0 +1,85 @@
+<app-all-template-client></app-all-template-client>
+<app-header></app-header>
+<section id="appointment" class="st-shape-wrap st-gray-bg">
+    <div class="st-shape4">
+      <img src="assets/img/shape/section_shape.png" alt="shape1">
+    </div>
+    <div class="st-shape6">
+      <img src="assets/img/shape/contact-shape3.svg" alt="shape3">
+    </div>
+    <div class="st-height-b120 st-height-lg-b80"></div>
+    <div class="container">
+      <div class="st-section-heading st-style1">
+        <h2 class="st-section-heading-title">Sign IN Here</h2>
+        <div class="st-seperator">
+          <div class="st-seperator-left wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.2s"></div>
+          <div class="st-seperator-center"><img src="assets/img/icons/4.png" alt="icon"></div>
+          <div class="st-seperator-right wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.2s"></div>
+        </div>
+        <div class="st-section-heading-subtitle">Lorem Ipsum is simply dummy text of the printing and typesetting
+          industry. <br>Lorem Ipsum the industry's standard dummy text.</div>
+      </div>
+      <div class="st-height-b40 st-height-lg-b40"></div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-10 offset-lg-1">
+          <form (ngSubmit)="doSignin()" [formGroup]="checkoutParentGroup" class="st-appointment-form" id="appointment-form">
+            <div id="st-alert1" ></div>
+            <div class="row">
+              <div  formGroupName="user">
+              <div class="col-lg-6">
+                <div class="st-form-field st-style1">
+                  <label>email</label>
+                  <input type="text" id="uname" name="username" placeholder="Jhon Doe" required  class="form-control" formControlName="email">
+                </div>
+              </div>
+            
+              <div class="col-lg-6" >
+                <div class="st-form-field st-style1">
+                  <label>Password</label>
+                  <input type="text" id="Password" name="password" placeholder="************" required  formControlName="password">
+                </div>
+              </div>
+            </div>
+                <table>
+                <tr>
+                  <td><input name="submit" type="submit" value="Signin" /></td>
+                </tr>
+              </table>
+              </div> 
+          </form>
+          <div class="container">
+            <div class="st-section-heading st-style1">
+              <h2 class="st-section-heading-title">Or Sign in with </h2>
+              <div class="st-seperator">
+                <div class="st-seperator-left wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.2s"></div>
+                <div class="st-seperator-center"><img src="assets/img/icons/4.png" alt="icon"></div>
+                <div class="st-seperator-right wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.2s"></div>
+              </div>
+          
+          
+          <a  class="st-post-thumb st-link-hover-wrap st-zoom">
+            <img class="st-zoom-in" src="assets/img/google.png" alt="blog1">
+           
+          </a>
+          <a href="blog-details-right-sidebar.html" class="st-post-thumb st-link-hover-wrap st-zoom">
+            <img class="st-zoom-in" src="assets/img/facebook.jpg" alt="blog1">
+            
+          </a>
+            </div>
+            <div class="st-height-b40 st-height-lg-b40"></div>
+          </div>
+        
+          <div class="st-form-field st-style1">
+            <label>Don't have an account ?  <a href="/signup" routerLink="/signup" color=RED>Signup here !!!</a></label>
+         
+          </div>
+          <div class="d-flex justify-content-center">
+            <a routerLink="/reset">Forgot your password?</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Service Section -->
