@@ -40,18 +40,22 @@ public class ThreadController {
     }*/
 
     @PostMapping("/add-thread")
-    public Thread addThread (@RequestParam("file") MultipartFile file ,
+    public Thread addThread (@RequestParam(value = "file", required = false) MultipartFile file,
                              @RequestParam("title") String title,
                              @RequestParam("topic") Topic topic ,
                              @RequestParam("question") String question
                              ) throws IOException{
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        String uploadDir = "thread-images/";
-        String filePath = uploadDir + fileName;
-        FileUploadUtil.saveFile(uploadDir, fileName, file);
         Thread thread = new Thread();
+
+        if (file != null) {
+            String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+            String uploadDir = "thread-images/";
+            String filePath = uploadDir + fileName;
+            FileUploadUtil.saveFile(uploadDir, fileName, file);
+            thread.setCoverPhotoThread(filePath);
+        }
+
         thread.setTitleThread(title);
-        thread.setCoverPhotoThread(filePath);
         thread.setQuestionThread(question);
         thread.setTopicThread(topic);
         return threadService.addThread(thread);
