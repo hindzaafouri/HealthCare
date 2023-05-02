@@ -14,12 +14,20 @@ import java.util.Set;
 @Setter
 @ToString
 @Entity
-@JsonIgnoreProperties("answers")
+//@JsonIgnoreProperties("answers")
 public class Thread implements Serializable  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idThread ;
     private String titleThread ;
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
 
     @Column(columnDefinition = "int default 0")
     private int votes ;
@@ -27,6 +35,8 @@ public class Thread implements Serializable  {
     private Topic topicThread ;
     private String questionThread ;
 
+    @Column(columnDefinition = "int default 0")
+    private boolean status ;
     private LocalDateTime createdAt ;
     private String coverPhotoThread ;
 

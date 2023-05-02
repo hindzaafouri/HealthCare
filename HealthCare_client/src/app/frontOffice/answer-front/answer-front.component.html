@@ -1,0 +1,184 @@
+<div class="row">
+    <div class="col-lg-8">
+      <div class="comments-area">
+        <div class="comment-list-outer">
+          <h2 class="comments-title">Answers</h2>
+          <ol class="comment-list">
+            <ng-container *ngIf="answers.length > 0; else noAnswers">
+              <div *ngIf="showSuccessAlertUpdate" class="alert alert-success" role="alert">
+                Answer updated successfully!
+              </div>
+              <div *ngIf="showErrorsAlertUpdate" class="alert alert-danger" role="alert">
+                Error updating answer.
+              </div>
+              <div *ngFor="let answer of answers | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
+                <li class="comment">
+                  <div class="comment-body ml-0">
+                    <div class="row">
+                      <div class="col-lg-2">
+                        <div class="row h-25">
+                          <div class="col-lg-2">
+                            <button class="btn-secondary mb-2 rounded" style="background-color: #6c757d87;border-color: #6c757d00;"
+                              (click)="upAnswer(answer.idAnswer)"><i
+                                class="fas fa-caret-up"></i></button>
+                          </div>
+                        </div>
+                        <div class="row h-25">
+                          <div class="col-lg-2 ml-1 mt-1">
+                            <p>{{answer?.votes}}</p>
+                          </div>
+                        </div>
+                        <div class="row h-25">
+                          <div class="col-lg-2">
+                            <button class="btn-secondary mb-2 rounded" style="background-color: #6c757d87;border-color: #6c757d00;"
+                              (click)="downAnswer(answer.idAnswer)"><i
+                                class="fas fa-caret-down"></i></button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-8">
+                        <div class="comment-meta">
+                          <div class="comment-author">
+                            <img src="/assets/frontTemplate/img/comment1.jpg" alt="comment1" class="avatar">
+                            <span class="nm"><a href="#">Hannibal Lecter</a></span>
+                          </div><!-- .comment-author -->
+                          <div class="comment-metadata">
+                            <a href="#"><span>{{ answer?.createdAt | date:'yyyy-MM-dd - HH:mm:ss' }}</span></a>
+                          </div><!-- .comment-metadata -->
+                        </div><!-- .comment-meta -->
+
+                        <div class="comment-content">
+                          <p>{{ answer?.answer }}</p>
+                        </div>
+                        <div class="reply"><i class="fas fa-reply mr-2"></i><a href="#" (click)="openModalAddComment(answer,$event)">Reply </a></div>
+                      </div>
+
+                      <div class="col-lg-2">
+                        <button class="btn-info mr-2 rounded" (click)="currentAnswer = answer; openModalUpdateAnswer(answer)"><i
+                            class="fas fa-edit"></i></button> <!-- Modal for reply comment-->
+                        <button class="btn-danger rounded" (click)="deleteAnswer(answer.idAnswer)"><i
+                            class="fas fa-trash"></i></button>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </div>
+            </ng-container>
+            <ng-template #noAnswers>
+              <p>No answers found.</p>
+            </ng-template>
+            <pagination-controls [(ngModel)]="currentPage" (pageChange)="currentPage = $event"></pagination-controls>
+          </ol><!-- .comment-list -->
+        </div><!-- .comment-list-outer -->
+        <div class="comment-respond">
+          <h2 class="comment-reply-title">Add your answer</h2>
+          <div *ngIf="showSuccessAlert" class="alert alert-success" role="alert">
+            Answer added successfully!
+          </div>
+          <div *ngIf="showErrorAlert" class="alert alert-danger" role="alert">
+            Error adding answer.
+          </div>
+          <form method="post" class="comment-form" (ngSubmit)="addAnswer(threadId)" #myForm="ngForm">
+            <p class="comment-form-comment">
+              <textarea name="answer" cols="40" rows="5" placeholder="Write here...*" required="" #answerInput="ngModel"
+              [(ngModel)]="answer.answer"></textarea> 
+            </p>
+            <p class="form-submit">
+              <button type="submit" class="st-btn st-style1 st-color1 st-size-medium" >Send
+                Answer</button>
+            </p>
+          </form>
+          <div class="alert alert-danger mt-1" role="alert" *ngIf="answerInput.invalid&&answerInput.touched">
+            Answer is Required
+           </div>
+        </div><!-- .comment-respond -->
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="modal fade" id="updateAnswerModal" tabindex="-1" role="dialog" aria-labelledby="updateAnswerModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form (ngSubmit)="updateAnswer(answerToUpdate.idAnswer)" #updateAnswerForm="ngForm">
+        <div class="modal-header">
+          <h5 class="modal-title" id="updateAnswerModalLabel">Update Answer</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="answer">Answer</label>
+            <textarea class="form-control" id="answer" name="answer" required
+              [(ngModel)]="answerToUpdate.answer"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal()">Close</button>
+          <button type="submit" class="btn btn-info">Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="addCommentModal" tabindex="-1" role="dialog"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form #updateAnswerForm="ngForm">
+        <div class="modal-header">
+          <h5 class="modal-title" id="updateAnswerModalLabel" >{{answerToUpdate.answer}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="comment-list-outer">
+              <h6 class="mb-3">Comments(3)</h6>
+              <ol class="comment-list" style="list-style: none;">
+                <ng-container *ngIf="comments.length > 0; else noComments">
+                <div *ngFor="let comment of comments">
+                <li class="comment">
+                  <div class="comment-body">
+                    <div class="comment-meta">
+                      <div class="comment-author">
+                        <img src="/assets/frontTemplate/img/comment1.jpg" alt="comment1" class="avatar">
+                        <a href="#" class="nm">Smith Jhon</a>
+                      </div>
+                      <div class="comment-metadata">
+                        <a href="#"><span>15 Jan, 2020</span></a>
+                      </div>
+                    </div>
+                    <div class="comment-content">
+                      <p>{{comment.comment}}</p>
+                    </div>
+                  </div>
+                </li> 
+              </div>
+              </ng-container>
+              <ng-template #noComments>
+                <p>No comments found.</p>
+              </ng-template>
+            </ol>
+            </div>
+            <div class="border-top">
+              <h2 class="comment-reply-title mt-3">Add your comment</h2>
+              <form method="post" class="comment-form" (ngSubmit)="addComment(answerToUpdate.idAnswer)">
+                <p class="comment-form-comment">
+                  <textarea name="comment" cols="40" rows="5" placeholder="Write here...*" required="" [(ngModel)]="comment.comment"></textarea>
+                </p>
+                <p class="form-submit">
+                  <button type="submit" class="st-btn st-style1 st-color1 st-size-medium">Submit Comment</button>
+                </p>
+              </form>
+            </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

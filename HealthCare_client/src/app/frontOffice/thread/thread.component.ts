@@ -3,6 +3,8 @@ import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http'
 import { ActivatedRoute, Router } from '@angular/router';
 import { Thread } from 'src/models/Thread';
 import { Topic } from 'src/models/Topic';
+import { FormBuilder, FormGroup, Validators , FormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-thread',
@@ -12,19 +14,83 @@ import { Topic } from 'src/models/Topic';
 export class ThreadComponent implements OnInit {
 
   public message!: string;
+
+  //upload image 
+  selectedFile!: File ;
+  registerForm!: FormGroup;
+  imageSrc!: string;
+  imageUrl!:string;
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'multipart/form-data',
+      'Accept': 'application/json'
+    })
+  };
+
+
   thread: Thread = {} as Thread;
   topics: Topic[] = [];
   threads: any[] = [];
   threadsSortedByVote: any[] = [];
   threadsByTopic: any[] = [];
   topicsValues: Topic[] = Object.values(Topic);
-  selectedFile: File | null = null;
   searchByKeyWord : string = '';
   selectedTopic: string = '';
   filteredThreads: Thread[] = [];
 
 
-  constructor(private http: HttpClient , private router: Router , private route: ActivatedRoute) { }
+  constructor(private http: HttpClient , private router: Router , private route: ActivatedRoute,private fb: FormBuilder) { }
+
+  onSubmit() {
+    const formData = new FormData();
+
+    //title
+    const title = this.registerForm.get('title')?.value;
+    if (title) {
+      formData.append('title', title);
+    }  
+    
+    //question
+    const question = this.registerForm.get('question')?.value;
+    if (question) {
+      formData.append('question', question);
+    }
+
+    //topic
+    const topic = this.registerForm.get('topic')?.value;
+    if (topic) {
+      formData.append('topic', topic);
+    }
+
+
+    //file
+    formData.append('file', this.selectedFile);
+    
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Accept': 'application/json'
+      })
+    };
+
+    console.log(title) ;
+        console.log(question) ;
+        console.log(topic) ;
+        console.log(this.selectedFile);
+
+    this.http.post('http://localhost:8080/healthcare/thread-op/add-thread', formData , httpOptions).subscribe(
+      data => {
+        console.log(data);
+        
+        this.getThreads();
+      },
+      error => {
+        console.log(error);
+      }
+    );
+    this.thread = {} as Thread;
+
+  }
+
 
   getTopics() : void {
     this.http.get<Topic[]>('http://localhost:8080/healthcare/thread-op/topics').subscribe(data => {
@@ -44,6 +110,11 @@ export class ThreadComponent implements OnInit {
     );
   }
 
+  getImageUrl(path: string): string {
+    return `http://localhost:8080/healthcare/${path}`;
+  }
+
+
   
 
   getThreadsSortedByVotes() : void {
@@ -61,60 +132,16 @@ export class ThreadComponent implements OnInit {
 
 
 
-  addThreadOnSubmit(): void {
-    const formData = new FormData();
-    this.thread.topicThread = this.thread.topicThread.toString();
-  
-    if (this.selectedFile) {
-      const reader = new FileReader();
-      reader.readAsDataURL(this.selectedFile);
-      reader.onload = () => {
-        const imageString = reader.result as string;
-        this.thread.coverPhotoThread = imageString;
-        if (this.selectedFile) {
-          formData.append('imageThread', this.selectedFile, this.selectedFile.name);
-        }
-        formData.append('thread', JSON.stringify(this.thread));
-
-        const httpOptions = {
-          headers: new HttpHeaders({
-            'Content-Type': 'multipart/form-data'
-          })
-        };
-
-        this.http.post('http://localhost:8080/healthcare/thread-op/add-thread', formData , httpOptions).subscribe(
-          data => {
-            console.log(data);
-            this.getThreads();
-          },
-          error => {
-            console.log(error);
-          }
-        );
-        this.thread = {} as Thread;
-      };
-    } else {
-      formData.append('thread', JSON.stringify(this.thread));
-      this.http.post('http://localhost:8080/healthcare/thread-op/add-thread', formData).subscribe(
-        data => {
-          console.log(data);
-          this.getThreads();
-        },
-        error => {
-          console.log(error);
-        }
-      );
-      this.thread = {} as Thread;
-    }
+  onFileSelected(event:any): void {
+    this.selectedFile = <File>event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      this.imageSrc = e.target.result;
+    };
+    reader.readAsDataURL(this.selectedFile);
   }
 
-  onFileSelected(event: Event) {
-    if (event.target && event.target instanceof HTMLInputElement && event.target.files) {
-      this.selectedFile = event.target.files[0];
-    }
-  }
-
-  /*getThreadsByTopic(topic: Topic): void  {
+  getThreadsByTopic(topic: Topic): void  {
     const topicString = topic.toString();
     this.http.get<Thread[]>(`http://localhost:8080/healthcare/thread-op/thread-byTopic/${topic}`).subscribe((threadsByTopic) => {
       this.threadsByTopic = threadsByTopic;
@@ -124,9 +151,8 @@ export class ThreadComponent implements OnInit {
       //Update displayed threads
       this.threads = threadsByTopic;
     });
-  }*/
+  }
 
-  
 
   onTopicChange() {
     if (this.selectedTopic) {
@@ -136,7 +162,27 @@ export class ThreadComponent implements OnInit {
     }
   }
 
+
+  handleFileInput(event:any) {
+    const file: File = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      this.imageUrl = reader.result as string;
+      this.thread.coverPhotoThread = this.imageUrl;
+    };
+  }
+
+
   ngOnInit(): void {
+
+    this.registerForm = this.fb.group({
+      title: ['', Validators.required],
+      question: ['', Validators.required],
+      topic: ['', Validators.required],
+      imageUrl: [''],
+    });
+
     this.getTopics() ;
     this.getThreads() ;
     this.getThreadsSortedByVotes() ;

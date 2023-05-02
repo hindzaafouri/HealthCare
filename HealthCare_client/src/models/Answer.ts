@@ -2,7 +2,7 @@ import { Thread } from "./Thread";
 
 export interface Answer {
     idAnswer: number;
-    answer: String ;
+    answer: string ;
     votes: number ;
     createdAt: Date;
     thread: Thread ;

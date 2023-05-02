@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import tn.esprit.healthcare.Entities.Answer;
 import tn.esprit.healthcare.Entities.Comment;
 import tn.esprit.healthcare.Services.ICommentService;
 
@@ -24,10 +25,9 @@ public class CommentController {
     }
 
     @DeleteMapping("/{idComment}")
-    public ResponseEntity<String> deleteComment (@PathVariable Long idComment) {
+    public void deleteComment (@PathVariable Long idComment) {
         Comment comment = commentService.findCommentById(idComment) ;
         commentService.deleteComment(comment);
-        return ResponseEntity.ok("Comment "+idComment+" Deleted successfully");
     }
 
     @GetMapping("/comments-ByAnswer/{idAnswer}")

@@ -1,3 +1,5 @@
+import { Answer } from "./Answer";
+
 export interface Thread {
     idThread: number;
     titleThread: string;
@@ -7,5 +9,6 @@ export interface Thread {
     createdAt: Date;
     status: boolean;
     coverPhotoThread:string ;
-    //answers: Answer[];
+    userId:number ;
+    answers: Answer[];
 }

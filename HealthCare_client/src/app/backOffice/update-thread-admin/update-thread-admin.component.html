@@ -1,0 +1,50 @@
+<app-all-template-admin></app-all-template-admin>
+<html :class="{ 'theme-dark': dark }" x-data="data()" lang="en">
+<div class="flex h-screen bg-gray-50 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }"
+    style="display: flex;">
+    <app-aside></app-aside>
+    <div class="flex flex-col flex-1 w-full">
+        <app-header-back></app-header-back>
+        <main class="h-full pb-16 overflow-y-auto">
+            <form (ngSubmit)="updateThread()" >
+                <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
+                    Update Thread 
+                </h4>
+            <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
+                
+                <label class="block text-sm">
+                    <span class="text-gray-700 dark:text-gray-400">Thread Status</span>
+                    <!-- focus-within sets the color for the icon when input is focused -->
+                    <div class="form-group">
+                        <select  [(ngModel)]="thread.status" name="status" class="block w-full pr-10 mt-1 text-sm text-black dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input">
+                            <option [value]="false" [selected]="!thread.status"> Hidden </option>
+                            <option [value]="true" [selected]="thread.status"> Visible </option>
+                          </select>
+                      </div>
+                </label>
+
+                <label class="block mt-4 text-sm">
+                    <span class="text-gray-700 dark:text-gray-400">Thread Topic</span>
+                    <!-- focus-within sets the color for the icon when input is focused -->
+                    <div class="relative text-gray-500 focus-within:text-purple-600 dark:focus-within:text-purple-400">
+                          <select class="block w-full pr-10 mt-1 text-sm text-black dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input" [(ngModel)]="thread.topicThread" name="topicThread">
+                            <option *ngFor="let topic of topics" [value]="topic">{{ topic }}</option>
+                        </select>
+                    </div>
+                </label>
+
+                <div class="mt-3 d-flex flex-row-reverse">
+                    <button  class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                        Update Thread
+                      </button>
+                      <button type="button" class="btn btn-secondary mr-3" (click)="goBack()">Go Back</button>
+                </div>    
+            </div>
+        </form>
+
+        <app-answer-admin [threadId]="threadId"></app-answer-admin>
+        </main>
+    </div>
+</div>
+
+</html>

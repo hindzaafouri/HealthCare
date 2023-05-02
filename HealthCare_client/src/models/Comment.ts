@@ -2,6 +2,6 @@ import { Answer } from "./Answer";
 
 export interface Comment {
     idComment: number;
-    comment: String ;
+    comment: string ;
     answer: Answer ;
 }
