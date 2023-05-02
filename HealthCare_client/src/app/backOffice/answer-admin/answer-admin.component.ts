@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit , Input} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AnswerService } from 'src/app/services-hind/answer.service';
 import { Answer } from 'src/models/Answer';
 
 @Component({
@@ -14,37 +15,33 @@ export class AnswerAdminComponent implements OnInit {
   answers: Answer[] = [];
   @Input() threadId!: number;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router) { }
+  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router,private answerService : AnswerService) { }
 
   ngOnInit(): void {
       console.log(this.threadId) ;
       this.getAnswersByThread(this.threadId);
   }
 
+  // from service
   getAnswersByThread(threadId: number): void {
-    this.http.get<Answer[]>(`http://localhost:8080/healthcare/answer-op/answers-byThread/${threadId}`)
-      .subscribe(
-        data => {
-          console.log(data);
-          this.answers = data;
-        },
-        error => {
-          console.log(error);
-        }
-      );
+    this.answerService.getAnswersByThread(threadId).subscribe(
+      (data: Answer[]) => {
+        this.answers = data;
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
+  // from service
   deleteAnswer(answerId: number): void {
-    const confirmation = window.confirm('Are you sure you want to delete this answer?');
-    if (confirmation) {
-      // Call Spring Boot endpoint to delete the answer
-      this.http.delete(`http://localhost:8080/healthcare/answer-op/delete-answer/${answerId}`)
-        .subscribe(() => {
-          // Remove the answer from the local array
-          const index = this.answers.findIndex(a => a.idAnswer === answerId);
-          this.answers.splice(index, 1);
-        });
-    }
+    this.answerService.deleteAnswer(answerId).subscribe(() => {
+      const index = this.answers.findIndex(a => a.idAnswer === answerId);
+      this.answers.splice(index, 1);
+      this.answerService.getAnswersByThread(this.threadId);
+    });
+
   }
 
   viewComments(idAnswer: number) {

@@ -142,6 +142,14 @@ export class ThreadComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    this.registerForm = this.fb.group({
+      title: ['', Validators.required],
+      question: ['', Validators.required],
+      topic: ['', Validators.required],
+      imageUrl: [''],
+    });
+
     this.getTopics() ;
     this.getThreads() ;
     this.getThreadsSortedByVotes() ;

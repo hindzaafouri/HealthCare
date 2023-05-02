@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Thread } from 'src/models/Thread';
 import { AnswerAdminComponent } from '../answer-admin/answer-admin.component';
 import { threadId } from 'worker_threads';
+import { ThreadService } from 'src/app/services-hind/thread.service';
 
 @Component({
   selector: 'app-threads-admin',
@@ -19,29 +20,28 @@ export class ThreadsAdminComponent implements OnInit {
 
 
 
-  constructor(private http: HttpClient , private router: Router) { }
+  constructor(private http: HttpClient , private router: Router,private threadService: ThreadService) { }
 
   ngOnInit(): void {
     this.getThreads() ; 
   }
   
 
+  // from service
   getThreads(): void {
-    this.http.get<Thread[]>('http://localhost:8080/healthcare/thread-op').subscribe(
-      data => {
-        console.log(data) ;
-        this.threads = data;
-      },
-      error => {
-        console.log(error);
-      }
-    );
+    this.threadService.getThreads().subscribe(data => {
+      this.threads = data;
+      console.log(this.threads);
+    }, error => {
+      console.log(error);
+    });
   }
 
+  // from service 
   getThreadById(threadId: number) : void {
-    this.http.get<Thread>('http://localhost:8080/healthcare/thread-op/'+threadId).subscribe(
+    this.threadService.getThreadById(threadId).subscribe(
       data => {
-        console.log(data) ;
+        console.log(data);
         this.thread = data;
       },
       error => {

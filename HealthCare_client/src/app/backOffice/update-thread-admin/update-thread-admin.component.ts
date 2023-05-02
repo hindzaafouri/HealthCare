@@ -5,6 +5,7 @@ import { Thread } from 'src/models/Thread';
 import { HttpClient } from '@angular/common/http';
 import { Topic } from 'src/models/Topic';
 import { FormGroup , FormBuilder } from '@angular/forms';
+import { ThreadService } from 'src/app/services-hind/thread.service';
 
 @Component({
   selector: 'app-update-thread-admin',
@@ -20,7 +21,7 @@ export class UpdateThreadAdminComponent implements OnInit {
   @Input() isModalOpen!: boolean;
 
 
-  constructor(private route: ActivatedRoute, private http: HttpClient,  private router: Router) { }
+  constructor(private route: ActivatedRoute, private http: HttpClient,  private router: Router,private threadService:ThreadService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -31,9 +32,11 @@ export class UpdateThreadAdminComponent implements OnInit {
     console.log(this.threadId) ;    
   }
 
+  // from service 
   getThreadDetails() : void {
-    this.http.get<Thread>(`http://localhost:8080/healthcare/thread-op/${this.threadId}`).subscribe(
+    this.threadService.getThreadById(this.threadId).subscribe(
       data => {
+        console.log(data);
         this.thread = data;
         this.selectedTopic = this.thread.topicThread;
       },
@@ -41,6 +44,7 @@ export class UpdateThreadAdminComponent implements OnInit {
         console.log(error);
       }
     );
+
   }
 
   
@@ -48,25 +52,28 @@ export class UpdateThreadAdminComponent implements OnInit {
     this.router.navigate(['/threads-admin']);
   }
 
+  // from service
   getTopics() {
-    this.http.get<string[]>('http://localhost:8080/healthcare/thread-op/topics').subscribe(data => {
+    this.threadService.getTopics().subscribe(data => {
       this.topics = data;
+      console.log(this.topics);
+    }, error => {
+      console.log(error);
     });
   }
 
+  // from service
   updateThread () {
-    const url = 'http://localhost:8080/healthcare/thread-op/update-thread/' + this.thread.idThread;
-    const data = {
-      status: this.thread.status,
-      topicThread: this.thread.topicThread
-    };
-    this.http.put(url, data).subscribe(res => {
-      console.log('Thread updated successfully:', res);
-      this.router.navigate(['/threads-admin']);
+    this.threadService.updateThread(this.thread, true).subscribe(
+      res => {
+        console.log('Thread updated successfully:', res);
+        this.router.navigate(['/threads-admin']);
+      },
+      err => {
+        console.error('Error updating thread:', err);
+      }
+    );
 
-    }, err => {
-      console.error('Error updating thread:', err);
-    });
   }
 
 }

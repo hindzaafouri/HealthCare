@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit , Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CommentService } from 'src/app/services-hind/comment.service';
 import { Comment } from 'src/models/Comment';
 
 @Component({
@@ -13,7 +14,11 @@ export class CommentAdminComponent implements OnInit {
   @Input() answerId!: number;
   commentsByAnswer!: Comment[];
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router) { }
+  constructor(private http: HttpClient,
+     private route: ActivatedRoute,
+      private router: Router,
+      private commentService:CommentService
+      ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -22,27 +27,30 @@ export class CommentAdminComponent implements OnInit {
     });
   }
 
+
+  //from service
   getComments() {
-    this.http.get(`http://localhost:8080/healthcare/comment-op/comments-ByAnswer/${this.answerId}`)
-      .subscribe((data: any) => {
+    this.commentService.getCommentsByAnswer(this.answerId).subscribe(
+      (data: Comment[]) => {
+        console.log(data);
         this.commentsByAnswer = data;
-      });
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
-  deleteComment(commentId:number) : void{
-    const confirmation = window.confirm('Are you sure you want to delete this comment?');
-    if (confirmation) {
-      // Call Spring Boot endpoint to delete the comment
-      this.http.delete(`http://localhost:8080/healthcare/comment-op/${commentId}`)
-        .subscribe(() => {
-          // Remove the comment from the local array
-          const index = this.commentsByAnswer.findIndex(a => a.idComment === commentId);
-          console.log("comment deleted");
-          this.commentsByAnswer.splice(index, 1);
-          // Call getComments() again to refresh the comments for the current answer
-          this.getComments();
-        });
-    }
+
+  //from service
+  deleteComment(commentId:number) : void {
+    this.commentService.deleteComment(commentId).subscribe(() => {
+      const index = this.commentsByAnswer.findIndex(a => a.idComment === commentId);
+      console.log("comment deleted");
+      this.commentsByAnswer.splice(index, 1);
+      // Call getComments() again to refresh the comments for the current answer
+      this.getComments();
+    });
   }
 
   goBack(): void {

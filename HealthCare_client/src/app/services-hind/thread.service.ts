@@ -41,5 +41,23 @@ export class ThreadService {
     return this.http.get<Thread[]>(`${this.apiUrl}/thread-byTopic/${topicString}`);
   }
 
+  getThreadById(threadId: number): Observable<Thread> {
+    const url = `${this.apiUrl}/${threadId}`;
+    return this.http.get<Thread>(url);
+  }
 
+  updateThread(thread: Thread, isAdminUpdate: boolean = false): Observable<Thread> {
+    const url = `${this.apiUrl}/update-thread/${thread.idThread}`;
+    const data = {
+      titleThread: thread.titleThread,
+      questionThread: thread.questionThread,
+      topicThread: thread.topicThread,
+      status: isAdminUpdate ? thread.status : null,
+    };
+    return this.http.put<Thread>(url, data);
+  }
+
+  deleteThread(threadId: number) {
+    return this.http.delete(`${this.apiUrl}/delete-thread/${threadId}`);
+  }
 }

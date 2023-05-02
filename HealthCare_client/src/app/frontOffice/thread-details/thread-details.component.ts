@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ThreadService } from 'src/app/services-hind/thread.service';
 import { Answer } from 'src/models/Answer';
 import { Comment } from 'src/models/Comment';
 import { Thread } from 'src/models/Thread';
@@ -32,7 +33,7 @@ export class ThreadDetailsComponent implements OnInit {
   fbUrl = 'https://www.facebook.com/dialog/share';
   appId = "1283078112286472" ;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute,private router: Router) { }
+  constructor(private http: HttpClient, private route: ActivatedRoute,private router: Router,private threadService : ThreadService) { }
 
   ngOnInit(): void {
      this.route.paramMap.subscribe(params => {
@@ -73,11 +74,12 @@ export class ThreadDetailsComponent implements OnInit {
   }
 
  
-
+  // from service
   getThreadDetails(threadId: number): void {
-    this.http.get<Thread>('http://localhost:8080/healthcare/thread-op/' + this.threadId).subscribe(
+    this.threadService.getThreadById(threadId).subscribe(
       data => {
-        this.thread = data; // Assign the retrieved thread data to the thread property
+        console.log(data);
+        this.thread = data;
       },
       error => {
         console.log(error);
@@ -85,13 +87,17 @@ export class ThreadDetailsComponent implements OnInit {
     );
   }
 
+  //from service
   deleteThread(event:Event) : void {
     event.preventDefault();
     const confirmation = window.confirm('Are you sure you want to delete this thread?');
     if (confirmation) {
-      // Call Spring Boot endpoint to delete the thread
-      this.http.delete(`http://localhost:8080/healthcare/thread-op/delete-thread/${this.threadId}`)
+      this.threadService.deleteThread(this.thread.idThread)
         .subscribe(() => {
+          console.log('Thread deleted successfully');
+          this.router.navigate(['/threads']);
+        }, error => {
+          console.error('Error deleting thread:', error);
         });
     }
   }
@@ -103,29 +109,28 @@ export class ThreadDetailsComponent implements OnInit {
     this.formModal.show();
   }
 
+  // from service
   getTopics() : void {
-    this.http.get<Topic[]>('http://localhost:8080/healthcare/thread-op/topics').subscribe(data => {
-      console.log("topics") ;
-      console.log(data) ;
+    this.threadService.getTopics().subscribe(data => {
       this.topics = data;
+      console.log(this.topics);
+    }, error => {
+      console.log(error);
     });
   }
 
+  //from service
   updateThread() {
     console.log('Updating thread with new values:', this.threadToUpdate.titleThread, this.threadToUpdate.questionThread, this.threadToUpdate.topicThread);
-
-    const url = 'http://localhost:8080/healthcare/thread-op/update-thread/' + this.threadToUpdate.idThread;
-    const data = {
-      titleThread: this.threadToUpdate.titleThread,
-      questionThread: this.threadToUpdate.questionThread,
-      topicThread: this.threadToUpdate.topicThread,
-    };
-    this.http.put(url, data).subscribe(res => {
-      console.log('Thread updated successfully:', res);  
-      this.router.navigate(['/threads']);
-    }, err => {
-      console.error('Error updating thread:', err);
-    });
+    this.threadService.updateThread(this.threadToUpdate).subscribe(
+      res => {
+        console.log('Thread updated successfully:', res);  
+        this.router.navigate(['/threads']);
+      },
+      err => {
+        console.error('Error updating thread:', err);
+      }
+    );
   }
 
   closeModal() {
