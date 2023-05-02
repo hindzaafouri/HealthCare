@@ -14,7 +14,7 @@ import java.util.Set;
 @Setter
 @ToString
 @Entity
-@JsonIgnoreProperties({"thread" , "comments"})
+@JsonIgnoreProperties({"thread"})
 public class Answer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
