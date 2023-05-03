@@ -30,7 +30,6 @@ const routes: Routes = [
   { path : 'threads'  , component:ThreadComponent },
   { path : 'threads/:idThread', component:ThreadDetailsComponent },
   { path : 'Appointment' , component : AddAppointmentComponent},
-  { path : 'back' , component : HeaderBackComponent},
   { path : 'Appointment/show' , component : ShowAppointmentComponent},
   { path : 'Appointment/show/details' , component : DetailsShowComponent},
   { path : 'editappointment/:id_appointment' , component : EditAppointmentComponent},
