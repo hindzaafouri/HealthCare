@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
 		this.isSignedin = this.auth.isUserSignedin();
 
 		if(this.isSignedin) {
-			this.router.navigateByUrl('home');
+			this.router.navigateByUrl('/');
 			
 		}
 		this.myFormLogin()
@@ -100,7 +100,7 @@ export class LoginComponent implements OnInit {
 		  data => {
 			this.social.loginWithGoogle(data.idToken).subscribe({
 			  next: response =>{
-				this.router.navigateByUrl("/front")
+				this.router.navigateByUrl("")
 				let name=response.user.userRoles[0].roleName;
 				console.log('role:', name);
                 console.log(sessionStorage.getItem("id"));
@@ -116,7 +116,7 @@ export class LoginComponent implements OnInit {
 		  data => {
 			this.social.loginWithFacebook(data.authToken).subscribe({
 			  next: response =>{
-				this.router.navigateByUrl("/front")
+				this.router.navigateByUrl("")
 				let name=response.user.userRoles[0].roleName;
 				console.log('role:', name);
                 console.log(sessionStorage.getItem("id"));

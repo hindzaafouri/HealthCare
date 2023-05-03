@@ -6,7 +6,6 @@ import { ThreadComponent } from './frontOffice/thread/thread.component';
 import { ThreadDetailsComponent } from './frontOffice/thread-details/thread-details.component';
 import { HomeComponent } from './frontOffice/home/home/home.component';
 import { AddAppointmentComponent } from './frontOffice/Appointment/add-appointment/add-appointment.component';
-import { HeaderBackComponent } from './backOffice/header-back/header-back.component';
 import { BodyComponent } from './frontOffice/body/body.component';
 import { ShowAppointmentComponent } from './frontOffice/Appointment/show-appointment/show-appointment.component';
 import { DetailsShowComponent } from './frontOffice/Appointment/details-show/details-show.component';
