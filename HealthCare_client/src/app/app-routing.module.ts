@@ -42,12 +42,9 @@ const routes: Routes = [
     {path: 'reset', component:ResetPasswordComponent},
   {path: 'active', component:CodeActivationComponent},
   {path: 'signup', component:SignupComponent},
-
-
-
-
   { path: 'threads-admin' , component:ThreadsAdminComponent } ,
   { path : 'threads/:idThread', component:ThreadDetailsComponent },
+  { path: 'threads-admin' , component:ThreadsAdminComponent } ,
   { path: 'update-thread/:threadId', component: UpdateThreadAdminComponent } ,
   { path: 'comments/:idAnswer', component: CommentAdminComponent },
   { path : "**" , component:NotFoundComponent}

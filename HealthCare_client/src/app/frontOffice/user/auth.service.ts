@@ -47,12 +47,12 @@ this.setUsername(resp.user.username)
 		sessionStorage.setItem('id', JSON.stringify(id));
 	  }
 
-	  public getId(): [] {
+	  public getId(): number {
 		const id = sessionStorage.getItem('id');
      if (id !== null) {
        return JSON.parse(id);
         }
-     return [];
+     return 0;
 	  }
 
 	  public getRoles(): [] {

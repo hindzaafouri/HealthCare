@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -13,7 +14,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tn.esprit.healthcare.Entities.Answer;
 import tn.esprit.healthcare.Entities.Thread;
 import tn.esprit.healthcare.Entities.Topic;
+import tn.esprit.healthcare.Entities.User;
+import tn.esprit.healthcare.Repositories.UserRepository;
 import tn.esprit.healthcare.Services.IThreadService;
+import tn.esprit.healthcare.Services.UserDetailsImpl;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -32,6 +36,9 @@ public class ThreadController {
     @Autowired
     IThreadService threadService ;
 
+    @Autowired
+    UserRepository userRepository ;
+
 
     /*@PostMapping("/add-thread")
     public ResponseEntity<Void> addThread (@RequestBody Thread thread) {
@@ -39,14 +46,22 @@ public class ThreadController {
         return ResponseEntity.status(HttpStatus.CREATED).build() ;
     }*/
 
+   /* @PostMapping("/add-thread")
+    public Thread addThread (@RequestBody Thread thread,Authentication authentication) {
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        User user = userRepository.findById(userDetails.getId()).get();
+        thread.setUser(user);
+        return threadService.addThread(thread) ;
+    }*/
     @PostMapping("/add-thread")
     public Thread addThread (@RequestParam(value = "file", required = false) MultipartFile file,
                              @RequestParam("title") String title,
                              @RequestParam("topic") Topic topic ,
-                             @RequestParam("question") String question
+                             @RequestParam("question") String question,
+                             @RequestParam("userId") Long userId
                              ) throws IOException{
         Thread thread = new Thread();
-
+        User user = userRepository.findById(userId).get();
         if (file != null) {
             String fileName = StringUtils.cleanPath(file.getOriginalFilename());
             String uploadDir = "thread-images/";
@@ -54,7 +69,7 @@ public class ThreadController {
             FileUploadUtil.saveFile(uploadDir, fileName, file);
             thread.setCoverPhotoThread(filePath);
         }
-
+        thread.setUser(user);
         thread.setTitleThread(title);
         thread.setQuestionThread(question);
         thread.setTopicThread(topic);

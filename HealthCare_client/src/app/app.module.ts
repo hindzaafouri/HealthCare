@@ -5,7 +5,6 @@ import { RouterModule , Routes} from '@angular/router';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule , ReactiveFormsModule } from '@angular/forms';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AllTemplateClientComponent } from './frontOffice/all-template-client/all-template-client.component';
 import { FooterComponent } from './frontOffice/footer/footer.component';
@@ -84,6 +83,7 @@ import { AnswerFrontComponent } from './frontOffice/answer-front/answer-front.co
     RouterModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    NgxPaginationModule,
     ReactiveFormsModule,
     ToastrModule.forRoot({
       timeOut: 5000,
