@@ -1,0 +1,83 @@
+<app-all-template-client></app-all-template-client>
+
+ <!-- Start Service Section -->
+ <section id="appointment" class="st-shape-wrap st-gray-bg">
+    <div class="st-shape4">
+      <img src="assets/img/shape/section_shape.png" alt="shape1">
+    </div>
+    <div class="st-shape6">
+      <img src="assets/img/shape/contact-shape3.svg" alt="shape3">
+    </div>
+    <div class="st-height-b120 st-height-lg-b80"></div>
+    <div class="container">
+      <div class="st-section-heading st-style1">
+        <h2 class="st-section-heading-title">Make an appointment</h2>
+        <div class="st-seperator">
+          <div class="st-seperator-left wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.2s"></div>
+          <div class="st-seperator-center"><img src="assets/img/icons/4.png" alt="icon"></div>
+          <div class="st-seperator-right wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.2s"></div>
+        </div>
+        <div class="st-section-heading-subtitle"></div>
+      </div>
+      <div class="st-height-b40 st-height-lg-b40"></div>
+    </div>
+   
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-10 offset-lg-1">
+            <form (submit)="Submit()">
+          
+           
+            <div class="row">
+              <div class="col-lg-6">
+
+              <div class="col-lg-6">
+                <div class="st-form-field st-style1">
+                  <label>Booking Date</label>
+                  <input type="date" name="date" id="date" [(ngModel)]="appointmentUpdate.date" placeholder="dd/mm/yy">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="st-form-field st-style1">
+                  <label>Hour </label>
+                  <input type="text" class="form-control" name="heure" [(ngModel)]="appointmentUpdate.heure" placeholder="12:00" required>
+                </div>
+              </div>
+
+              <div class="col-lg-6">
+                <div class="st-form-field st-style1">
+                  <label>Department</label>
+                  <div class="st-custom-select-wrap">
+                   <input type="text" class="form-control" name="department" [(ngModel)]="appointmentUpdate.department">
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-12">
+                <div class="st-form-field st-style1">
+                  <label>Message</label>
+                  <input type="text" class="form-control" name="message" [(ngModel)]="appointmentUpdate.message">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="users" class="col-form-label col-sm-1">USER</label>
+                <select [(ngModel)]="appointmentUpdate.user" class="form-control" name="username">
+                       <option [ngValue]="undefined">Sélectionner un user</option>
+                       <option *ngFor="let user of users" [ngValue]="user">{{user.username}}</option> 
+                </select>
+              </div> 
+
+              <div class="col-lg-12">
+                <button class="st-btn st-style1 st-color1 st-size-medium" type="submit" id="appointment-submit"
+                  name="submit">Modify an Appointment</button>
+              </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </section>
+  <!-- End Service Section -->
+  <router-outlet></router-outlet>

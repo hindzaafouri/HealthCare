@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import { RouterModule , Routes} from '@angular/router';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule , ReactiveFormsModule } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AllTemplateClientComponent } from './frontOffice/all-template-client/all-template-client.component';
@@ -12,6 +13,13 @@ import { BodyComponent } from './frontOffice/body/body.component';
 import { HeaderComponent } from './frontOffice/header/header.component';
 import { ThreadComponent } from './frontOffice/thread/thread.component';
 import { ThreadDetailsComponent } from './frontOffice/thread-details/thread-details.component';
+import { HomeComponent } from './frontOffice/home/home/home.component';
+import { ToastrModule } from 'ngx-toastr';
+import { AddAppointmentComponent } from './frontOffice/Appointment/add-appointment/add-appointment.component';
+import { EditAppointmentComponent } from './frontOffice/Appointment/edit-appointment/edit-appointment.component';
+import { ShowAppointmentComponent } from './frontOffice/Appointment/show-appointment/show-appointment.component';
+import { DetailsShowComponent } from './frontOffice/Appointment/details-show/details-show.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderBackComponent } from './backOffice/header-back/header-back.component';
 import { AllTemplateAdminComponent } from './backOffice/all-template-admin/all-template-admin.component';
 import { AsideComponent } from './backOffice/aside/aside.component';
@@ -43,6 +51,11 @@ import { AnswerFrontComponent } from './frontOffice/answer-front/answer-front.co
     HeaderComponent,
     ThreadComponent,
     ThreadDetailsComponent,
+    HomeComponent,
+    AddAppointmentComponent,
+    EditAppointmentComponent,
+    ShowAppointmentComponent,
+    DetailsShowComponent
     HeaderBackComponent,
     AllTemplateAdminComponent,
     HeaderBackComponent,
@@ -63,17 +76,23 @@ import { AnswerFrontComponent } from './frontOffice/answer-front/answer-front.co
     AnswerFrontComponent,
   ],
   imports: [
+    NgxPaginationModule,
+    NgbModule,
     BrowserModule,
     HttpClientModule,
     FormsModule,
     RouterModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    ReactiveFormsModule,
+    ToastrModule.forRoot({
+      timeOut: 5000,
+      progressBar: true,
+      progressAnimation: 'increasing'
+    }),
     SocialLoginModule
-  ]
-    NgxPaginationModule,
-    ReactiveFormsModule 
     ],
+
   exports: [RouterModule],
   providers: [
     {

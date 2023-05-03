@@ -1,0 +1,104 @@
+<app-all-template-client></app-all-template-client>
+
+<!-- Start Service Section -->
+<section id="appointment" class="st-shape-wrap st-gray-bg">
+  <div class="st-shape4">
+    <img src="assets/img/shape/section_shape.png" alt="shape1">
+  </div>
+  <div class="st-shape6">
+    <img src="assets/img/shape/contact-shape3.svg" alt="shape3">
+  </div>
+  <div class="st-height-b120 st-height-lg-b80"></div>
+  <div class="container">
+    <div class="st-section-heading st-style1">
+      <h2 class="st-section-heading-title">Show an appointment</h2>
+      <div class="st-seperator">
+        <div class="st-seperator-left wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.2s"></div>
+        <div class="st-seperator-center"><img src="assets/img/icons/4.png" alt="icon"></div>
+        <div class="st-seperator-right wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.2s"></div>
+      </div>
+      <div class="st-section-heading-subtitle"></div>
+    </div>
+    <div class="st-height-b40 st-height-lg-b40"></div>
+  </div>
+  <!-- With actions -->
+  <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300" >
+    Show Appointment
+
+  </h4>
+  <div class="add-task">
+       
+    <a  href="/Appointment" class="st-btn st-style1 st-color2 st-smooth-move">+ Add Another Appointment</a>
+
+  </div>
+
+  <div class="w-full overflow-hidden rounded-lg shadow-xs">
+    <div class="w-full overflow-x-auto">
+      <table class="w-full whitespace-no-wrap">
+        <thead>
+          <div class="input-group">
+            <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+            <input [(ngModel)]="filters.keyword" name="keyword" (input)="listAppointments()" type="text"
+              placeholder="Type here...">
+
+          </div>
+          <tr
+            class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+            <th class="px-4 py-3">Id_Appointment</th>
+            <th class="px-4 py-3">Date</th>
+            <th class="px-4 py-3">Heure</th>
+            <th class="px-4 py-3">Status</th>
+            <th class="px-4 py-3">Department</th>
+            <th class="px-4 py-3">Message</th>
+            <th class="px-4 py-3">User ID</th>
+            <th class="px-4 py-3">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let appointment of appointments | 
+          paginate:{ itemsPerPage: 3, 
+          currentPage: page,
+          totalItems:totalLength }"
+          class="col-lg-4 border text-center mt-4 p-1">   
+            <td>{{ appointment.id_appointment }}</td>
+            <td>{{ appointment.date }}</td>
+            <td>{{ appointment.heure }}</td>
+            <td>{{ appointment.stateAppointment }}</td>
+            <td>{{ appointment.department }}</td>
+            <td>{{ appointment.message }}</td>
+            <td>{{ appointment.user.username}}</td>
+            <div class="st-hero-btn">
+              <td><button class="btn btn-info"><a
+                    routerLink="/editappointment/{{appointment.id_appointment}}">Edit</a></button></td>
+              <td><button><a class="btn btn-danger"
+                    (click)="deleteAppointment(deleteModel, appointment.id_appointment)">Delete</a></button></td>
+            </div>
+          </tr>
+        </tbody>
+       
+      </table>
+    </div>
+  </div>
+  <pagination-controls class="text-center" (pageChange)="page = $event"></pagination-controls>
+</section>
+
+<div  >
+  <ng-template #deleteModel let-modal>
+    <div class="modal-header" >
+      <h4 class="modal-title" id="modal-title">Appointment deletion</h4>
+      <button type="button" class="close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p><strong>Are you sure you want to delete <span class="text-primary"></span>?</strong></p>
+      <p>All information associated to this item will be permanently deleted.
+        <span class="text-danger">This operation can not be undone</span>
+      </p>
+    </div>
+    <div class="class-footer" style="padding: 5px;">
+      <button type="button" class="btn btn-outline-secondary"  style="margin-right: 5px;" (click)="modal.dismiss('cancel click')">Cancel</button>
+      <button type="button" class="btn btn-danger" (click)="modal.close('Ok click')">Ok</button>
+    </div>
+  </ng-template>
+</div>
