@@ -11,19 +11,18 @@ import { BodyComponent } from './frontOffice/body/body.component';
 import { ShowAppointmentComponent } from './frontOffice/Appointment/show-appointment/show-appointment.component';
 import { DetailsShowComponent } from './frontOffice/Appointment/details-show/details-show.component';
 import { EditAppointmentComponent } from './frontOffice/Appointment/edit-appointment/edit-appointment.component';
-import { HeaderBackComponent } from './backOffice/header-back/header-back.component';
 import { AllTemplateAdminComponent } from './backOffice/all-template-admin/all-template-admin.component';
 import { UserListComponent } from './backOffice/user/user-list/user-list.component';
 import { UserAddComponent } from './backOffice/user/user-add/user-add.component';
 import { LoginComponent } from './frontOffice/user/login/login.component';
-import { ResetPasswordComponent } from './frontOffice/user/reset-password/reset-password.component';
-import { CodeActivationComponent } from './frontOffice/user/code-activation/code-activation.component';
-import { SignupComponent } from './frontOffice/user/signup/signup.component';
 import { NotFoundComponent } from './frontOffice/not-found/not-found.component';
 import { ThreadsAdminComponent } from './backOffice/threads-admin/threads-admin.component';
 import { DashboardComponent } from './backOffice/dashboard/dashboard.component';
 import { UpdateThreadAdminComponent } from './backOffice/update-thread-admin/update-thread-admin.component';
 import { CommentAdminComponent } from './backOffice/comment-admin/comment-admin.component';
+import { ResetPasswordComponent } from './frontOffice/user/reset-password/reset-password.component';
+import { CodeActivationComponent } from './frontOffice/user/code-activation/code-activation.component';
+import { SignupComponent } from './frontOffice/user/signup/signup.component';
 
 
 const routes: Routes = [
