@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { RouterModule , Routes} from '@angular/router';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AllTemplateClientComponent } from './frontOffice/all-template-client/all-template-client.component';
@@ -69,8 +68,7 @@ import { AnswerFrontComponent } from './frontOffice/answer-front/answer-front.co
     RouterModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    SocialLoginModule
-  ]
+    SocialLoginModule,
     NgxPaginationModule,
     ReactiveFormsModule 
     ],

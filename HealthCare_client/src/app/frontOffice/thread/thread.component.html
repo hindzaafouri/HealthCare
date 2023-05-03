@@ -1,4 +1,5 @@
 <app-all-template-client></app-all-template-client>
+
 <div class="st-content">
   <div class="st-page-heading st-size-md st-dynamic-bg"
     style="background-image: url('/assets/frontTemplate/img/hero-bg6.jpg')">
@@ -6,6 +7,7 @@
     <div class="container">
       <div class="st-page-heading-in text-center">
         <h1 class="st-page-heading-title">Forum</h1>
+        {{userId}}
         <div class="st-page-heading-subtitle">Find answers and ask questions here !</div>
       </div>
     </div>
@@ -87,6 +89,7 @@
           </div>
 
         </div>
+
         <div class="st-height-b30 st-height-lg-b30"></div>
 
 
@@ -210,6 +213,8 @@
             <p class="comment-form-comment">
               <label>File Upload </label>
               <input type="file" class="form-control" id="image" name="image" (change)="onFileSelected($event)">
+              <input type="hidden" [value]=userId name="userId">
+
             </p>
             <div class="row">
               <div *ngIf="selectedFile" class="form-group" style="    height: 50%; width: 50%;">

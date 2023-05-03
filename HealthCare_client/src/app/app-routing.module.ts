@@ -4,8 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AllTemplateClientComponent } from './frontOffice/all-template-client/all-template-client.component';
 import { ThreadComponent } from './frontOffice/thread/thread.component';
 import { ThreadDetailsComponent } from './frontOffice/thread-details/thread-details.component';
-import { HeaderBackComponent } from './backOffice/header-back/header-back.component';
-import { AllTemplateAdminComponent } from './backOffice/all-template-admin/all-template-admin.component';
 import { UserListComponent } from './backOffice/user/user-list/user-list.component';
 import { UserAddComponent } from './backOffice/user/user-add/user-add.component';
 import { LoginComponent } from './frontOffice/user/login/login.component';
@@ -29,13 +27,8 @@ const routes: Routes = [
     {path: 'reset', component:ResetPasswordComponent},
   {path: 'active', component:CodeActivationComponent},
   {path: 'signup', component:SignupComponent},
-
-
-
-
-  { path : 'threads/:idThread', component:ThreadDetailsComponent }
-  { path: 'threads-admin' , component:ThreadsAdminComponent } ,
   { path : 'threads/:idThread', component:ThreadDetailsComponent },
+  { path: 'threads-admin' , component:ThreadsAdminComponent } ,
   { path: 'update-thread/:threadId', component: UpdateThreadAdminComponent } ,
   { path: 'comments/:idAnswer', component: CommentAdminComponent },
   { path : "**" , component:NotFoundComponent}

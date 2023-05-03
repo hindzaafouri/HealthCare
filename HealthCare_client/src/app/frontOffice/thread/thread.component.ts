@@ -37,6 +37,7 @@ export class ThreadComponent implements OnInit {
   selectedTopic: string = '';
   filteredThreads: Thread[] = [];
   showAlert = false;
+  userId= sessionStorage.getItem('id') ; 
 
   constructor(private fb: FormBuilder
     ,private threadService: ThreadService) { }
@@ -48,6 +49,7 @@ export class ThreadComponent implements OnInit {
     const formData = new FormData();
 
     formData.append('title', this.registerForm.get('title')?.value || '');
+    formData.append('userId', this.registerForm.get('userId')?.value || '');
     formData.append('question', this.registerForm.get('question')?.value || '');
     formData.append('topic', this.registerForm.get('topic')?.value || '');
     
