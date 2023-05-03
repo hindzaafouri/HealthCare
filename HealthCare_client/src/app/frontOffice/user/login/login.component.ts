@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
+import { SocialService } from './social.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +20,7 @@ export class LoginComponent implements OnInit {
 	error: string = '';
 	checkoutParentGroup!: FormGroup;
 
-	constructor(private formChildGroup: FormBuilder,private route: ActivatedRoute, private router: Router, private auth: AuthService) {}
+	constructor(private formChildGroup: FormBuilder,private route: ActivatedRoute, private router: Router, private auth: AuthService,private social: SocialService,private authService: SocialAuthService) {}
 
 	ngOnInit() : void {
 		this.isSignedin = this.auth.isUserSignedin();
@@ -93,17 +95,36 @@ export class LoginComponent implements OnInit {
   }
 	
 
-	/*signInWithGoogle(): void {
+	signInWithGoogle(): void {
 		this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(
 		  data => {
 			this.social.loginWithGoogle(data.idToken).subscribe({
 			  next: response =>{
-				this.router.navigateByUrl("home")
+				this.router.navigateByUrl("/front")
+				let name=response.user.userRoles[0].roleName;
+				console.log('role:', name);
+                console.log(sessionStorage.getItem("id"));
 			  }
 			})
 			console.log(data.idToken)
 		  }
 		);
-	  }*/
+	  }
+
+	  signInWithFB(): void {
+		this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).then(
+		  data => {
+			this.social.loginWithFacebook(data.authToken).subscribe({
+			  next: response =>{
+				this.router.navigateByUrl("/front")
+				let name=response.user.userRoles[0].roleName;
+				console.log('role:', name);
+                console.log(sessionStorage.getItem("id"));
+			  }
+			})
+			console.log(data.authToken)
+		  }
+		);
+	  }
 
 }

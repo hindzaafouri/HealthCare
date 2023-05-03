@@ -20,6 +20,10 @@ import { UserAddComponent } from './backOffice/user/user-add/user-add.component'
 import { LoginComponent } from './frontOffice/user/login/login.component';
 import { HttpInterceptorService } from './frontOffice/user/http-interceptor.service';
 import { UserEditComponent } from './backOffice/user/user-edit/user-edit.component';
+import {FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule} from 'angularx-social-login';
+import { CodeActivationComponent } from './frontOffice/user/code-activation/code-activation.component';
+import { ResetPasswordComponent } from './frontOffice/user/reset-password/reset-password.component';
+import { SignupComponent } from './frontOffice/user/signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +42,9 @@ import { UserEditComponent } from './backOffice/user/user-edit/user-edit.compone
     UserAddComponent,
     LoginComponent,
     UserEditComponent,
+    CodeActivationComponent,
+    ResetPasswordComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,12 +53,31 @@ import { UserEditComponent } from './backOffice/user/user-edit/user-edit.compone
     RouterModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    SocialLoginModule
   ],
   exports: [RouterModule],
   providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '998943596311-agii5b72rppsj1h1tdp5f75mhnfj22s7.apps.googleusercontent.com'
+            )
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('554126483472498')
+          }
+        ]
+      } as SocialAuthServiceConfig,
+    },
     {provide: HTTP_INTERCEPTORS,
       useClass: HttpInterceptorService,
-      multi: true}
+      multi: true},
   ],
   bootstrap: [AppComponent]
 })

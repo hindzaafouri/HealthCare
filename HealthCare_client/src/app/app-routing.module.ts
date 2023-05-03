@@ -9,6 +9,9 @@ import { AllTemplateAdminComponent } from './backOffice/all-template-admin/all-t
 import { UserListComponent } from './backOffice/user/user-list/user-list.component';
 import { UserAddComponent } from './backOffice/user/user-add/user-add.component';
 import { LoginComponent } from './frontOffice/user/login/login.component';
+import { ResetPasswordComponent } from './frontOffice/user/reset-password/reset-password.component';
+import { CodeActivationComponent } from './frontOffice/user/code-activation/code-activation.component';
+import { SignupComponent } from './frontOffice/user/signup/signup.component';
 
 const routes: Routes = [
     { path: "front" , component: AllTemplateClientComponent},
@@ -17,6 +20,11 @@ const routes: Routes = [
   { path : 'user_list'  , component:UserListComponent },
     { path : 'user_add'  , component:UserAddComponent },
     { path : 'login'  , component:LoginComponent },
+    {path: 'reset', component:ResetPasswordComponent},
+  {path: 'active', component:CodeActivationComponent},
+  {path: 'signup', component:SignupComponent},
+
+
 
 
   { path : 'threads/:idThread', component:ThreadDetailsComponent }

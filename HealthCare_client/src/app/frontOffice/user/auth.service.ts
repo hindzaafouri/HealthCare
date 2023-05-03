@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
+import { Request } from './SignUpRequest';
 
 
 @Injectable({
@@ -129,7 +130,9 @@ this.setUsername(resp.user.username)
 
 		sessionStorage.removeItem('token');
 sessionStorage.removeItem('roles');
-		this.router.navigateByUrl('front');
+sessionStorage.removeItem('username');
+
+		this.router.navigateByUrl('/login');
 
 	}
 
