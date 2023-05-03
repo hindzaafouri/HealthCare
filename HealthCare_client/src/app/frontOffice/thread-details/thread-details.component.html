@@ -1,108 +1,92 @@
+<app-all-template-client></app-all-template-client>
 <div class="st-content">
+  <div class="st-page-heading" style="background-image: url('/assets/frontTemplate/img/hero-bg2.jpg')">
+
     <div class="container">
-        <!-- test -->
-        <p>thread-details works!</p>
-        <p>Thread ID: {{ threadId }}</p>
+      <div class="st-page-heading-in text-center">
+        <h1 class="st-page-heading-title">{{ thread.titleThread }}</h1>
+        <div class="st-post-label">
+          <span>By <a href="#">Jhon Doe</a></span>
+          <span>{{ thread.createdAt | date:'yyyy-MM-dd - HH:mm:ss' }}</span>
 
-        <div *ngIf="thread">
-            <h1>{{ thread.titleThread }}</h1>
-            <p>{{ thread.questionThread }}</p>
-            <p>{{ thread.topicThread }}</p>
-            <p>{{ thread.createdAt | date:'yyyy-MM-dd HH:mm:ss' }}</p>
-            <!-- Add any other properties of the thread object as needed -->
+        </div>
+        <div class="st-height-b30 st-height-lg-b30"></div>
+        <a href="#" class="delete-post text-white" (click)="shareOnFacebook($event)"><i class="fab fa-facebook"
+            style="color: #2374e1;"></i> Share on facebook | </a>
+        <a href="#" class="delete-post text-white" (click)="shareOnTwitter($event)"><i class="fab fa-twitter"
+            style="color:rgb(29, 155, 240)"></i> Share on Twitter | </a>
+        <a href="#" class="delete-post text-white" (click)="sendOnWhatsApp($event)"><i class="fab fa-whatsapp"
+            style="color:#25d366"></i> Send on WhatsApp</a>
+
+        <div class="st-height-b30 st-height-lg-b30"></div>
+
+
+        <div class="st-post-actions">
+          <a href="#" class="edit-post text-white"
+            (click)="currentThread = thread; openModalUpdateThread(thread,$event)"><i class="fas fa-edit"></i> Edit |
+          </a>
+          <a href="#" class="delete-post text-white" (click)="deleteThread($event)"><i class="fas fa-trash-alt"></i> Delete |
+          </a>
         </div>
 
-        <div *ngIf="!thread">
-            <p>Loading thread details...</p>
-        </div>
-
-        <!--test-->
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="comments-area">
-                    <div class="comment-list-outer">
-                        <h2 class="comments-title">Comments(3)</h2>
-                        <ol class="comment-list">
-                            <li class="comment">
-                                <div class="comment-body">
-                                    <div class="comment-meta">
-                                        <div class="comment-author">
-                                            <img src="assets/img/comment1.jpg" alt="comment1" class="avatar">
-                                            <a href="#" class="nm">Smith Jhon</a>
-                                        </div><!-- .comment-author -->
-                                        <div class="comment-metadata">
-                                            <a href="#"><span>15 Jan, 2020</span></a>
-                                        </div><!-- .comment-metadata -->
-                                    </div><!-- .comment-meta -->
-                                    <div class="comment-content">
-                                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
-                                    </div>
-                                    <div class="reply"><a href="#" class="comment-reply-link">Reply</a></div>
-                                </div>
-                                <ol class="children">
-                                    <li class="comment">
-                                        <div class="comment-body">
-                                            <div class="comment-meta">
-                                                <div class="comment-author">
-                                                    <img src="assets/img/comment2.jpg" alt="comment1" class="avatar">
-                                                    <span class="nm"><a href="#">Robat Newman</a></span>
-                                                </div><!-- .comment-author -->
-                                                <div class="comment-metadata">
-                                                    <a href="#"><span>15 Jan, 2020</span></a>
-                                                </div><!-- .comment-metadata -->
-                                            </div><!-- .comment-meta -->
-                                            <div class="comment-content">
-                                                <p>Consectetuer adipiscing elit. Lorem ipsum dolor sit amet,
-                                                    consectetuer.</p>
-                                            </div>
-                                            <div class="reply"><a href="#" class="comment-reply-link">Reply</a></div>
-                                        </div>
-                                    </li>
-                                </ol><!-- .children -->
-                            </li>
-                            <li class="comment">
-                                <div class="comment-body">
-                                    <div class="comment-meta">
-                                        <div class="comment-author">
-                                            <img src="assets/img/comment1.jpg" alt="comment1" class="avatar">
-                                            <span class="nm"><a href="#">Hannibal Lecter</a></span>
-                                        </div><!-- .comment-author -->
-                                        <div class="comment-metadata">
-                                            <a href="#"><span>26 Jan, 2016</span></a>
-                                        </div><!-- .comment-metadata -->
-                                    </div><!-- .comment-meta -->
-                                    <div class="comment-content">
-                                        <p>Lorem ipsum dolor sit amet. Lorem ipsum adipiscing elit.</p>
-                                    </div>
-                                    <div class="reply"><a href="#" class="comment-reply-link">Reply</a></div>
-                                </div>
-                            </li>
-                        </ol><!-- .comment-list -->
-                    </div><!-- .comment-list-outer -->
-                    <div class="comment-respond">
-                        <h2 class="comment-reply-title">Add your comment</h2>
-                        <form method="post" class="comment-form">
-                            <p class="comment-form-author">
-                                <input name="author" type="text" placeholder="Name*" required="">
-                            </p>
-                            <p class="comment-form-email">
-                                <input name="email" type="email" placeholder="E-mail*" required="">
-                            </p>
-                            <p class="comment-form-url">
-                                <input id="url" name="url" type="url" placeholder="Website">
-                            </p>
-                            <p class="comment-form-comment">
-                                <textarea name="comment" cols="40" rows="5" placeholder="Write here...*"
-                                    required=""></textarea>
-                            </p>
-                            <p class="form-submit">
-                                <button type="submit" class="st-btn st-style1 st-color1 st-size-medium">Send
-                                    Message</button>
-                            </p>
-                        </form>
-                    </div><!-- .comment-respond -->
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+  </div><!-- .st-page-heading -->
+
+
+  <div class="container">
+    <div class="mt-5 mb-5" *ngIf="thread">
+      <h2>{{ thread.questionThread }}</h2>
+    </div>
+
+    <div *ngIf="!thread">
+      <p>Loading thread details...</p>
+    </div>
+
+    <app-answer-front [threadId]="threadId"></app-answer-front>
+
+  </div>
 </div>
+
+<div class="modal fade" id="updateThreadModal" tabindex="-1" role="dialog" aria-labelledby="updateThreadModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form (ngSubmit)="updateThread()" #updateThreadForm="ngForm">
+        <div class="modal-header">
+          <h5 class="modal-title" id="updateThreadFormLabel">Update Thread</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="title">Title</label>
+            <textarea class="form-control" id="titleThread" name="titleThread" required
+              [(ngModel)]="threadToUpdate.titleThread"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="question">Question</label>
+            <textarea class="form-control" id="questionThread" name="questionThread" required
+              [(ngModel)]="threadToUpdate.questionThread"></textarea>
+          </div>
+          <div>
+            <label for="topic">Topic</label>
+            <select class="form-select" [(ngModel)]="threadToUpdate.topicThread" name="topicThread">
+              <option *ngFor="let topic of topics" [value]="topic">{{ topic }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal()">Close</button>
+          <button type="submit" class="btn btn-info">Update</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<script async defer crossorigin="anonymous"
+  src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v11.0&appId=<YOUR_APP_ID>&autoLogAppEvents=1"
+  nonce="gGGl1nGJ"></script>

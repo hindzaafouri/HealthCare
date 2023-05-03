@@ -1,4 +1,5 @@
 package tn.esprit.healthcare.Entities;
+import net.minidev.json.annotate.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
@@ -18,9 +19,6 @@ public class Appointment implements Serializable{
     @Column(name = "StateAppointment", nullable = false)
     private StateAppointment stateAppointment;
 
-    @OneToOne
-    @JoinColumn(name="id")
-    private User users;
     public Appointment(){}
     public Appointment(Long id_appointment, Date date, String Heure ,StateAppointment stateAppointment){}
 
@@ -56,11 +54,15 @@ public class Appointment implements Serializable{
         this.stateAppointment = stateAppointment;
     }
 
-    public User getUsers() {
-        return users;
+
+    public User getUser() {
+        return user;
     }
 
-    public void setUsers(User users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
+    @JsonIgnore
+    @ManyToOne
+    User user ;
 }

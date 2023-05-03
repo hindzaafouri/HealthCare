@@ -1,43 +1,57 @@
 package tn.esprit.healthcare.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
-
-
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
-@Table(	name = "users",
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = "username"),
-                @UniqueConstraint(columnNames = "email")
-        })
+@Table(name = "user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Column
     private String username;
 
+    @Column(name = "email")
     private String email;
 
+    @Column(name = "password")
     private String password;
+    @Column
+    private String Phone_number;
 
-    private String phone_number;
-    public User() {
+    @Column(name = "active")
+    private int active;
+
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private Set<Role> userRoles = new HashSet<>();
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "code_id")
+    @JsonIgnore
+    private Code code;
+
+    public Set<Role> getUserRoles() {
+        return userRoles;
     }
 
-    public User(String username, String email, String password,String phone_number) {
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.phone_number=phone_number;
-    }
+    public void setUserRoles(Set<Role> userRoles) {
+        this.userRoles = userRoles;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+        for (Role r : userRoles) {
+            r.setUser(this);
+        }
     }
 
     public String getUsername() {
@@ -65,10 +79,43 @@ public class User {
     }
 
     public String getPhone_number() {
-        return phone_number;
+        return Phone_number;
     }
 
     public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
+        Phone_number = phone_number;
     }
+
+    public int getActive() {
+        return active;
+    }
+
+    public void setActive(int active) {
+        this.active = active;
+    }
+
+    public Code getCode() {
+        return code;
+    }
+
+    public void setCode(Code code) {
+        this.code = code;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonIgnore
+    private Set<Answer> answers;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonIgnore
+    private Set<Thread> threads;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonIgnore
+    private Set<Comment> comments;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonIgnore
+    private Set<Appointment> appointments;
+
 }
