@@ -3,6 +3,7 @@ package tn.esprit.healthcare.Services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -12,6 +13,7 @@ import tn.esprit.healthcare.Entities.User;
 import tn.esprit.healthcare.Payload.UserPrincipal;
 import tn.esprit.healthcare.Repositories.UserRepository;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -26,18 +28,18 @@ public class UserService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepository.findByemail(email);
-        System.out.println(user.getEmail() + "         " +user.getPassword());
-        UserPrincipal userPrincipal = new UserPrincipal(user);
-        return userPrincipal;
-    }
+    public UserDetailsImpl loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByemail(username);
+        return UserDetailsImpl.build(user);}
 
     @Transactional
     public void addUser(User user){
         userRepository.save(user);
     }
 
+    public void deletePatient(Long id) {
+        userRepository.deleteById(id);
+    }
     public boolean ifEmailExist(String email){
         return userRepository.existsByEmail(email);
     }
@@ -65,5 +67,24 @@ public class UserService implements UserDetailsService {
         } catch (DataAccessException ex) {
             throw new RuntimeException("Error fetching users: " + ex.getMessage(), ex);
         }
+    }
+
+    private Set getAuthority(User user) {
+        Set<SimpleGrantedAuthority> authorities = new HashSet<>();
+        user.getUserRoles().forEach(role -> {
+            authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getRoleName()));
+        });
+        return authorities;
+    }
+
+    public User updateUser(User user) {
+        Long id = user.getId();
+        User std = userRepository.findById(id).get();
+        std.setUsername(user.getUsername());
+        std.setEmail(user.getEmail());
+        std.setPhone_number(user.getPhone_number());
+        std.setActive(user.getActive());
+
+        return userRepository.save(std);
     }
 }

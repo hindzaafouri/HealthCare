@@ -1,0 +1,77 @@
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/backTemplate/css/tailwind.output.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" />
+<html :class="{ 'theme-dark': dark }" x-data="data()" lang="en">   
+<div class="flex h-screen bg-gray-50 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }" style="display: flex;">
+        <app-aside></app-aside>
+        <form (ngSubmit)="doSignup()" class="st-appointment-form" id="appointment-form">
+
+        <div class="flex flex-col flex-1 w-full">
+            <app-header-back></app-header-back>
+            <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
+                <!-- Invalid input -->
+                <label class="block text-sm">
+                  <span class="text-gray-700 dark:text-gray-400">
+                    Username
+                  </span>
+                  <input  [(ngModel)]="username" name="username" class="block w-full mt-1 text-sm border-green-600 dark:text-gray-300 dark:bg-gray-700 focus:border-green-400 focus:outline-none focus:shadow-outline-green form-input" placeholder="Jane Doe">
+                 
+                </label>
+  
+                <!-- Valid input -->
+                <label class="block mt-4 text-sm">
+                  <span class="text-gray-700 dark:text-gray-400">
+                    Email
+                  </span>
+                  <input  [(ngModel)]="email" name="email" class="block w-full mt-1 text-sm border-green-600 dark:text-gray-300 dark:bg-gray-700 focus:border-green-400 focus:outline-none focus:shadow-outline-green form-input" placeholder="Jane Doe">
+                 
+                </label>
+  
+                <!-- Helper text -->
+                <label class="block mt-4 text-sm">
+                  <span class="text-gray-700 dark:text-gray-400">
+                   Password
+                  </span>
+                  <input  [(ngModel)]="password" name="password" class="block w-full mt-1 text-sm border-green-600 dark:text-gray-300 dark:bg-gray-700 focus:border-green-400 focus:outline-none focus:shadow-outline-green form-input" placeholder="Jane Doe">
+                 
+                </label>
+                <label class="block mt-4 text-sm">
+                    <span class="text-gray-700 dark:text-gray-400">
+                     Phone Number
+                    </span>
+                    <input  [(ngModel)]="phone_number" name="phone_number" class="block w-full mt-1 text-sm border-green-600 dark:text-gray-300 dark:bg-gray-700 focus:border-green-400 focus:outline-none focus:shadow-outline-green form-input" placeholder="Jane Doe">
+                   
+                  </label>
+                <div class="mt-4 text-sm">
+                    <span class="text-gray-700 dark:text-gray-400">
+                      Role
+                    </span>
+                        <div class="st-custom-select-wrap">
+                            <div *ngFor="let role of user_roles">
+                              <input [(ngModel)]="role.selected" name="{{ role.name }}" type="checkbox" id="{{role.name}}" (change)="onChangeCategory($event, role)"  class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" name="accountType" value="busines">
+                              <label class="inline-flex items-center ml-6 text-gray-600 dark:text-gray-400" for="{{role.name}}">
+                                {{role.name}}
+                              </label>
+                            </div>
+                    
+                    </div>
+                    
+                  </div>
+              </div>
+              <div class="col-lg-6">
+                <table>
+                 <tr>
+                   <td><input name="submit" type="submit" value="Signup" /></td>
+                 </tr>
+                </table>
+           </div>
+        </div> 
+    </form>
+
+    </div>
+    </html> 
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+<script src="/assets/backTemplate/js/init-alpine.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" defer></script>
+<script src="/assets/backTemplate/js/charts-lines.js" defer></script>
+<script src="/assets/backTemplate/js/charts-pie.js" defer></script>

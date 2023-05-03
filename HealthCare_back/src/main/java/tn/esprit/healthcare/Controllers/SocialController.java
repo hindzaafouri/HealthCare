@@ -77,7 +77,7 @@ public class SocialController {
         if(!result){
             tn.esprit.healthcare.Entities.User user = new tn.esprit.healthcare.Entities.User();
             user.setEmail(email);
-            user.setPassword(passwordEncoder.encode("kasdjhfkadhsY776ggTyUU65khaskdjfhYuHAwjñlji"));
+            user.setPassword(passwordEncoder.encode("farouk"));
             user.setActive(1);
             List<Role> authorities = authoritiesService.getAuthorities();
             Set<Role> roles = user.getUserRoles();
@@ -91,7 +91,7 @@ public class SocialController {
         }
         JwtLogin jwtLogin = new JwtLogin();
         jwtLogin.setEmail(email);
-        jwtLogin.setPassword("kasdjhfkadhsY776ggTyUU65khaskdjfhYuHAwjñlji");
+        jwtLogin.setPassword("farouk");
         return tokenService.login(jwtLogin);
     }
 }

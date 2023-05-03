@@ -51,6 +51,11 @@
                 <li class="menu-item-has-children"><a  [routerLink]="['/threads']" class="st-smooth-move">Forum</a>
                 </li>
                 <li><a href="#contact" class="st-smooth-move">Contact</a></li>
+                <li *ngIf="!isSignedin"><a routerLink="/login" class="st-smooth-move">login</a></li>
+                <li *ngIf="username"><a (click)="doSignout()" class="st-smooth-move">{{ username }}</a></li>
+                <li *ngIf="isSignedin"> <a routerLink="/front" style="text-decoration: underline; cursor: pointer;" (click)="doSignout()" >Signout</a></li>
+
+
               </ul>
             </div>
           </div>
