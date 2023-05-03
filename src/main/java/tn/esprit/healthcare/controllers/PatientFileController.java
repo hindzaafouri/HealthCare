@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.healthcare.EmailPackage.EmailService;
+import tn.esprit.healthcare.entities.PatientDto;
 import tn.esprit.healthcare.entities.PatientFile;
 import tn.esprit.healthcare.services.IPatientFileService;
 import tn.esprit.healthcare.services.IPatientFileServiceImpl;
@@ -15,11 +16,11 @@ import java.util.Optional;
 @AllArgsConstructor
 @RestController
 @RequestMapping("patient")
+@CrossOrigin(value = "*")
 public class PatientFileController {
 
-    //@Autowired
-    IPatientFileService IPatientFileService;
-  //  @Autowired
+   // IPatientFileService IPatientFileService;
+   @Autowired
     IPatientFileServiceImpl iPatientFileServiceimpl;
     @Autowired
 
@@ -27,8 +28,8 @@ public class PatientFileController {
     @GetMapping("/all")
     public List<PatientFile> getAll(){
         String body="test";
-        emailService.sendMail("moatez.oueslati@esprit.tn","invitation",body);
-        return IPatientFileService.getAllPatientFile();
+        emailService.sendMail("anaslamiri07@gmail.com","Le patient est encore malade",body);
+        return iPatientFileServiceimpl.getAllPatientFile();
 
     }
 
@@ -36,37 +37,29 @@ public class PatientFileController {
 
     public Optional<PatientFile> retrievePatientFile(@PathVariable Long num) {
 
-        return  IPatientFileService.getPatientFile(num);
+        return  iPatientFileServiceimpl.getPatientFile(num);
 
     }
-    @PostMapping("add")
+    @PostMapping("/add")
     public PatientFile addPatient(@RequestBody PatientFile patientFile, HttpServletResponse response) throws IOException {
 
-        return IPatientFileService.addPatientFile(patientFile,response);
+        return iPatientFileServiceimpl.addPatientFile(patientFile,response);
 
     }
 
     @DeleteMapping("delete/{num}")
     public void removePatientFile(@PathVariable Long num){
 
-        IPatientFileService.removePatientFile(num);
+        iPatientFileServiceimpl.removePatientFile(num);
     }
     @PutMapping("/update")
     public PatientFile updatePiste(@RequestBody PatientFile patientFile, HttpServletResponse response) throws IOException {
 
-        return  IPatientFileService.updatePatientFile(patientFile,response);
+        return  iPatientFileServiceimpl.updatePatientFile(patientFile,response);
 
     }
 
-    @GetMapping(value = "/number/{state}")
-    @ResponseBody
-    public int nombredepatientsstatus(@PathVariable(name = "state")String state) {
-        if (state.isEmpty()) {
-            return 0;
-        }
 
-        return IPatientFileService.nombreselonstatus(state);
-    }
     @GetMapping(value = "/findBystate/{state}")
     @ResponseBody
     public List<PatientFile> findByStatus(@PathVariable(name = "state")String state) {
@@ -75,6 +68,13 @@ public class PatientFileController {
         }
 
         return iPatientFileServiceimpl.findByStatus(state);
+    }
+
+    @GetMapping(value = "/Allnumber")
+    @ResponseBody
+    public PatientDto nombredepatientsstatus() {
+
+        return iPatientFileServiceimpl.nombreselonstatusDto();
     }
 
 }

@@ -6,6 +6,7 @@ import com.lowagie.text.pdf.PdfWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.esprit.healthcare.EmailPackage.EmailService;
+import tn.esprit.healthcare.entities.PatientDto;
 import tn.esprit.healthcare.entities.PatientFile;
 import tn.esprit.healthcare.repositories.PatientFileRepository;
 
@@ -116,7 +117,14 @@ public class IPatientFileServiceImpl implements IPatientFileService {
 
     @Override
     public int nombreselonstatus(String state) {
-        return patientFileRepository.nombredepatients(state);
+        return 0;
+    }
+
+    public PatientDto nombreselonstatusDto() {
+        PatientDto patientDto = new PatientDto();
+        patientDto.setMalade(patientFileRepository.nombredepatients("malade"));
+        patientDto.setGueri(patientFileRepository.nombredepatients("gueri"));
+        return patientDto;
     }
 }
 
