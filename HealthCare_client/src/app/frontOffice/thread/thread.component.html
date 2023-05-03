@@ -1,7 +1,8 @@
-
 <app-all-template-client></app-all-template-client>
 <div class="st-content">
-  <div class="st-page-heading st-size-md st-dynamic-bg" data-src="/assets/frontTemplate/img/hero-bg6.jpg">
+  <div class="st-page-heading st-size-md st-dynamic-bg"
+    style="background-image: url('/assets/frontTemplate/img/hero-bg6.jpg')">
+
     <div class="container">
       <div class="st-page-heading-in text-center">
         <h1 class="st-page-heading-title">Forum</h1>
@@ -17,7 +18,7 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="st-form-field st-style1">
-             <label>Search Thread By Key Word</label>
+              <label>Search Thread By Key Word</label>
               <input type="text" id="keyword" name="keyword" placeholder="Key Word" [(ngModel)]="searchByKeyWord">
             </div>
           </div>
@@ -25,30 +26,33 @@
         <div class="row">
 
           
+
           <div class="col-lg-6" *ngFor="let thread of (selectedTopic ? filteredThreads : threads)  ">
-            <div *ngIf="(thread.titleThread.toLowerCase().includes(searchByKeyWord.toLowerCase()) || thread.questionThread.toLowerCase().includes(searchByKeyWord.toLowerCase()) || thread.topicThread.toLowerCase().includes(searchByKeyWord.toLowerCase()) || searchByKeyWord == '')">
-            <div class="st-post st-style3 st-zoom">
-              <a href="blog-details-right-sidebar.html" class="st-post-thumb">
-                <img class="st-zoom-in" src="/assets/frontTemplate/img/blog13.jpg" alt="blog1">
-              </a>
-              <div class="st-post-info">
-                <h2 class="st-post-title"><a href="blog-details-right-sidebar.html">{{ thread.titleThread }}</a></h2>
-                <div class="st-post-meta">
-                  <span>
-                    <a href="#" class="st-post-avatar">
-                      <span class="st-post-avatar-text">Admin</span>
-                    </a>
-                  </span>
-                  <span class="st-post-date">{{ thread.createdAt | date:'yyyy-MM-yyyy'}}</span>
+            <div
+              *ngIf="(thread.titleThread.toLowerCase().includes(searchByKeyWord.toLowerCase()) || thread.questionThread.toLowerCase().includes(searchByKeyWord.toLowerCase()) || thread.topicThread.toLowerCase().includes(searchByKeyWord.toLowerCase()) || searchByKeyWord == '')">
+              <div class="st-post st-style3 st-zoom">
+                <a href="blog-details-right-sidebar.html" class="st-post-thumb">
+                  <img class="st-zoom-in" src="/assets/frontTemplate/img/blog13.jpg" alt="blog1">
+                </a>
+                <div class="st-post-info">
+                  <h2 class="st-post-title"><a href="blog-details-right-sidebar.html">{{ thread.titleThread }}</a></h2>
+                  <div class="st-post-meta">
+                    <span>
+                      <a href="#" class="st-post-avatar">
+                        <span class="st-post-avatar-text">Admin</span>
+                      </a>
+                    </span>
+                    <span class="st-post-date">{{ thread.createdAt | date:'yyyy-MM-yyyy'}}</span>
+                  </div>
+                  <div class="st-post-text truncate-text">{{ thread.questionThread }}</div>
                 </div>
-                <div class="st-post-text truncate-text">{{ thread.questionThread }}</div>
+                <div class="st-post-footer">
+                  <a [routerLink]="['/threads', thread.idThread]" class="st-btn st-style2 st-color1 st-size-medium">Read
+                    More</a>
+                </div>
               </div>
-              <div class="st-post-footer">
-                <a  [routerLink]="['/threads', thread.idThread]" class="st-btn st-style2 st-color1 st-size-medium">Read More</a>
-              </div>
+              <div class="st-height-b30 st-height-lg-b30"></div>
             </div>
-            <div class="st-height-b30 st-height-lg-b30"></div>
-          </div>
           </div>
 
           <div class="col-lg-12">
@@ -77,16 +81,14 @@
         <div class="st-height-b0 st-height-lg-b40"></div>
         <div class="st-widget st-sidebar-widget">
           <h3 class="st-widget-title">Topics</h3>
-          <!--<ul class="st-widget-list">
-            <li *ngFor="let topic of topics" [value]="topic" (click)="getThreadsByTopic(topic)"><a>{{ topic }}</a></li>
-          </ul>-->
           <div *ngFor="let topic of topics">
-            <input type="radio" name="topic" [(ngModel)]="selectedTopic" [value]="topic" (change)="onTopicChange()"> {{topic}}
+            <input type="radio" name="topic" [(ngModel)]="selectedTopic" [value]="topic" (change)="onTopicChange()">
+            {{topic}}
           </div>
 
         </div>
         <div class="st-height-b30 st-height-lg-b30"></div>
-        
+
 
         <div class="st-widget st-sidebar-widget">
           <h3 class="st-widget-title">Trending threads</h3>
@@ -142,46 +144,142 @@
         </div>
         <div class="st-section-heading-subtitle">Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. <br>Lorem Ipsum the industry's standard dummy text.</div>
+          <div *ngIf="showAlert" class="alert alert-success">
+            Thread has been successfully added!
+          </div>
       </div>
       <div class="st-height-b40 st-height-lg-b40"></div>
     </div>
     <div class="container">
       <div class="row">
         <div class="col-lg-10 offset-lg-1">
-          <form method="post" class="comment-form" (ngSubmit)="addThreadOnSubmit()">
-            <p class="comment-form-author">
-              <input name="title" type="text" placeholder="Title*" required="" [(ngModel)]="thread.titleThread">
-            </p>
+          
+
+
+
+
+          <form method="post" [formGroup]="registerForm" class="comment-form" (ngSubmit)="addThread()">
+            <div class="comment-form-author">
+              <label>Title</label>
+              <input id="title" type="text" placeholder="Title*" required="" formControlName="title" minlength="10" maxlength="50" >
+              <div class="mt-n4" *ngIf="registerForm.get('title')?.invalid && (registerForm.get('title')?.dirty || registerForm.get('title')?.touched)">
+                <div class="text-danger" *ngIf="registerForm.get('title')?.errors?.['required']">
+                  Title is required.
+                </div>
+                <div class="text-danger" *ngIf="registerForm.get('title')?.errors?.['minlength']">
+                  Title must be at least 10 characters long.
+                </div>
+                <div class="text-danger" *ngIf="registerForm.get('title')?.errors?.['maxlength']">
+                  Title cannot be more than 50 characters long.
+                </div>
+              </div>
+            </div>
+            
 
 
             <div class="st-form-field st-style1" style="width: 50%;">
+              <label>Topic</label>
               <div class="st-custom-select-wrap">
-                <select name="topic" [(ngModel)]="thread.topicThread" class="" data-placeholder="Select topic" required>
+                <select name="topic" formControlName="topic" class="" placeholder="Select topic" required >
                   <option *ngFor="let topic of topics" [ngValue]="topic">{{topic}}</option>
                 </select>
               </div>
+              <div *ngIf="registerForm.get('topic')?.invalid && (registerForm.get('topic')?.dirty || registerForm.get('topic')?.touched)">
+                <div class="text-danger" *ngIf="registerForm.get('topic')?.errors?.['required']">
+                  Topic is required.
+                </div>
+
+              </div>
             </div>
-
-
-            <p class="comment-form-comment">
-              <textarea name="question" cols="40" rows="5" [(ngModel)]="thread.questionThread"
-                placeholder="Write your question here ...*" required=""></textarea>
-            </p>
-
+            <div class="comment-form-comment">
+              <label>Question</label>
+              <textarea name="question" formControlName="question" cols="40" rows="5"
+                placeholder="Write your question here ...*" required="" minlength="10" maxlength="150" ></textarea>
+                <div class="mt-n4" *ngIf="registerForm.get('question')?.invalid && (registerForm.get('question')?.dirty || registerForm.get('question')?.touched)">
+                  <div class="text-danger" *ngIf="registerForm.get('question')?.errors?.['required']">
+                    Question is required.
+                  </div>
+                  <div class="text-danger" *ngIf="registerForm.get('question')?.errors?.['minlength']">
+                    Question must be at least 10 characters long.
+                  </div>
+                  <div class="text-danger" *ngIf="registerForm.get('question')?.errors?.['maxlength']">
+                    Question cannot be more than 150 characters long.
+                  </div>
+                </div>
+            </div>
             <p class="comment-form-comment">
               <label>File Upload </label>
-              <input type="file" accept="image/*" (change)="onFileSelected($event)">
-              <img [src]="thread.coverPhotoThread" height="200" *ngIf="thread.coverPhotoThread">
+              <input type="file" class="form-control" id="image" name="image" (change)="onFileSelected($event)">
             </p>
-
+            <div class="row">
+              <div *ngIf="selectedFile" class="form-group" style="    height: 50%; width: 50%;">
+                <div class="text-center">
+                  <img [src]="imageSrc" class="img-fluid rounded" alt="Image sélectionnée">
+                </div>
+              </div>
+            </div>
 
             <div class="row">
               <p class="form-submit">
-                <button type="submit" class="st-btn st-style1 st-color1 st-size-medium">Add thread</button>
+                <button type="submit" class="st-btn st-style1 st-color1 st-size-medium" [disabled]="!registerForm.valid">Add thread</button>
               </p>
             </div>
             <div class="st-height-b100 st-height-lg-b80"></div>
           </form>
+
+          <!--<form #registerForm="ngForm" method="post" class="comment-form" (ngSubmit)="addThread()">
+            <div class="form-group" ngModelGroup="thread">
+              <p class="comment-form-author">
+                <label>Title</label>
+                <input name="title" type="text" placeholder="Title*" required="" [(ngModel)]="thread.titleThread" #titleInput="ngModel" minlength="3" maxlength="100" 
+                [ngClass]="{'is-invalid': titleInput.invalid && (titleInput.dirty || titleInput.touched)}">
+              </p>
+                <div class="invalid-feedback" *ngIf="titleInput.invalid && (titleInput.dirty || titleInput.touched)">
+                  <div *ngIf="titleInput.errors?.['required']">Title is required.</div>
+                  <div *ngIf="titleInput.errors?.['minlength']">Title must be at least 3 characters long.</div>
+                  <div *ngIf="titleInput.errors?.['maxlength']">Title cannot be more than 100 characters long.</div>
+                </div>
+              
+              <div class="st-form-field st-style1" style="width: 50%;">
+                <label>Topic</label>
+                <div class="st-custom-select-wrap">
+                  <select name="topic" [(ngModel)]="thread.topicThread" #topicInput="ngModel" class="" placeholder="Select topic" required>
+                    <option *ngFor="let topic of topics" [ngValue]="topic">{{topic}}</option>
+                  </select>
+                  <div class="invalid-feedback" *ngIf="topicInput.invalid && (topicInput.dirty || topicInput.touched)">
+                    <div *ngIf="topicInput.errors?.['required']">Topic is required.</div>
+                  </div>
+                </div>
+              </div>
+              <p class="comment-form-comment">
+                <label>Question</label>
+                <textarea name="question" [(ngModel)]="thread.questionThread" #questionInput="ngModel" cols="40" rows="5"
+                  placeholder="Write your question here ...*" required=""></textarea>
+                </p>
+                <div class="invalid-feedback" *ngIf="questionInput.invalid && (questionInput.dirty || questionInput.touched)">
+                  <div *ngIf="questionInput.errors?.['required']">Question is required.</div>
+                </div>
+              
+              <p class="comment-form-comment">
+                <label>File Upload </label>
+                <input type="file" class="form-control" id="image" name="image" (change)="onFileSelected($event)">
+              </p>
+              <div class="row">
+                <div *ngIf="selectedFile" class="form-group" style="    height: 50%; width: 50%;">
+                  <div class="text-center">
+                    <img [src]="imageSrc" class="img-fluid rounded" alt="Image sélectionnée">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <p class="form-submit">
+                <button type="submit" class="st-btn st-style1 st-color1 st-size-medium" [disabled]="!registerForm.valid">Add thread</button>
+              </p>
+            </div>
+            <div class="st-height-b100 st-height-lg-b80"></div>
+          </form>-->
+        
         </div>
       </div>
     </div>

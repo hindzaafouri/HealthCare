@@ -1,4 +1,5 @@
 
+
   <!-- Start Header Section -->
   <header class="st-site-header st-style1 st-sticky-header">
     <div class="st-top-header">
@@ -47,15 +48,7 @@
                 <li><a href="#doctors" class="st-smooth-move">Doctors</a></li>
                 <li><a href="#gallery" class="st-smooth-move">Gallery</a></li>
                 <li><a href="#price" class="st-smooth-move">Pricing</a></li>
-                <li class="menu-item-has-children"><a href="#blog" class="st-smooth-move">Blog</a>
-                  <ul>
-                    <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
-                    <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
-                    <li><a href="blog-no-sidebar.html">Blog No Sidebar</a></li>
-                    <li><a href="blog-details-right-sidebar.html">Blog Details Right Sidebar</a></li>
-                    <li><a href="blog-details-left-sidebar.html">Blog Details Left Sidebar</a></li>
-                    <li><a href="blog-details-no-sidebar.html">Blog Details No Sidebar</a></li>
-                  </ul>
+                <li class="menu-item-has-children"><a  [routerLink]="['/threads']" class="st-smooth-move">Forum</a>
                 </li>
                 <li><a href="#contact" class="st-smooth-move">Contact</a></li>
                 <li *ngIf="!isSignedin"><a routerLink="/login" class="st-smooth-move">login</a></li>

@@ -3,12 +3,20 @@ package tn.esprit.healthcare.Services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 import tn.esprit.healthcare.Entities.Answer;
 import tn.esprit.healthcare.Entities.Thread;
 import tn.esprit.healthcare.Entities.Topic;
 import tn.esprit.healthcare.Repositories.ThreadRepository;
 
+import javax.persistence.EntityNotFoundException;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -20,11 +28,69 @@ public class ThreadService implements IThreadService {
     @Autowired
     ThreadRepository threadRepository ;
 
-    @Override
-    public void addUpdateThread(Thread thread) {
+   @Override
+    public Thread addThread(Thread thread) {
         thread.setCreatedAt(LocalDateTime.now());
         threadRepository.save(thread) ;
+        return thread ;
     }
+
+    /*@Override
+    public void addThread(Thread thread, MultipartFile file) throws IOException {
+        thread.setCreatedAt(LocalDateTime.now());
+
+        // Save the cover photo to the local file system
+        if (!file.isEmpty()) {
+            String fileName = UUID.randomUUID().toString() + "." + StringUtils.getFilenameExtension(file.getOriginalFilename());
+            String uploadDir = "uploads/";
+            String filePath = uploadDir + fileName;
+
+            File uploadDirFile = new File(uploadDir);
+            if (!uploadDirFile.exists()) {
+                uploadDirFile.mkdir();
+            }
+
+            File dest = new File(filePath);
+            file.transferTo(dest);
+
+            thread.setCoverPhotoThread(filePath);
+            thread.setCreatedAt(LocalDateTime.now());
+        }
+
+        threadRepository.save(thread);
+    }*/
+
+
+
+    @Override
+    public void updateThread(Thread updatedThread) {
+        // Check if the answer already exists in the database
+        Optional<Thread> threadOptional = threadRepository.findById(updatedThread.getIdThread());
+        if (threadOptional.isPresent()) {
+            Thread thread = threadOptional.get();
+            // Update the answer fields
+
+            thread.setStatus(updatedThread.isStatus());
+            thread.setTopicThread(updatedThread.getTopicThread());
+            thread.setTitleThread(updatedThread.getTitleThread());
+            thread.setQuestionThread(updatedThread.getQuestionThread());
+
+
+            thread.setCreatedAt(thread.getCreatedAt());
+            thread.setUser(thread.getUser());
+            thread.setVotes(thread.getVotes());
+
+            thread.setCoverPhotoThread(thread.getCoverPhotoThread());
+
+
+            // Save the updated answer to the database
+            threadRepository.save(thread);
+        } else {
+            throw new EntityNotFoundException("Thread with ID " + updatedThread.getIdThread() + " not found");
+
+        }
+    }
+
 
     @Override
     public void deleteThread(Thread thread) {
@@ -88,10 +154,12 @@ public class ThreadService implements IThreadService {
     public List<Thread> getThreadsSortedByVotes() {
         Iterable<Thread> optionalThread = threadRepository.findAll();
         List<Thread> threads = StreamSupport.stream(optionalThread.spliterator(), false).collect(Collectors.toList());
-            threads.sort(Comparator.comparingInt(Thread::getVotes).reversed());
-        threads = threads.subList(0, 3) ;
-            return threads;
-        }
+        threads.sort(Comparator.comparingInt(Thread::getVotes).reversed());
+        int size = threads.size();
+        int endIndex = Math.min(size, 3);
+        threads = threads.subList(0, endIndex);
+        return threads;
+    }
 
     @Override
     public Set<Thread> findThreadByTopic(Topic topic) {

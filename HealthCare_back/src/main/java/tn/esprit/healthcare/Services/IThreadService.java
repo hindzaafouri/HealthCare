@@ -1,15 +1,20 @@
 package tn.esprit.healthcare.Services;
 
+import org.springframework.web.multipart.MultipartFile;
+import tn.esprit.healthcare.Entities.Answer;
 import tn.esprit.healthcare.Entities.Thread;
 import tn.esprit.healthcare.Entities.Topic;
 import tn.esprit.healthcare.Repositories.ThreadRepository;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
 public interface IThreadService {
 
-    public void addUpdateThread (Thread thread) ;
+    public Thread addThread (Thread thread);
+
+    public void updateThread (Thread thread) ;
 
     public void deleteThread (Thread thread) ;
 

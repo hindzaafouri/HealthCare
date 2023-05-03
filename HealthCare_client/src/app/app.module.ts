@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { RouterModule , Routes} from '@angular/router';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AllTemplateClientComponent } from './frontOffice/all-template-client/all-template-client.component';
@@ -11,8 +12,8 @@ import { BodyComponent } from './frontOffice/body/body.component';
 import { HeaderComponent } from './frontOffice/header/header.component';
 import { ThreadComponent } from './frontOffice/thread/thread.component';
 import { ThreadDetailsComponent } from './frontOffice/thread-details/thread-details.component';
-import { AllTemplateAdminComponent } from './backOffice/all-template-admin/all-template-admin.component';
 import { HeaderBackComponent } from './backOffice/header-back/header-back.component';
+import { AllTemplateAdminComponent } from './backOffice/all-template-admin/all-template-admin.component';
 import { AsideComponent } from './backOffice/aside/aside.component';
 import { DashboardComponent } from './backOffice/dashboard/dashboard.component';
 import { UserListComponent } from './backOffice/user/user-list/user-list.component';
@@ -24,6 +25,14 @@ import {FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, Soc
 import { CodeActivationComponent } from './frontOffice/user/code-activation/code-activation.component';
 import { ResetPasswordComponent } from './frontOffice/user/reset-password/reset-password.component';
 import { SignupComponent } from './frontOffice/user/signup/signup.component';
+import { NotFoundComponent } from './frontOffice/not-found/not-found.component';
+import { ThreadsAdminComponent } from './backOffice/threads-admin/threads-admin.component';
+import { UpdateThreadAdminComponent } from './backOffice/update-thread-admin/update-thread-admin.component';
+import { AnswerAdminComponent } from './backOffice/answer-admin/answer-admin.component';
+import { CommentAdminComponent } from './backOffice/comment-admin/comment-admin.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { AnswerFrontComponent } from './frontOffice/answer-front/answer-front.component';
+
 
 @NgModule({
   declarations: [
@@ -34,6 +43,7 @@ import { SignupComponent } from './frontOffice/user/signup/signup.component';
     HeaderComponent,
     ThreadComponent,
     ThreadDetailsComponent,
+    HeaderBackComponent,
     AllTemplateAdminComponent,
     HeaderBackComponent,
     AsideComponent,
@@ -45,6 +55,12 @@ import { SignupComponent } from './frontOffice/user/signup/signup.component';
     CodeActivationComponent,
     ResetPasswordComponent,
     SignupComponent,
+    NotFoundComponent,
+    ThreadsAdminComponent,
+    UpdateThreadAdminComponent,
+    AnswerAdminComponent,
+    CommentAdminComponent,
+    AnswerFrontComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +70,10 @@ import { SignupComponent } from './frontOffice/user/signup/signup.component';
     ReactiveFormsModule,
     AppRoutingModule,
     SocialLoginModule
-  ],
+  ]
+    NgxPaginationModule,
+    ReactiveFormsModule 
+    ],
   exports: [RouterModule],
   providers: [
     {
