@@ -27,4 +27,13 @@ public class EmailServiceImpl implements EmailService{
         simpleMailMessage.setText(mail.getCode());
         javaMailSender.send(simpleMailMessage);
     }
+    @Override
+    public void sendMail(String to, String subject, String body)
+    {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(to);
+        message.setSubject(subject);
+        message.setText(body);
+        javaMailSender.send(message);
+    }
 }

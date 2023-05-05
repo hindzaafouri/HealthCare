@@ -23,6 +23,7 @@ import { CommentAdminComponent } from './backOffice/comment-admin/comment-admin.
 import { ResetPasswordComponent } from './frontOffice/user/reset-password/reset-password.component';
 import { CodeActivationComponent } from './frontOffice/user/code-activation/code-activation.component';
 import { SignupComponent } from './frontOffice/user/signup/signup.component';
+import { PatientFileComponent } from './backOffice/anas/patient-file/patient-file.component';
 
 
 const routes: Routes = [
@@ -46,6 +47,7 @@ const routes: Routes = [
   { path: 'threads-admin' , component:ThreadsAdminComponent } ,
   { path: 'update-thread/:threadId', component: UpdateThreadAdminComponent } ,
   { path: 'comments/:idAnswer', component: CommentAdminComponent },
+  { path: 'patient_file', component: PatientFileComponent },
   { path : "**" , component:NotFoundComponent}
 
 ];

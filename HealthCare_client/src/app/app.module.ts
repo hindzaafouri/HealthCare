@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { RouterModule , Routes} from '@angular/router';
@@ -38,6 +38,9 @@ import { AnswerAdminComponent } from './backOffice/answer-admin/answer-admin.com
 import { CommentAdminComponent } from './backOffice/comment-admin/comment-admin.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AnswerFrontComponent } from './frontOffice/answer-front/answer-front.component';
+import { PatientFileComponent } from './backOffice/anas/patient-file/patient-file.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { PatientService } from './backOffice/anas/patient.service';
 
 
 @NgModule({
@@ -72,6 +75,7 @@ import { AnswerFrontComponent } from './frontOffice/answer-front/answer-front.co
     AnswerAdminComponent,
     CommentAdminComponent,
     AnswerFrontComponent,
+    PatientFileComponent,
   ],
   imports: [
     NgxPaginationModule,
@@ -82,15 +86,13 @@ import { AnswerFrontComponent } from './frontOffice/answer-front/answer-front.co
     RouterModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    NgxPaginationModule,
     ReactiveFormsModule,
     ToastrModule.forRoot({
       timeOut: 5000,
       progressBar: true,
       progressAnimation: 'increasing'
     }),
-    SocialLoginModule
-    ],
+    SocialLoginModule    ],
 
   exports: [RouterModule],
   providers: [
@@ -115,7 +117,10 @@ import { AnswerFrontComponent } from './frontOffice/answer-front/answer-front.co
     {provide: HTTP_INTERCEPTORS,
       useClass: HttpInterceptorService,
       multi: true},
+       PatientService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+
 })
 export class AppModule { }

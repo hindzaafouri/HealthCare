@@ -82,7 +82,6 @@ public class UserController {
         return accountResponse;
     }
 
-
     // http://localhost:8080/active
     @PostMapping("/active")
     public UserActive getActiveUser(@RequestBody JwtLogin jwtLogin){
