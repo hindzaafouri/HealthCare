@@ -22,6 +22,8 @@ public interface IThreadService {
 
     public Set<Thread> findThreadByKeyWord (String keyword) ;
 
+    public List<Thread> getThreadsByTimeFrame (String timeFrame) ;
+
     public Iterable<Thread> findAll () ;
 
     public List<String> getTopics () ;

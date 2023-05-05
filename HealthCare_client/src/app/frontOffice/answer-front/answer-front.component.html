@@ -80,8 +80,10 @@
           </div>
           <form method="post" class="comment-form" (ngSubmit)="addAnswer(threadId)" #myForm="ngForm">
             <p class="comment-form-comment">
+              <grammarly-editor-plugin>
               <textarea name="answer" cols="40" rows="5" placeholder="Write here...*" required="" #answerInput="ngModel"
               [(ngModel)]="answer.answer"></textarea> 
+            </grammarly-editor-plugin>
             </p>
             <p class="form-submit">
               <button type="submit" class="st-btn st-style1 st-color1 st-size-medium" >Send
@@ -112,8 +114,10 @@
         <div class="modal-body">
           <div class="form-group">
             <label for="answer">Answer</label>
+            <grammarly-editor-plugin>
             <textarea class="form-control" id="answer" name="answer" required
               [(ngModel)]="answerToUpdate.answer"></textarea>
+            </grammarly-editor-plugin>
           </div>
         </div>
         <div class="modal-footer">
@@ -170,7 +174,9 @@
               <h2 class="comment-reply-title mt-3">Add your comment</h2>
               <form method="post" class="comment-form" (ngSubmit)="addComment(answerToUpdate.idAnswer)">
                 <p class="comment-form-comment">
+                  <grammarly-editor-plugin>
                   <textarea name="comment" cols="40" rows="5" placeholder="Write here...*" required="" [(ngModel)]="comment.comment"></textarea>
+                  </grammarly-editor-plugin>
                 </p>
                 <p class="form-submit">
                   <button type="submit" class="st-btn st-style1 st-color1 st-size-medium">Submit Comment</button>

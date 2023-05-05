@@ -17,7 +17,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Year;
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -148,6 +152,31 @@ public class ThreadService implements IThreadService {
             }
         }
         return matchingThreads;
+    }
+
+    @Override
+    public List<Thread> getThreadsByTimeFrame(String timeFrame) {
+        List<Thread> threads;
+        if (timeFrame.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            // Fetch threads for a specific day
+            LocalDate date = LocalDate.parse(timeFrame, DateTimeFormatter.ISO_DATE);
+            threads = threadRepository.findThreadByCreatedAtBetween(date.atStartOfDay(), date.plusDays(1).atStartOfDay());
+        } else if (timeFrame.matches("\\d{4}-\\d{2}")) {
+            // Fetch threads for a specific month
+            YearMonth yearMonth = YearMonth.parse(timeFrame, DateTimeFormatter.ofPattern("yyyy-MM"));
+            threads = threadRepository.findThreadByCreatedAtBetween(
+                    yearMonth.atDay(1).atStartOfDay(), yearMonth.atEndOfMonth().plusDays(1).atStartOfDay()
+            );
+        } else if (timeFrame.matches("\\d{4}")) {
+            // Fetch threads for a specific year
+            Year year = Year.parse(timeFrame, DateTimeFormatter.ofPattern("yyyy"));
+            threads = threadRepository.findThreadByCreatedAtBetween(
+                    year.atDay(1).atStartOfDay(), year.plusYears(1).atDay(1).atStartOfDay()
+            );
+        } else {
+            throw new IllegalArgumentException("Invalid timeframe format. Supported formats: yyyy, yyyy-MM, yyyy-MM-dd");
+        }
+        return threads;
     }
 
     @Override

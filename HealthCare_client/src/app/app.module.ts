@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule , CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { RouterModule , Routes} from '@angular/router';
@@ -38,9 +38,11 @@ import { AnswerAdminComponent } from './backOffice/answer-admin/answer-admin.com
 import { CommentAdminComponent } from './backOffice/comment-admin/comment-admin.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AnswerFrontComponent } from './frontOffice/answer-front/answer-front.component';
+import { GrammarlyButtonElement, GrammarlyEditorPluginElement } from '@grammarly/editor-sdk';
 
 
 @NgModule({
+  schemas: [CUSTOM_ELEMENTS_SCHEMA] ,
   declarations: [
     AppComponent,
     BodyComponent,

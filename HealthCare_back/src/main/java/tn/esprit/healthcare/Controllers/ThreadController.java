@@ -77,6 +77,8 @@ public class ThreadController {
     }
 
 
+
+
     @DeleteMapping("/delete-thread/{id}")
     public ResponseEntity<String> deleteThread (@PathVariable long id) {
         Thread thread = threadService.findThreadById(id) ;
@@ -150,6 +152,17 @@ public class ThreadController {
         List<Thread> threads = threadService.getThreadsSortedByVotes() ;
         return ResponseEntity.ok(threads) ;
     }
+
+    @GetMapping("/timeframe/{timeFrame}")
+    public ResponseEntity<List<Thread>> getThreadsByTimeFrame(@PathVariable String timeFrame) {
+        try {
+            List<Thread> threads = threadService.getThreadsByTimeFrame(timeFrame);
+            return ResponseEntity.ok(threads);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
 
     private static class FileUploadUtil {
         public static void saveFile(String uploadDir, String fileName,

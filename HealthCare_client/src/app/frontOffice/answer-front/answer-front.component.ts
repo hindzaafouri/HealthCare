@@ -7,6 +7,7 @@ import { CommentService } from 'src/app/services-hind/comment.service';
 import { Answer } from 'src/models/Answer';
 import { Comment } from 'src/models/Comment';
 import { Thread } from 'src/models/Thread';
+import * as Grammarly from "@grammarly/editor-sdk";
 
 declare var window:any ; 
 
@@ -57,6 +58,8 @@ export class AnswerFrontComponent implements OnInit {
       this.formModal = new window.bootstrap.Modal(
         document.getElementById("updateAnswerModal")
       );
+      Grammarly.init("client_L7TFP6VsBxxK2vAihQQ7Yj");
+
   
       this.formModalAddComment = new window.bootstrap.Modal(
         document.getElementById("addCommentModal")
