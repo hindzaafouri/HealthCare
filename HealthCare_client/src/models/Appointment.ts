@@ -9,4 +9,5 @@ export class Appointment {
     department!: string;
     message!:string;
     user!: User;
+    medecin !:string;
 }

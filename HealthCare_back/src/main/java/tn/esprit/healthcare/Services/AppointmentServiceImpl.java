@@ -1,8 +1,11 @@
 package tn.esprit.healthcare.Services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import tn.esprit.healthcare.Entities.Appointment;
+import tn.esprit.healthcare.Entities.User;
 import tn.esprit.healthcare.Repositories.AppointmentRepository;
 import tn.esprit.healthcare.Repositories.UserRepository;
 
@@ -14,13 +17,16 @@ public class AppointmentServiceImpl implements AppointmentService{
     @Autowired
     private AppointmentRepository appointmentRepository;
 
-
+    @Autowired
+    private UserRepository userRepository;
     public List<Appointment> findAll() {
         return appointmentRepository.findAll();
     }
 
     @Override
-    public Appointment save(Appointment appointment) {
+    public Appointment save(Appointment appointment, Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+        appointment.setUser(user);
         appointmentRepository.save(appointment);
         return appointment;
     }

@@ -1,3 +1,4 @@
+
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
@@ -43,9 +44,17 @@ import { PatientService } from './backOffice/anas/patient.service';
 import { ProfileComponent } from './frontOffice/user/profile/profile.component';
 import { DoctorListComponent } from './backOffice/user/doctor-list/doctor-list.component';
 import { PatientfileComponent } from './frontOffice/anas/patientfile/patientfile.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { ListDoctorComponent } from './frontOffice/list-doctor/list-doctor.component';
+import { PatientappointmentlistComponent } from './frontOffice/Appointment/patientappointmentlist/patientappointmentlist.component';
+import { DoctorappointmentlistComponent } from './frontOffice/doctorappointmentlist/doctorappointmentlist.component';
+import { DoctorappointmentUpdateComponent } from './frontOffice/doctorappointment-update/doctorappointment-update.component';
+import { GrammarlyButtonElement, GrammarlyEditorPluginElement } from '@grammarly/editor-sdk';
+
 
 
 @NgModule({
+  schemas: [CUSTOM_ELEMENTS_SCHEMA] ,
   declarations: [
     AppComponent,
     BodyComponent,
@@ -81,6 +90,11 @@ import { PatientfileComponent } from './frontOffice/anas/patientfile/patientfile
     ProfileComponent,
     DoctorListComponent,
     PatientfileComponent,
+    ListDoctorComponent,
+    PatientappointmentlistComponent,
+    DoctorappointmentlistComponent,
+    DoctorappointmentUpdateComponent
+
   ],
   imports: [
     NgxPaginationModule,
@@ -96,7 +110,9 @@ import { PatientfileComponent } from './frontOffice/anas/patientfile/patientfile
       progressBar: true,
       progressAnimation: 'increasing'
     }),
-    SocialLoginModule    ],
+    SocialLoginModule,
+    FullCalendarModule
+    ],
 
   exports: [RouterModule],
   providers: [

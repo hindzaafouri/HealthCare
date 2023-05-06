@@ -6,7 +6,6 @@ import { ThreadComponent } from './frontOffice/thread/thread.component';
 import { ThreadDetailsComponent } from './frontOffice/thread-details/thread-details.component';
 import { HomeComponent } from './frontOffice/home/home/home.component';
 import { AddAppointmentComponent } from './frontOffice/Appointment/add-appointment/add-appointment.component';
-import { HeaderBackComponent } from './backOffice/header-back/header-back.component';
 import { BodyComponent } from './frontOffice/body/body.component';
 import { ShowAppointmentComponent } from './frontOffice/Appointment/show-appointment/show-appointment.component';
 import { DetailsShowComponent } from './frontOffice/Appointment/details-show/details-show.component';
@@ -33,10 +32,19 @@ import { PatientfileComponent } from './frontOffice/anas/patientfile/patientfile
 const routes: Routes = [
  { path: "" , component: HomeComponent},
   { path: "admin" , component: DashboardComponent, canActivate: [AdminGuard]},
+
+import { ListDoctorComponent } from './frontOffice/list-doctor/list-doctor.component';
+import { PatientappointmentlistComponent } from './frontOffice/Appointment/patientappointmentlist/patientappointmentlist.component';
+import { DoctorappointmentlistComponent } from './frontOffice/doctorappointmentlist/doctorappointmentlist.component';
+import { DoctorappointmentUpdateComponent } from './frontOffice/doctorappointment-update/doctorappointment-update.component';
+
+
+const routes: Routes = [
+  { path: "" , component: HomeComponent},
+  { path: "admin" , component: DashboardComponent},
   { path : 'threads'  , component:ThreadComponent },
   { path : 'threads/:idThread', component:ThreadDetailsComponent },
   { path : 'Appointment' , component : AddAppointmentComponent},
-  { path : 'back' , component : HeaderBackComponent},
   { path : 'Appointment/show' , component : ShowAppointmentComponent},
   { path : 'Appointment/show/details' , component : DetailsShowComponent},
   { path : 'editappointment/:id_appointment' , component : EditAppointmentComponent},
@@ -52,13 +60,21 @@ const routes: Routes = [
   { path : 'threads/:idThread', component:ThreadDetailsComponent },
   { path: 'threads-admin' , component:ThreadsAdminComponent } ,
   { path: 'update-thread/:threadId', component: UpdateThreadAdminComponent } ,
+  { path: 'patientappointments', component: PatientappointmentlistComponent },
+  { path: 'doctorappointments', component: DoctorappointmentlistComponent },
+  { path: 'doctorappointments/update', component: DoctorappointmentUpdateComponent },
+  { path: "doctors", component: ListDoctorComponent },
   { path: 'comments/:idAnswer', component: CommentAdminComponent },
+
   {
     path:'patient',
     component:PatientfileComponent
   },
+ // { path: 'patient_file', component: PatientFileComponent },
+//  { path:'Patient', component:PatientfileComponent},
+
   { path : "**" , component:NotFoundComponent}
- 
+
 ];
 
 

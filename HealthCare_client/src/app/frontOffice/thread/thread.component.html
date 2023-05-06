@@ -74,7 +74,7 @@
       <div class="col-lg-4">
         <div class="">
           <div _ngcontent-wua-c20="" class="st-post-footer">
-            <a _ngcontent-wua-c20="" href="#add-thread-forum" class="st-btn st-style2 st-color1 st-size-medium"><i
+            <a _ngcontent-wua-c20="" href="#add-thread-form" class="st-btn st-style2 st-color1 st-size-medium"><i
                 class="fas fa-plus" style="position: relative; margin-top: 5px; margin-right: 10px;"></i> Add Thread
             </a>
           </div>
@@ -161,10 +161,12 @@
 
 
 
-          <form method="post" [formGroup]="registerForm" class="comment-form" (ngSubmit)="addThread()">
+          <form method="post" id="add-thread-form" [formGroup]="registerForm" class="comment-form" (ngSubmit)="addThread()">
             <div class="comment-form-author">
               <label>Title</label>
+              <grammarly-editor-plugin>
               <input id="title" type="text" placeholder="Title*" required="" formControlName="title" minlength="10" maxlength="50" >
+            </grammarly-editor-plugin>
               <div class="mt-n4" *ngIf="registerForm.get('title')?.invalid && (registerForm.get('title')?.dirty || registerForm.get('title')?.touched)">
                 <div class="text-danger" *ngIf="registerForm.get('title')?.errors?.['required']">
                   Title is required.
@@ -196,8 +198,10 @@
             </div>
             <div class="comment-form-comment">
               <label>Question</label>
+              <grammarly-editor-plugin>
               <textarea name="question" formControlName="question" cols="40" rows="5"
                 placeholder="Write your question here ...*" required="" minlength="10" maxlength="150" ></textarea>
+              </grammarly-editor-plugin>
                 <div class="mt-n4" *ngIf="registerForm.get('question')?.invalid && (registerForm.get('question')?.dirty || registerForm.get('question')?.touched)">
                   <div class="text-danger" *ngIf="registerForm.get('question')?.errors?.['required']">
                     Question is required.
@@ -210,10 +214,12 @@
                   </div>
                 </div>
             </div>
+
+
             <p class="comment-form-comment">
               <label>File Upload </label>
               <input type="file" class="form-control" id="image" name="image" (change)="onFileSelected($event)">
-              <input type="hidden" [value]=userId name="userId">
+              <input type="text" [value]=userId name="userId">
 
             </p>
             <div class="row">

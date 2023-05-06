@@ -17,7 +17,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDateTime;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -125,6 +126,8 @@ public class ThreadService implements IThreadService {
         threadRepository.save(thread) ;
     }
 
+
+
     @Override
     public void downThread(Long id) {
         Thread thread = threadRepository.findById(id).get() ;
@@ -149,6 +152,32 @@ public class ThreadService implements IThreadService {
         }
         return matchingThreads;
     }
+
+    @Override
+    public List<Thread> getActiveStatus() {
+        boolean status = true;
+        return threadRepository.findThreadByStatus(status);
+    }
+
+
+    @Override
+    public Map<String, Integer> getThreadCountsByMonthInYear(int year) {
+        Map<String, Integer> threadCounts = new LinkedHashMap<>();
+        Year inputYear = Year.of(year);
+
+        for (int i = 1; i <= 12; i++) {
+            Month month = Month.of(i);
+            LocalDateTime startOfMonth = LocalDateTime.of(year, month, 1, 0, 0);
+            LocalDateTime endOfMonth = LocalDateTime.of(year, month, month.length(inputYear.isLeap()), 23, 59, 59);
+
+            List<Thread> threads = threadRepository.findThreadByCreatedAtBetween(startOfMonth, endOfMonth);
+            int count = threads.size();
+            threadCounts.put(month.toString(), count);
+        }
+
+        return threadCounts;
+    }
+
 
     @Override
     public List<Thread> getThreadsSortedByVotes() {

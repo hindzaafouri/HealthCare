@@ -3,3 +3,4 @@ ngb-modal-backdrop {
     z-index: 1050 !important;
 }
 @import '~ngx-toastr/toastr';
+@import '~bs-stepper/dist/css/bs-stepper.min.css';
