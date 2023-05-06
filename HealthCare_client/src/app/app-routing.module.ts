@@ -24,11 +24,14 @@ import { ResetPasswordComponent } from './frontOffice/user/reset-password/reset-
 import { CodeActivationComponent } from './frontOffice/user/code-activation/code-activation.component';
 import { SignupComponent } from './frontOffice/user/signup/signup.component';
 import { PatientFileComponent } from './backOffice/anas/patient-file/patient-file.component';
+import { ProfileComponent } from './frontOffice/user/profile/profile.component';
+import { DoctorListComponent } from './backOffice/user/doctor-list/doctor-list.component';
+import { AdminGuard } from './backOffice/user/admin-guard';
 
 
 const routes: Routes = [
  { path: "" , component: HomeComponent},
-  { path: "admin" , component: DashboardComponent},
+  { path: "admin" , component: DashboardComponent, canActivate: [AdminGuard]},
   { path : 'threads'  , component:ThreadComponent },
   { path : 'threads/:idThread', component:ThreadDetailsComponent },
   { path : 'Appointment' , component : AddAppointmentComponent},
@@ -37,11 +40,13 @@ const routes: Routes = [
   { path : 'Appointment/show/details' , component : DetailsShowComponent},
   { path : 'editappointment/:id_appointment' , component : EditAppointmentComponent},
   { path : 'user_list'  , component:UserListComponent },
+  { path : 'doctor_list'  , component:DoctorListComponent },
     { path : 'user_add'  , component:UserAddComponent },
     { path : 'login'  , component:LoginComponent },
     {path: 'reset', component:ResetPasswordComponent},
   {path: 'active', component:CodeActivationComponent},
   {path: 'signup', component:SignupComponent},
+  {path: 'profile', component:ProfileComponent},
   { path: 'threads-admin' , component:ThreadsAdminComponent } ,
   { path : 'threads/:idThread', component:ThreadDetailsComponent },
   { path: 'threads-admin' , component:ThreadsAdminComponent } ,

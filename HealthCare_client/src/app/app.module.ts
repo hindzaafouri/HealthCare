@@ -39,8 +39,9 @@ import { CommentAdminComponent } from './backOffice/comment-admin/comment-admin.
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AnswerFrontComponent } from './frontOffice/answer-front/answer-front.component';
 import { PatientFileComponent } from './backOffice/anas/patient-file/patient-file.component';
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { PatientService } from './backOffice/anas/patient.service';
+import { ProfileComponent } from './frontOffice/user/profile/profile.component';
+import { DoctorListComponent } from './backOffice/user/doctor-list/doctor-list.component';
 
 
 @NgModule({
@@ -76,6 +77,8 @@ import { PatientService } from './backOffice/anas/patient.service';
     CommentAdminComponent,
     AnswerFrontComponent,
     PatientFileComponent,
+    ProfileComponent,
+    DoctorListComponent,
   ],
   imports: [
     NgxPaginationModule,
@@ -84,7 +87,6 @@ import { PatientService } from './backOffice/anas/patient.service';
     HttpClientModule,
     FormsModule,
     RouterModule,
-    ReactiveFormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
     ToastrModule.forRoot({

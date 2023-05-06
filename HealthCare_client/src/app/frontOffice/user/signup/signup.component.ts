@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Request } from '../SignUpRequest';
-import { AuthService } from '../auth.service';
+import { UserService } from 'src/app/backOffice/user/user.service';
 
 @Component({
   selector: 'app-signup',
@@ -9,7 +9,7 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent  implements OnInit {
-  constructor(private authService: AuthService,private route: ActivatedRoute, private router: Router) { }
+	constructor(private authService: UserService,private route: ActivatedRoute, private router: Router) { }
 
 	username: string = '';
 	password: string = '';
@@ -51,7 +51,7 @@ export class SignupComponent  implements OnInit {
 			this.authService.signup(request).subscribe((result)=> {
 				//console.log(result);
 				//this.success = 'Signup successful';
-        this.router.navigateByUrl('/user_list');
+        this.router.navigateByUrl('/login');
 				this.success = result;
 			}, (err) => {
 				//console.log(err);
@@ -63,4 +63,3 @@ export class SignupComponent  implements OnInit {
 	}
 
 }
-

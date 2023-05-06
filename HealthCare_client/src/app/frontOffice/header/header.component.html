@@ -52,8 +52,8 @@
                 </li>
                 <li><a href="#contact" class="st-smooth-move">Contact</a></li>
                 <li *ngIf="!isSignedin"><a routerLink="/login" class="st-smooth-move">login</a></li>
-                <li *ngIf="username"><a (click)="doSignout()" class="st-smooth-move">{{ username }}</a></li>
-                <li > <a routerLink="/" style="text-decoration: underline; cursor: pointer;" (click)="doSignout()" >Signout</a></li>
+                <li *ngIf="isSignedin"><a routerLink="/profile" class="st-smooth-move">Account</a></li>
+                <li  *ngIf="isSignedin"> <a routerLink="/" style="text-decoration: underline; cursor: pointer;" (click)="doSignout()" >Signout</a></li>
 
 
               </ul>

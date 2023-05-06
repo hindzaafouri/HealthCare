@@ -69,6 +69,14 @@ public class UserService implements UserDetailsService {
         }
     }
 
+    public List<User> fetchDoctorsList() {
+        try {
+            return userRepository.findAllDoctors();
+        } catch (DataAccessException ex) {
+            throw new RuntimeException("Error fetching users: " + ex.getMessage(), ex);
+        }
+    }
+
     private Set getAuthority(User user) {
         Set<SimpleGrantedAuthority> authorities = new HashSet<>();
         user.getUserRoles().forEach(role -> {

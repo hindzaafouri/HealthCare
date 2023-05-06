@@ -21,6 +21,10 @@ export class UserService {
     return this.http.get(this.API + '/getPatients');
   }
 
+  public getDoctors() {
+    return this.http.get(this.API + '/getDoctors');
+  }
+
   public deleteUsers(id: any) {
     return this.http.delete(this.API + '/deletePatient?id=' + id);
   }
