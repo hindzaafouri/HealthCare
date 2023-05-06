@@ -39,6 +39,9 @@ export class ThreadComponent implements OnInit {
   filteredThreads: Thread[] = [];
   showAlert = false;
   userId= sessionStorage.getItem('id') ; 
+   //Pagniation 
+   currentPage = 1;
+   itemsPerPage = 4;
 
   constructor(private fb: FormBuilder
     ,private threadService: ThreadService) { }

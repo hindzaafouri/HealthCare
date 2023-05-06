@@ -14,6 +14,8 @@ export class AnswerAdminComponent implements OnInit {
 
   answers: Answer[] = [];
   @Input() threadId!: number;
+  currentPage = 1;
+  itemsPerPage = 5;
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router,private answerService : AnswerService) { }
 

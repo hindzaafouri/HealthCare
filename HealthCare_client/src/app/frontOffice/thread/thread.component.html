@@ -28,8 +28,8 @@
         <div class="row">
 
           
-
-          <div class="col-lg-6" *ngFor="let thread of (selectedTopic ? filteredThreads : threads)  ">
+          <ng-container *ngIf="threads.length > 0; else noThreads">
+          <div class="col-lg-6" *ngFor="let thread of (selectedTopic ? filteredThreads : threads)  | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }  ">
             <div
               *ngIf="(thread.titleThread.toLowerCase().includes(searchByKeyWord.toLowerCase()) || thread.questionThread.toLowerCase().includes(searchByKeyWord.toLowerCase()) || thread.topicThread.toLowerCase().includes(searchByKeyWord.toLowerCase()) || searchByKeyWord == '')">
               <div class="st-post st-style3 st-zoom">
@@ -56,17 +56,13 @@
               <div class="st-height-b30 st-height-lg-b30"></div>
             </div>
           </div>
+          </ng-container>
 
-          <div class="col-lg-12">
-            <ul class="pagination st-post-pagination">
-              <li class="page-item disabled"><a class="page-link" href="#">Prev</a></li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item active"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">Next</a></li>
-            </ul>
-          </div>
+          <ng-template #noThreads>
+            <p>No threads found .</p>
+          </ng-template>
 
+          <pagination-controls [(ngModel)]="currentPage" (pageChange)="currentPage = $event"></pagination-controls>
         </div>
       </div>
 
@@ -84,7 +80,7 @@
         <div class="st-widget st-sidebar-widget">
           <h3 class="st-widget-title">Topics</h3>
           <div *ngFor="let topic of topics">
-            <input type="radio" name="topic" [(ngModel)]="selectedTopic" [value]="topic" (change)="onTopicChange()">
+            <input type="radio" class="mt-3" name="topic" [(ngModel)]="selectedTopic" [value]="topic" (change)="onTopicChange()">
             {{topic}}
           </div>
 
@@ -219,7 +215,6 @@
             <p class="comment-form-comment">
               <label>File Upload </label>
               <input type="file" class="form-control" id="image" name="image" (change)="onFileSelected($event)">
-              <input type="text" [value]=userId name="userId">
 
             </p>
             <div class="row">

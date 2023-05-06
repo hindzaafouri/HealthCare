@@ -21,6 +21,8 @@ export class ThreadsAdminComponent implements OnInit {
   isModalOpen = false;
   chart!: Chart;
   year: number = new Date().getFullYear();
+  currentPage = 1;
+  itemsPerPage = 5;
 
 
 

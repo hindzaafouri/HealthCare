@@ -74,7 +74,7 @@ export class ThreadService {
       titleThread: thread.titleThread,
       questionThread: thread.questionThread,
       topicThread: thread.topicThread,
-      status: isAdminUpdate ? thread.status : null,
+      status: isAdminUpdate ? thread.status : thread.status,
     };
     return this.http.put<Thread>(url, data);
   }

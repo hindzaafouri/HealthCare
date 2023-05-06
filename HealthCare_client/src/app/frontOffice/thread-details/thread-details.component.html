@@ -6,7 +6,7 @@
       <div class="st-page-heading-in text-center">
         <h1 class="st-page-heading-title">{{ thread.titleThread }}</h1>
         <div class="st-post-label">
-          <span>By <a href="#">Jhon Doe</a></span>
+          <span>By <a href="#">{{ thread.user.username }}</a></span>
           <span>{{ thread.createdAt | date:'yyyy-MM-dd - HH:mm:ss' }}</span>
 
         </div>
