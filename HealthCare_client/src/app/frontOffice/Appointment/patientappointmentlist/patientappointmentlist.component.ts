@@ -9,6 +9,7 @@ import { Appointment } from 'src/models/Appointment';
 })
 export class PatientappointmentlistComponent implements OnInit {
 
+  userId: number = parseInt(sessionStorage.getItem('id') || '');
   appointments !: Appointment[];
   appid !: any;
 
@@ -23,7 +24,7 @@ export class PatientappointmentlistComponent implements OnInit {
     this._appointmentService.deleteAppointment(this.appid).subscribe(() => {
       this._appointmentService.getAppointments().subscribe(response => {
         this.appointments = response.filter((d) => {
-          return d.user.id == 1;
+          return d.user.id == this.userId;
 
         });
         
@@ -40,7 +41,7 @@ export class PatientappointmentlistComponent implements OnInit {
 
     this._appointmentService.getAppointments().subscribe(response => {
       this.appointments = response.filter((d) => {
-        return d.user.id == 1;
+        return d.user.id == this.userId;
 
       });
       console.log(this.appointments);

@@ -70,12 +70,12 @@ sessionStorage.setItem("token",`Bearer ${resp.token}`)
 		sessionStorage.setItem('username', JSON.stringify(username));
 	  }
 
-	  public getUsername(): [] {
+	  public getUsername(): string {
 		const username = sessionStorage.getItem('username');
      if (username !== null) {
        return JSON.parse(username);
         }
-     return [];
+     return "null";
 	  }
 
 	signup(request: Request): Observable<any> {

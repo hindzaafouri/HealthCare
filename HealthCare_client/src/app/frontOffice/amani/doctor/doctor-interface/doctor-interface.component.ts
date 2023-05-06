@@ -13,12 +13,15 @@ export class DoctorInterfaceComponent implements OnInit {
   constructor(private authservice: AuthService) { }
 
   ngOnInit(): void {
-    this.userName = this.authservice.getCurrentUser();
+   
+   // this.userName = this.authservice.getUsername();
     console.log(this.userName)
     this.roles = this.authservice.getRoles();
     this.role = this.roles[0].roleName
    console.log(this.role)
   }
+
+
   logout() {
 		this.authservice.signout();
 	}

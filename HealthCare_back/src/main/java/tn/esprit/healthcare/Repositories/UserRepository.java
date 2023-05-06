@@ -31,8 +31,6 @@ public interface UserRepository extends JpaRepository<User,Long> {
     @Query("SELECT u FROM User u JOIN u.userRoles r WHERE r.roleName = 'Doctor'")
     List<User> findAllDoctors();
 
-    @Query("SELECT u FROM User u JOIN u.userRoles r WHERE r.roleName = 'Doctor'")
-    List<User> findAllDoctors();
 
 
     @Query("SELECT count(*) FROM User u JOIN u.userRoles r WHERE r.roleName = 'Patient'")

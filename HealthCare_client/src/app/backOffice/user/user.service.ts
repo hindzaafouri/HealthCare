@@ -29,6 +29,7 @@ export class UserService {
 
   getUserById(id :number) {
     return this.http.get<User>(this.API +'/user/'+id)
+  }
 
   public getDoctors() {
     return this.http.get(this.API + '/getDoctors');

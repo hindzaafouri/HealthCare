@@ -16,7 +16,7 @@ export class FichePatientService {
         'Content-Type': 'application/json'
       })
     };
-    return this.http.post("http://localhost:8080/healthcare/patient/add",patient,httpOptions)
+    return this.http.post("http://localhost:8080/healthcare/patients/add",patient,httpOptions)
   }
 
   upPatient(patient:any)
@@ -26,26 +26,26 @@ export class FichePatientService {
         'Content-Type': 'application/json'
       })
     };
-    return this.http.put("http://localhost:8080/healthcare/patient/update",patient,httpOptions)
+    return this.http.put("http://localhost:8080/healthcare/patients/update",patient,httpOptions)
   }
 
   getPatient()
   {
-    return this.http.get("http://localhost:8080/healthcare/patient/all")
+    return this.http.get("http://localhost:8080/healthcare/patients/all")
   }
 
   delete(id:any)
   {
-    return this.http.delete("http://localhost:8080/healthcare/patient/delete/"+id)
+    return this.http.delete("http://localhost:8080/healthcare/patients/delete/"+id)
   }
 
   getId(id:any){
-    return this.http.get("http://localhost:8080/healthcare/patient/"+id)
+    return this.http.get("http://localhost:8080/healthcare/patients/"+id)
   }
 
 
   getAllNumber()
   {
-    return this.http.get("http://localhost:8080/healthcare/patient/Allnumber")
+    return this.http.get("http://localhost:8080/healthcare/patients/Allnumber")
   }
 }

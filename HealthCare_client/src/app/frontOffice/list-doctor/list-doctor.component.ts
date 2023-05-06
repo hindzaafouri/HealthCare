@@ -53,6 +53,8 @@ export class ListDoctorComponent implements OnInit {
     }
     this.userService.getDoctors().subscribe((data) => {
       this.doctorsData = data;
+      console.log("doctors",data);
+
 
     })
 
@@ -77,8 +79,8 @@ export class ListDoctorComponent implements OnInit {
 
 
     this.doctorData = data;
-    console.log(this.doctorData);
-    console.log(this.appointments);
+    console.log("doctordata",this.doctorData);
+    console.log("appointement",this.appointments);
 
     this.appointments.filter((d: any) => {
 

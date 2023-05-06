@@ -14,7 +14,7 @@ export class PatientInterfaceComponent implements OnInit {
   constructor(private authservice: AuthService) { }
 
   ngOnInit(): void {
-    this.userName = this.authservice.getCurrentUser();
+    //this.userName = this.authservice.getCurrentUser();
     console.log(this.userName)
     this.roles = this.authservice.getRoles();
     this.role = this.roles[0].roleName

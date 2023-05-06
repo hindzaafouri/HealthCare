@@ -17,6 +17,7 @@ export class UserService {
 
   getDoctors(): Observable<User[]> {
     return this._httpClient.get<User[]>(this.getUrl);
+    console.log("Doctors :",User);
   }
 
 }

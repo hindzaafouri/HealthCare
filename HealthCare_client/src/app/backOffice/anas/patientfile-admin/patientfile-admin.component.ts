@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { PatientService } from '../patient.service';
 
 @Component({
-  selector: 'app-patient-file',
-  templateUrl: './patient-file.component.html',
-  styleUrls: ['./patient-file.component.css']
+  selector: 'app-patientfile-admin',
+  templateUrl: './patientfile-admin.component.html',
+  styleUrls: ['./patientfile-admin.component.css']
 })
-export class PatientFileComponent implements OnInit {
+export class PatientfileAdminComponent implements OnInit {
 
   username=""
   consutation_nbr=""
@@ -103,3 +103,4 @@ upbtn!:boolean
 
 
 }
+

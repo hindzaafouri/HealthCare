@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("patient")
+@RequestMapping("patients")
 @CrossOrigin(value = "*")
 public class PatientFileController {
 

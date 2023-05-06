@@ -55,9 +55,7 @@ import { PatientdetailsComponent } from './frontOffice/amani/doctor/patientdetai
 import { ProfileComponent } from './frontOffice/amani/doctor/profile/profile.component';
 import { TableConsultationsComponent } from './frontOffice/amani/doctor/table-consultations/table-consultations.component';
 import { TablePatientsComponent } from './frontOffice/amani/doctor/table-patients/table-patients.component';
-import { PatientFileComponent } from './backOffice/anas/patient-file/patient-file.component';
 import { PatientService } from './backOffice/anas/patient.service';
-import { ProfileComponent } from './frontOffice/user/profile/profile.component';
 import { DoctorListComponent } from './backOffice/user/doctor-list/doctor-list.component';
 import { PatientfileComponent } from './frontOffice/anas/patientfile/patientfile.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
@@ -66,11 +64,11 @@ import { PatientappointmentlistComponent } from './frontOffice/Appointment/patie
 import { DoctorappointmentlistComponent } from './frontOffice/doctorappointmentlist/doctorappointmentlist.component';
 import { DoctorappointmentUpdateComponent } from './frontOffice/doctorappointment-update/doctorappointment-update.component';
 import { GrammarlyButtonElement, GrammarlyEditorPluginElement } from '@grammarly/editor-sdk';
+import { PatientfileAdminComponent } from './backOffice/anas/patientfile-admin/patientfile-admin.component';
 
 
 
 @NgModule({
-  schemas: [CUSTOM_ELEMENTS_SCHEMA] ,
   declarations: [
     AppComponent,
     BodyComponent,
@@ -118,14 +116,14 @@ import { GrammarlyButtonElement, GrammarlyEditorPluginElement } from '@grammarly
     ProfileComponent,
     TableConsultationsComponent,
     TablePatientsComponent,
-    PatientFileComponent,
+    PatientfileComponent,
     ProfileComponent,
     DoctorListComponent,
-    PatientfileComponent,
     ListDoctorComponent,
     PatientappointmentlistComponent,
     DoctorappointmentlistComponent,
-    DoctorappointmentUpdateComponent
+    DoctorappointmentUpdateComponent,
+    PatientfileAdminComponent
 
   ],
   imports: [

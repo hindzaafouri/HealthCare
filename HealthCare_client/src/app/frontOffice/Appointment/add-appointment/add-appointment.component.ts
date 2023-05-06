@@ -94,7 +94,7 @@ export class AddAppointmentComponent implements OnInit {
     /* if(this.addForm.invalid){
        return;
      }*/
-     this.appointment.medecin="2";
+     this.appointment.medecin="5";
     this._appointmentService.saveAppointment(this.appointment).subscribe(
       //console.log("added");
 
