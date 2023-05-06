@@ -1,4 +1,5 @@
 import { Answer } from "./Answer";
+import { User } from "./User";
 
 export interface Thread {
     idThread: number;
@@ -9,6 +10,6 @@ export interface Thread {
     createdAt: Date;
     status: boolean;
     coverPhotoThread:string ;
-    userId:number ;
+    user:User ;
     answers: Answer[];
 }
