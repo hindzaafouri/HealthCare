@@ -53,9 +53,8 @@ const routes: Routes = [
   { path: 'threads-admin' , component:ThreadsAdminComponent } ,
   { path: 'update-thread/:threadId', component: UpdateThreadAdminComponent } ,
   { path: 'comments/:idAnswer', component: CommentAdminComponent },
-  { path: 'patient_file', component: PatientFileComponent },
   {
-    path:'Patient',
+    path:'patient',
     component:PatientfileComponent
   },
   { path : "**" , component:NotFoundComponent}
