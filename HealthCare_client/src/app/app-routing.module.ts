@@ -81,6 +81,13 @@ const routes: Routes = [
   { path: 'doctorappointments/update', component: DoctorappointmentUpdateComponent },
   { path: "doctors", component: ListDoctorComponent },
   { path: 'comments/:idAnswer', component: CommentAdminComponent },
+  {
+    path:'patient',
+    component:PatientfileComponent
+  },
+ // { path: 'patient_file', component: PatientFileComponent },
+//  { path:'Patient', component:PatientfileComponent},
+
  // { path : "**" , component:NotFoundComponent},
   {
     path: 'doctor', component: DoctorInterfaceComponent, children: [
@@ -107,8 +114,6 @@ const routes: Routes = [
 
     ]
   }
- // { path: 'patient_file', component: PatientFileComponent },
-  //{ path:'Patient', component:PatientfileComponent},
   { path : "**" , component:NotFoundComponent}
 
 ];

@@ -1,1 +1,91 @@
-<p>patientfile works!</p>
+<app-all-template-client></app-all-template-client>
+<br>
+<br>
+<br>
+<br>
+
+<div class="container mt-5 pb-3 shadow card">
+    <h1 align="center" class="mt-5"> Patient file</h1>
+
+
+    
+            <div class="row mb-2">
+                <div class="col-sm">
+                    <input type="text" name="search" [(ngModel)]="search" id="disabledTextInput" class="form-control"
+                    placeholder="Search...">
+                </div>
+               
+                <div class="col-sm">
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-secondary">Add + </button>
+                </div>
+              </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Username</th>
+                <th scope="col">Consutation_nbr</th>
+                <th scope="col">Content</th>
+                <th scope="col">State</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let i of AllPatient ">
+                <th>{{i.username}}</th>
+                <td>{{i.consutation_nbr}}</td>
+                <td>{{i.content}}</td>
+                <td>{{i.state}}</td>
+                <td>
+                    <button (click)="delete(i.id_patientfile)" class="btn btn-danger">Supprimer</button>
+                    <button (click)="getId(i.id_patientfile)" data-bs-toggle="modal" data-bs-target="#exampleModal"  class="btn btn-warning">Edit</button>
+
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="exampleModal" data-bs-keyboard="false" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Patient file</h5>
+        </div>
+        <div class="modal-body">
+
+            <div class="mb-3">
+                <label for="disabledTextInput" class="form-label">Username</label>
+                <input type="text" name="username" [(ngModel)]="username" id="disabledTextInput" class="form-control"
+                    placeholder="Enter Username">
+            </div>
+            <div class="mb-3">
+                <label for="disabledTextInput" class="form-label">Consultation N°</label>
+                <input type="text" name="consutation_nbr" [(ngModel)]="consutation_nbr" id="disabledTextInput"
+                    class="form-control" placeholder="Enter consutation nomber">
+            </div>
+            <div class="mb-3">
+                <label for="disabledTextInput" class="form-label">Content</label>
+                <input type="text" name="content" [(ngModel)]="content" id="disabledTextInput" class="form-control"
+                    placeholder="Enter Content">
+            </div>
+        
+            <div class="mb-3">
+                <label for="disabledSelect" class="form-label">select state menu</label>
+                <select name="state" [(ngModel)]="state" id="disabledSelect" class="form-select">
+                    <option disabled selected>Disabled select</option>
+                    <option value="malade">malade</option>
+                    <option value="gueri">Gueri</option>
+                </select>
+            </div>
+        
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="clear()" data-bs-dismiss="modal">Close</button>
+          <button *ngIf="!upbtn" type="button" class="btn btn-primary" (click)="ajoutPatient()" data-bs-dismiss="modal">Save changes</button>
+          <button *ngIf="upbtn" type="button" class="btn btn-warning" (click)="update()" data-bs-dismiss="modal">update changes</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
