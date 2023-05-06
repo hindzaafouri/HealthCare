@@ -53,6 +53,10 @@ public class UserService implements UserDetailsService {
     public String getPasswordByEmail(String email){
         return userRepository.getPasswordByEmail(email);
     }
+    public User getPatient(Long id) {
+        return userRepository.findPatientById(id);
+    }
+
 
     public User getUserByMail(String mail){
         return this.userRepository.findByemail(mail);
