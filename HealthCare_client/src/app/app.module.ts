@@ -38,6 +38,22 @@ import { AnswerAdminComponent } from './backOffice/answer-admin/answer-admin.com
 import { CommentAdminComponent } from './backOffice/comment-admin/comment-admin.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AnswerFrontComponent } from './frontOffice/answer-front/answer-front.component';
+import { ConsultationsPatientComponent } from './frontOffice/amani/patient/consultations-patient/consultations-patient.component';
+import { PatientInfosComponent } from './frontOffice/amani/patient/patient-infos/patient-infos.component';
+import { PatientInterfaceComponent } from './frontOffice/amani/patient/patient-interface/patient-interface.component';
+import { ProfilePatientComponent } from './frontOffice/amani/patient/profile-patient/profile-patient.component';
+import { AjouterConsultationComponent } from './frontOffice/amani/doctor/ajouter-consultation/ajouter-consultation.component';
+import { ConsultationdetailsComponent } from './frontOffice/amani/doctor/consultationdetails/consultationdetails.component';
+import { DoctorInfosComponent } from './frontOffice/amani/doctor/doctor-infos/doctor-infos.component';
+import { DoctorInterfaceComponent } from './frontOffice/amani/doctor/doctor-interface/doctor-interface.component';
+import { EditconsultationComponent } from './frontOffice/amani/doctor/editconsultation/editconsultation.component';
+import { EditprofileComponent } from './frontOffice/amani/doctor/editprofile/editprofile.component';
+import { ListConsultationsComponent } from './frontOffice/amani/doctor/list-consultations/list-consultations.component';
+import { ListPatientsComponent } from './frontOffice/amani/doctor/list-patients/list-patients.component';
+import { PatientdetailsComponent } from './frontOffice/amani/doctor/patientdetails/patientdetails.component';
+import { ProfileComponent } from './frontOffice/amani/doctor/profile/profile.component';
+import { TableConsultationsComponent } from './frontOffice/amani/doctor/table-consultations/table-consultations.component';
+import { TablePatientsComponent } from './frontOffice/amani/doctor/table-patients/table-patients.component';
 
 
 @NgModule({
@@ -73,6 +89,22 @@ import { AnswerFrontComponent } from './frontOffice/answer-front/answer-front.co
     AnswerAdminComponent,
     CommentAdminComponent,
     AnswerFrontComponent,
+    ConsultationsPatientComponent,
+    PatientInfosComponent,
+    PatientInterfaceComponent,
+    ProfilePatientComponent,
+    AjouterConsultationComponent,
+    ConsultationdetailsComponent,
+    DoctorInfosComponent,
+    DoctorInterfaceComponent,
+    EditconsultationComponent,
+    EditprofileComponent,
+    ListConsultationsComponent,
+    ListPatientsComponent,
+    PatientdetailsComponent,
+    ProfileComponent,
+    TableConsultationsComponent,
+    TablePatientsComponent,
   ],
   imports: [
     NgxPaginationModule,

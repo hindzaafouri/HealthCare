@@ -1,0 +1,63 @@
+<div class="page-wrapper">
+    <div class="content container-fluid">
+    <div class="page-header">
+    <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+    <h5 class="text-uppercase mb-0 mt-0 page-title"> Profile</h5>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+    <ul class="breadcrumb float-right p-0 mb-0">
+    <li class="breadcrumb-item"><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+    <li class="breadcrumb-item"><span> Profile</span></li>
+    </ul>
+    </div>
+    </div>
+    </div>
+    <div class="card-box m-b-0">
+    <div class="row">
+    <div class="col-md-12">
+    <div class="profile-view">
+    <div class="profile-img-wrap">
+    <div class="profile-img rounded-circle" >
+    <a href="" class="avatar"> {{user.username.substr(0,1)}}</a>
+    <!-- <img src="assets/frontTemplate/img/avatar1.png"> -->
+    </div>
+    </div>
+    <div class="profile-basic" style="height: 130px;">
+    <div class="row">
+    <div class="col-md-5" style="margin-top: 30px;">
+    <div class="profile-info-left">
+    <h3 class="user-name m-t-0">{{user.username}}</h3>
+    <!-- <h5 class="company-role m-t-0 m-b-0">{{currentUser.roles[0].rolename}}</h5> -->
+    <small class="text-muted">{{role}}</small>
+    </div>
+    </div>
+    <div class="col-md-7">
+    <ul class="personal-info">
+    <li>
+    <span class="title">Username:</span>
+    <span class="text"><a href="">{{user.username}}</a></span>
+    </li>
+    <li>
+    <span class="title">Email:</span>
+    <span class="text"><a href="">
+      <span class="__cf_email__" data-cfemail="422827242427303b2f352d2c2502273a232f322e276c212d2f">
+        {{user.email}}</span></a></span>
+    </li>
+    <li>
+    <span class="title">Phone number:</span>
+    <span class="text"> {{user.phone_number}}</span>
+    </li>
+  
+    </ul>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+  
+  

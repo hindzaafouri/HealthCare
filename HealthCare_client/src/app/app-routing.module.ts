@@ -22,6 +22,22 @@ import { CommentAdminComponent } from './backOffice/comment-admin/comment-admin.
 import { ResetPasswordComponent } from './frontOffice/user/reset-password/reset-password.component';
 import { CodeActivationComponent } from './frontOffice/user/code-activation/code-activation.component';
 import { SignupComponent } from './frontOffice/user/signup/signup.component';
+import { DoctorInterfaceComponent } from './frontOffice/amani/doctor/doctor-interface/doctor-interface.component';
+import { DoctorInfosComponent } from './frontOffice/amani/doctor/doctor-infos/doctor-infos.component';
+import { ListConsultationsComponent } from './frontOffice/amani/doctor/list-consultations/list-consultations.component';
+import { TableConsultationsComponent } from './frontOffice/amani/doctor/table-consultations/table-consultations.component';
+import { ListPatientsComponent } from './frontOffice/amani/doctor/list-patients/list-patients.component';
+import { TablePatientsComponent } from './frontOffice/amani/doctor/table-patients/table-patients.component';
+import { AjouterConsultationComponent } from './frontOffice/amani/doctor/ajouter-consultation/ajouter-consultation.component';
+import { ProfileComponent } from './frontOffice/amani/doctor/profile/profile.component';
+import { EditprofileComponent } from './frontOffice/amani/doctor/editprofile/editprofile.component';
+import { ConsultationdetailsComponent } from './frontOffice/amani/doctor/consultationdetails/consultationdetails.component';
+import { EditconsultationComponent } from './frontOffice/amani/doctor/editconsultation/editconsultation.component';
+import { PatientdetailsComponent } from './frontOffice/amani/doctor/patientdetails/patientdetails.component';
+import { PatientInterfaceComponent } from './frontOffice/amani/patient/patient-interface/patient-interface.component';
+import { PatientInfosComponent } from './frontOffice/amani/patient/patient-infos/patient-infos.component';
+import { ConsultationsPatientComponent } from './frontOffice/amani/patient/consultations-patient/consultations-patient.component';
+import { ProfilePatientComponent } from './frontOffice/amani/patient/profile-patient/profile-patient.component';
 
 
 const routes: Routes = [
@@ -44,7 +60,32 @@ const routes: Routes = [
   { path: 'threads-admin' , component:ThreadsAdminComponent } ,
   { path: 'update-thread/:threadId', component: UpdateThreadAdminComponent } ,
   { path: 'comments/:idAnswer', component: CommentAdminComponent },
-  { path : "**" , component:NotFoundComponent}
+ // { path : "**" , component:NotFoundComponent},
+  {
+    path: 'doctor', component: DoctorInterfaceComponent, children: [
+       { path: '', redirectTo:'table-consultations' ,pathMatch:'full' },
+      { path: 'doctorInfos', component: DoctorInfosComponent },
+      { path: 'list-consultations', component: ListConsultationsComponent },
+      { path: 'table-consultations', component: TableConsultationsComponent },
+      { path: 'list-patients', component: ListPatientsComponent },
+      { path: 'table-patients', component: TablePatientsComponent },
+      { path: 'ajouter-consultation', component: AjouterConsultationComponent },
+      { path: 'profile', component: ProfileComponent },
+      { path: 'edit-profile', component: EditprofileComponent },
+      { path: 'consultation-details/:id', component: ConsultationdetailsComponent },
+      { path: 'edit-consultation/:id', component: EditconsultationComponent },
+      { path: 'patient-details/:id', component: PatientdetailsComponent },
+    ]
+  },{
+    path: 'patient', component: PatientInterfaceComponent, children: [
+      { path: '', redirectTo: 'consultations-patient', pathMatch: 'full' },
+      { path: 'patientInfos', component: PatientInfosComponent },
+      { path: 'consultations-patient', component: ConsultationsPatientComponent },
+      { path: 'list-patients', component: ListPatientsComponent },
+      { path: 'profile_patient', component: ProfilePatientComponent },
+
+    ]
+  }
 
 ];
 

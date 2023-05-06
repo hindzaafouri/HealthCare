@@ -93,6 +93,15 @@ this.setUsername(resp.user.username)
 		)
 	  }
 
+	  getCurrentUser() {
+		const username = sessionStorage.getItem('username');
+		if (username !== null) {
+		  return JSON.parse(username);
+		}
+		return;
+	  }
+	
+
 
 	activeAccount(mail: any,code: any):Observable<any>{
 		return this.http.post<any>(`${this.baseUrl}activated`,{mail,code}).pipe(

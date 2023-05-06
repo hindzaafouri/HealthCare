@@ -1,0 +1,62 @@
+
+
+<div class="main-wrapper">
+
+
+
+    <div class="page-wrapper">
+    <div class="content container-fluid">
+    <div class="page-header">
+    <div class="row">
+    <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+    <h5 class="text-uppercase mb-0 mt-0 page-title">Consultation Details</h5>
+    </div>
+    <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+    <ul class="breadcrumb float-right p-0 mb-0">
+    <li class="breadcrumb-item"><a href="javascript:void(0)" ><i class="fas fa-home"></i> Home</a></li>
+    <li class="breadcrumb-item"><a href="javascript:void(0)">Consultation Details</a></li>
+    <li class="breadcrumb-item"><span> Consultation Details</span></li>
+    </ul>
+    </div>
+    </div>
+    </div>
+    <div class="content-page">
+    <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-12" style="margin-left: 25%;">
+    <div class="aboutprofile-sidebar">
+    <div class="row">
+    <div class="col-lg-5 col-md-12 col-sm-12 col-12">
+    <div class="aboutprofile">
+    <div class="card">
+    <div class="card-body">
+    <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="profile-img">
+        <a href="javascript:void()" class="avatar">{{consultation.patient.username.substr(0,1)}}</a>
+        </div>
+    <div class="aboutprofile-name">
+      <p class="text-center">{{consultation.patient.username}}</p>
+    <h5 class="text-center mt-2">{{consultation.description}}</h5>
+    </div>
+    <ul class="list-group list-group-flush">
+    <li class="list-group-item"><b>Description</b><a href="javascript:void(0)" class="float-right">{{consultation.description}}</a></li>
+    <li class="list-group-item"><b>Start Date </b><a href="javascript:void(0)" class="float-right">{{consultation.start_date | date: 'dd/MM/yyyy HH:mm'}}</a></li>
+    <li class="list-group-item"><b>End Date </b><a href="javascript:void(0)" class="float-right">{{consultation.end_date | date: 'dd/MM/yyyy HH:mm'}}</a></li>
+    <li class="list-group-item"><b>Patient</b><a href="javascript:void(0)"  class="float-right">{{consultation.patient.username}}</a></li>
+    </ul>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+  
+    </div>
+    </div>
+  
