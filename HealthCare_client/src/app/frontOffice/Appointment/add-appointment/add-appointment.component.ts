@@ -15,6 +15,9 @@ import { AppointmentService } from 'src/app/shared/appointment.service'
 })
 export class AddAppointmentComponent implements OnInit {
 
+  userId: number = parseInt(sessionStorage.getItem('id') || '');
+
+
   addForm!: FormGroup;
   submitted!: boolean;
 
@@ -26,7 +29,7 @@ export class AddAppointmentComponent implements OnInit {
   selectFilterOptions !:any;
 
   appoitments !: Appointment[];
-
+/*
   users: User[] = [
     {
       id: 1,
@@ -37,7 +40,7 @@ export class AddAppointmentComponent implements OnInit {
       active: 1
     }
   ];
-
+*/
   appointment: Appointment = new Appointment();
 
   constructor(private _appointmentService: AppointmentService,
@@ -50,7 +53,7 @@ export class AddAppointmentComponent implements OnInit {
 
 
   ngOnInit(): void {
-
+/*
     this.users = [
       {
         id: 1,
@@ -61,7 +64,7 @@ export class AddAppointmentComponent implements OnInit {
         active: 1
       }
     ];
-
+*/
     this.buildAddForm();
     // this._appointmentService.getUser().subscribe(response => this.users = response);
 
@@ -79,13 +82,7 @@ export class AddAppointmentComponent implements OnInit {
     })
   }
 
-  /*
-  this._activatedRoute.params.subscribe(params => {
-    let id_rec: number = params['id_rec'];
-    if('id_rec'){
-      this._reclamationService.getReclamation(id_rec).subscribe(response => this.reclamation = response);
-    }
-  })*/
+
   onSubmit() {
     console.log(this.appointment);
     this.appointment.stateAppointment = "Pending";
