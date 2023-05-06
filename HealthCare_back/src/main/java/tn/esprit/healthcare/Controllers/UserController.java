@@ -194,6 +194,14 @@ public class UserController {
     public User updateStudent(@RequestBody User user) {
         return  userService.updateUser(user);
     }
+    @GetMapping("/patient/{id}")
+    public User getPatient (@PathVariable("id") Long id) {
+        return userService.getPatient(id);
+    }
+    @GetMapping("/user/{id}")
+    public User getUserByid(@PathVariable Long id){
+        return userRepository.findById(id).get();
+    }
 
     @GetMapping("/users")
     public ResponseEntity<?> getUsers() {

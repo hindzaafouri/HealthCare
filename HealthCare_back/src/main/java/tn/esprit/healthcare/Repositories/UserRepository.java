@@ -2,6 +2,7 @@ package tn.esprit.healthcare.Repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import tn.esprit.healthcare.Entities.User;
 
@@ -23,6 +24,10 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
     @Query("SELECT u FROM User u JOIN u.userRoles r WHERE r.roleName = 'Patient'")
     List<User> findAllPatients();
+
+    @Query("SELECT u FROM User u JOIN u.userRoles r WHERE u.id =:id AND r.roleName = 'Patient'")
+    User findPatientById(@Param("id") Long id);
+
     @Query("SELECT u FROM User u JOIN u.userRoles r WHERE r.roleName = 'Doctor'")
     List<User> findAllDoctors();
 
@@ -38,6 +43,7 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
     @Query("SELECT count(*) FROM User u JOIN u.userRoles r WHERE r.roleName = 'Admin'")
     Long countByuserRoles2();
+
 
 
 }

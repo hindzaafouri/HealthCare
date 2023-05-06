@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { Request } from './SignUpRequest';
+import { User } from 'src/models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +22,17 @@ export class UserService {
     return this.http.get(this.API + '/getPatients');
   }
 
+
+  public getPatient(id :number) {
+    return this.http.get<User>(this.API + '/patient/'+id);
+}
+
+  getUserById(id :number) {
+    return this.http.get<User>(this.API +'/user/'+id)
+
   public getDoctors() {
     return this.http.get(this.API + '/getDoctors');
+
   }
 
   public deleteUsers(id: any) {
