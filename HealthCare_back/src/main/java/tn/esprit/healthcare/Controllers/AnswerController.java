@@ -26,12 +26,12 @@ public class AnswerController {
     IThreadService threadService ;
 
     @PostMapping("/add-answer/{idThread}")
-    public ResponseEntity<Void> addAnswerAndAssignToThread (@RequestBody Answer answer , @PathVariable Long idThread) {
-           answerService.addAnswerAndAssignToThread(answer,idThread);
+    public ResponseEntity<Void> addAnswerAndAssignToThread (@RequestBody Answer answer , @PathVariable Long idThread , @RequestParam Long userId) {
+           answerService.addAnswerAndAssignToThread(answer,idThread,userId);
            return ResponseEntity.status(HttpStatus.CREATED).build() ;
     }
 
-    @PutMapping("/update-answer/{idAnswer}")
+    @PutMapping(value = "/update-answer/{idAnswer}")
     public ResponseEntity<Void> updateAnswer(@RequestBody Answer updatedAnswer, @PathVariable Long idAnswer) {
         // Set the id of the updated answer to the id in the path variable
         updatedAnswer.setIdAnswer(idAnswer);

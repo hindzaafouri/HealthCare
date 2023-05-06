@@ -6,8 +6,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import tn.esprit.healthcare.Entities.Answer;
 import tn.esprit.healthcare.Entities.Thread;
+import tn.esprit.healthcare.Entities.User;
 import tn.esprit.healthcare.Repositories.AnswerRepository;
 import tn.esprit.healthcare.Repositories.ThreadRepository;
+import tn.esprit.healthcare.Repositories.UserRepository;
 
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
@@ -21,8 +23,12 @@ public class AnswerService implements IAnswerService{
 
     @Autowired
     AnswerRepository answerRepository ;
+
+    @Autowired
+    UserRepository userRepository ;
+
     @Override
-    public void addAnswerAndAssignToThread(Answer answer, Long idThread) {
+    public void addAnswerAndAssignToThread(Answer answer, Long idThread , Long userId) {
         Optional<Thread> optionalThread = threadRepository.findById(idThread);
         if (optionalThread.isPresent()) {
             Thread thread = optionalThread.get();
@@ -32,6 +38,8 @@ public class AnswerService implements IAnswerService{
             }
             answers.add(answer);
             thread.setAnswers(answers);
+            User user = userRepository.findById(userId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+            answer.setUser(user);
             answer.setThread(thread);
             answer.setCreatedAt(LocalDateTime.now());
             answerRepository.save(answer);

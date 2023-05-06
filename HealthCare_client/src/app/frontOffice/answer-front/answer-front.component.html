@@ -53,7 +53,7 @@
                         <div class="reply"><i class="fas fa-reply mr-2"></i><a href="#" (click)="openModalAddComment(answer,$event)">Reply </a></div>
                       </div>
 
-                      <div class="col-lg-2">
+                      <div class="col-lg-2" *ngIf="answer.user.id == userId" >
                         <button class="btn-info mr-2 rounded" (click)="currentAnswer = answer; openModalUpdateAnswer(answer)"><i
                             class="fas fa-edit"></i></button> <!-- Modal for reply comment-->
                         <button class="btn-danger rounded" (click)="deleteAnswer(answer.idAnswer)"><i
@@ -72,6 +72,9 @@
         </div><!-- .comment-list-outer -->
         <div class="comment-respond">
           <h2 class="comment-reply-title">Add your answer</h2>
+          <div class="alert alert-danger mt-1" role="alert" *ngIf="answerInput.invalid&&answerInput.touched">
+            Answer is Required
+           </div>
           <div *ngIf="showSuccessAlert" class="alert alert-success" role="alert">
             Answer added successfully!
           </div>
@@ -80,17 +83,17 @@
           </div>
           <form method="post" class="comment-form" (ngSubmit)="addAnswer(threadId)" #myForm="ngForm">
             <p class="comment-form-comment">
+              <grammarly-editor-plugin>
               <textarea name="answer" cols="40" rows="5" placeholder="Write here...*" required="" #answerInput="ngModel"
               [(ngModel)]="answer.answer"></textarea> 
+            </grammarly-editor-plugin>
             </p>
             <p class="form-submit">
               <button type="submit" class="st-btn st-style1 st-color1 st-size-medium" >Send
                 Answer</button>
             </p>
           </form>
-          <div class="alert alert-danger mt-1" role="alert" *ngIf="answerInput.invalid&&answerInput.touched">
-            Answer is Required
-           </div>
+          
         </div><!-- .comment-respond -->
       </div>
     </div>
@@ -112,8 +115,10 @@
         <div class="modal-body">
           <div class="form-group">
             <label for="answer">Answer</label>
+            <grammarly-editor-plugin>
             <textarea class="form-control" id="answer" name="answer" required
               [(ngModel)]="answerToUpdate.answer"></textarea>
+            </grammarly-editor-plugin>
           </div>
         </div>
         <div class="modal-footer">
@@ -144,20 +149,31 @@
                 <ng-container *ngIf="comments.length > 0; else noComments">
                 <div *ngFor="let comment of comments">
                 <li class="comment">
-                  <div class="comment-body">
-                    <div class="comment-meta">
-                      <div class="comment-author">
-                        <img src="/assets/frontTemplate/img/comment1.jpg" alt="comment1" class="avatar">
-                        <a href="#" class="nm">Smith Jhon</a>
-                      </div>
-                      <div class="comment-metadata">
-                        <a href="#"><span>15 Jan, 2020</span></a>
+                  <div class="row">
+                    <div class="col-lg-10">
+                      <div class="comment-body">
+                        <div class="comment-meta">
+                          <div class="comment-author">
+                            <img src="/assets/frontTemplate/img/comment1.jpg" alt="comment1" class="avatar">
+                            <a href="#" class="nm">Smith Jhon</a>
+                          </div>
+                          <div class="comment-metadata">
+                            <a href="#"><span>15 Jan, 2020</span></a>
+                          </div>
+                        </div>
+                        <div class="comment-content">
+                          <p>{{comment.comment}}</p>
+                        </div>
+                        
                       </div>
                     </div>
-                    <div class="comment-content">
-                      <p>{{comment.comment}}</p>
+
+                    <div class="col-lg-2">
+                      <button *ngIf="comment.user.id == userId" class="btn-danger rounded" (click)="deleteComment(comment.idComment,$event)"><i
+                        class="fas fa-trash"></i></button>
                     </div>
                   </div>
+                  
                 </li> 
               </div>
               </ng-container>
@@ -170,7 +186,10 @@
               <h2 class="comment-reply-title mt-3">Add your comment</h2>
               <form method="post" class="comment-form" (ngSubmit)="addComment(answerToUpdate.idAnswer)">
                 <p class="comment-form-comment">
+                  <grammarly-editor-plugin>
                   <textarea name="comment" cols="40" rows="5" placeholder="Write here...*" required="" [(ngModel)]="comment.comment"></textarea>
+                  </grammarly-editor-plugin>
+                  
                 </p>
                 <p class="form-submit">
                   <button type="submit" class="st-btn st-style1 st-color1 st-size-medium">Submit Comment</button>

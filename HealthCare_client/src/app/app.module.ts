@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule , CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { RouterModule , Routes} from '@angular/router';
@@ -43,10 +43,12 @@ import { ListDoctorComponent } from './frontOffice/list-doctor/list-doctor.compo
 import { PatientappointmentlistComponent } from './frontOffice/Appointment/patientappointmentlist/patientappointmentlist.component';
 import { DoctorappointmentlistComponent } from './frontOffice/doctorappointmentlist/doctorappointmentlist.component';
 import { DoctorappointmentUpdateComponent } from './frontOffice/doctorappointment-update/doctorappointment-update.component';
+import { GrammarlyButtonElement, GrammarlyEditorPluginElement } from '@grammarly/editor-sdk';
 
 
 
 @NgModule({
+  schemas: [CUSTOM_ELEMENTS_SCHEMA] ,
   declarations: [
     AppComponent,
     BodyComponent,

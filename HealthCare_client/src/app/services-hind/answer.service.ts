@@ -10,6 +10,8 @@ export class AnswerService {
 
   constructor(private http: HttpClient) { }
   private apiUrl = 'http://localhost:8080/healthcare/answer-op';
+  userId= sessionStorage.getItem('id') ; 
+
 
   deleteAnswer(answerId: number): Observable<any> {
     const confirmation = window.confirm('Are you sure you want to delete this answer?');
@@ -36,13 +38,12 @@ export class AnswerService {
 
   updateAnswer(answerId: number, answerToUpdate: Answer): Observable<any> {
     const url = `${this.apiUrl}/update-answer/${answerId}`;
-    const body = JSON.stringify(answerToUpdate);
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.put(url, body, { headers });
+    return this.http.put(url, answerToUpdate);
   }
 
   addAnswer(threadId: number, answer: Answer): Observable<void> {
-    const url = `${this.apiUrl}/add-answer/${threadId}`;
+    answer.user.id = this.userId ? +this.userId : 0;
+    const url = `${this.apiUrl}/add-answer/${threadId}?userId=${this.userId}`;
     return this.http.post<void>(url, answer);
   }
 

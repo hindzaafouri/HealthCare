@@ -25,6 +25,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -77,6 +78,8 @@ public class ThreadController {
     }
 
 
+
+
     @DeleteMapping("/delete-thread/{id}")
     public ResponseEntity<String> deleteThread (@PathVariable long id) {
         Thread thread = threadService.findThreadById(id) ;
@@ -103,6 +106,12 @@ public class ThreadController {
             }
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+    }
+
+    @GetMapping("/get-active-threads")
+    public ResponseEntity<List<Thread>> getActiveThreads() {
+        List<Thread> activeThreads = threadService.getActiveStatus();
+        return ResponseEntity.ok(activeThreads);
     }
 
     @PutMapping("/update-thread/{idThread}")
@@ -150,6 +159,22 @@ public class ThreadController {
         List<Thread> threads = threadService.getThreadsSortedByVotes() ;
         return ResponseEntity.ok(threads) ;
     }
+
+    /*@GetMapping("/timeframe/{timeFrame}")
+    public ResponseEntity<List<Thread>> getThreadsByTimeFrame(@PathVariable String timeFrame) {
+        try {
+            List<Thread> threads = threadService.getThreadsByTimeFrame(timeFrame);
+            return ResponseEntity.ok(threads);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }*/
+
+    @GetMapping("/count-by-month/{year}")
+    public Map<String,Integer> getThreadCountByMonthInYear (@PathVariable int year) {
+        return threadService.getThreadCountsByMonthInYear(year) ;
+    }
+
 
     private static class FileUploadUtil {
         public static void saveFile(String uploadDir, String fileName,
