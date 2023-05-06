@@ -22,29 +22,38 @@ import { CommentAdminComponent } from './backOffice/comment-admin/comment-admin.
 import { ResetPasswordComponent } from './frontOffice/user/reset-password/reset-password.component';
 import { CodeActivationComponent } from './frontOffice/user/code-activation/code-activation.component';
 import { SignupComponent } from './frontOffice/user/signup/signup.component';
+import { ListDoctorComponent } from './frontOffice/list-doctor/list-doctor.component';
+import { PatientappointmentlistComponent } from './frontOffice/Appointment/patientappointmentlist/patientappointmentlist.component';
+import { DoctorappointmentlistComponent } from './frontOffice/doctorappointmentlist/doctorappointmentlist.component';
+import { DoctorappointmentUpdateComponent } from './frontOffice/doctorappointment-update/doctorappointment-update.component';
 
 
 const routes: Routes = [
- { path: "" , component: HomeComponent},
-  { path: "admin" , component: DashboardComponent},
-  { path : 'threads'  , component:ThreadComponent },
-  { path : 'threads/:idThread', component:ThreadDetailsComponent },
-  { path : 'Appointment' , component : AddAppointmentComponent},
-  { path : 'Appointment/show' , component : ShowAppointmentComponent},
-  { path : 'Appointment/show/details' , component : DetailsShowComponent},
-  { path : 'editappointment/:id_appointment' , component : EditAppointmentComponent},
-  { path : 'user_list'  , component:UserListComponent },
-    { path : 'user_add'  , component:UserAddComponent },
-    { path : 'login'  , component:LoginComponent },
-    {path: 'reset', component:ResetPasswordComponent},
-  {path: 'active', component:CodeActivationComponent},
-  {path: 'signup', component:SignupComponent},
-  { path: 'threads-admin' , component:ThreadsAdminComponent } ,
-  { path : 'threads/:idThread', component:ThreadDetailsComponent },
-  { path: 'threads-admin' , component:ThreadsAdminComponent } ,
-  { path: 'update-thread/:threadId', component: UpdateThreadAdminComponent } ,
+  { path: "", component: HomeComponent },
+  { path: "admin", component: DashboardComponent },
+  { path: 'threads', component: ThreadComponent },
+  { path: 'threads/:idThread', component: ThreadDetailsComponent },
+  { path: 'Appointment', component: AddAppointmentComponent },
+  { path: 'Appointment/show', component: ShowAppointmentComponent },
+  { path: 'Appointment/show/details', component: DetailsShowComponent },
+  { path: 'editappointment/:id_appointment', component: EditAppointmentComponent },
+  { path: 'patientappointments', component: PatientappointmentlistComponent },
+  { path: 'doctorappointments', component: DoctorappointmentlistComponent },
+  { path: 'doctorappointments/update', component: DoctorappointmentUpdateComponent },
+  { path: 'user_list', component: UserListComponent },
+  { path: 'user_add', component: UserAddComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'reset', component: ResetPasswordComponent },
+  { path: 'active', component: CodeActivationComponent },
+  { path: 'signup', component: SignupComponent },
+  { path: "doctors", component: ListDoctorComponent },
+  { path: 'threads-admin', component: ThreadsAdminComponent },
+  { path: 'threads/:idThread', component: ThreadDetailsComponent },
+  { path: 'threads-admin', component: ThreadsAdminComponent },
+  { path: 'update-thread/:threadId', component: UpdateThreadAdminComponent },
   { path: 'comments/:idAnswer', component: CommentAdminComponent },
-  { path : "**" , component:NotFoundComponent}
+  { path: "**", component: NotFoundComponent },
+ 
 
 ];
 

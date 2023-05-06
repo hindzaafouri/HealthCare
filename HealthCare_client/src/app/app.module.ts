@@ -38,6 +38,12 @@ import { AnswerAdminComponent } from './backOffice/answer-admin/answer-admin.com
 import { CommentAdminComponent } from './backOffice/comment-admin/comment-admin.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AnswerFrontComponent } from './frontOffice/answer-front/answer-front.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { ListDoctorComponent } from './frontOffice/list-doctor/list-doctor.component';
+import { PatientappointmentlistComponent } from './frontOffice/Appointment/patientappointmentlist/patientappointmentlist.component';
+import { DoctorappointmentlistComponent } from './frontOffice/doctorappointmentlist/doctorappointmentlist.component';
+import { DoctorappointmentUpdateComponent } from './frontOffice/doctorappointment-update/doctorappointment-update.component';
+
 
 
 @NgModule({
@@ -72,6 +78,10 @@ import { AnswerFrontComponent } from './frontOffice/answer-front/answer-front.co
     AnswerAdminComponent,
     CommentAdminComponent,
     AnswerFrontComponent,
+    ListDoctorComponent,
+    PatientappointmentlistComponent,
+    DoctorappointmentlistComponent,
+    DoctorappointmentUpdateComponent
   ],
   imports: [
     NgxPaginationModule,
@@ -89,7 +99,8 @@ import { AnswerFrontComponent } from './frontOffice/answer-front/answer-front.co
       progressBar: true,
       progressAnimation: 'increasing'
     }),
-    SocialLoginModule
+    SocialLoginModule,
+    FullCalendarModule
     ],
 
   exports: [RouterModule],
