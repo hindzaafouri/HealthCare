@@ -69,10 +69,10 @@ export class LoginComponent implements OnInit {
 				let name=response.user.userRoles[0].roleName;
 				console.log('role:', name);
                 console.log(sessionStorage.getItem("id"));
-				if (name === 'Patient') {
-				  this.router.navigateByUrl('/front');
-				} else {
+				if (name === 'Admin') {
 				  this.router.navigateByUrl('/admin');
+				} else {
+				  this.router.navigateByUrl('/');
 				}			  }
 			})
 		  } else if(ac === 0){
@@ -100,7 +100,7 @@ export class LoginComponent implements OnInit {
 		  data => {
 			this.social.loginWithGoogle(data.idToken).subscribe({
 			  next: response =>{
-				this.router.navigateByUrl("")
+				this.router.navigateByUrl("/")
 				let name=response.user.userRoles[0].roleName;
 				console.log('role:', name);
                 console.log(sessionStorage.getItem("id"));
@@ -116,7 +116,7 @@ export class LoginComponent implements OnInit {
 		  data => {
 			this.social.loginWithFacebook(data.authToken).subscribe({
 			  next: response =>{
-				this.router.navigateByUrl("")
+				this.router.navigateByUrl("/")
 				let name=response.user.userRoles[0].roleName;
 				console.log('role:', name);
                 console.log(sessionStorage.getItem("id"));

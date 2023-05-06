@@ -1,4 +1,5 @@
-import { NgModule , CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { RouterModule , Routes} from '@angular/router';
@@ -38,6 +39,11 @@ import { AnswerAdminComponent } from './backOffice/answer-admin/answer-admin.com
 import { CommentAdminComponent } from './backOffice/comment-admin/comment-admin.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AnswerFrontComponent } from './frontOffice/answer-front/answer-front.component';
+import { PatientFileComponent } from './backOffice/anas/patient-file/patient-file.component';
+import { PatientService } from './backOffice/anas/patient.service';
+import { ProfileComponent } from './frontOffice/user/profile/profile.component';
+import { DoctorListComponent } from './backOffice/user/doctor-list/doctor-list.component';
+import { PatientfileComponent } from './frontOffice/anas/patientfile/patientfile.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { ListDoctorComponent } from './frontOffice/list-doctor/list-doctor.component';
 import { PatientappointmentlistComponent } from './frontOffice/Appointment/patientappointmentlist/patientappointmentlist.component';
@@ -80,10 +86,15 @@ import { GrammarlyButtonElement, GrammarlyEditorPluginElement } from '@grammarly
     AnswerAdminComponent,
     CommentAdminComponent,
     AnswerFrontComponent,
+    PatientFileComponent,
+    ProfileComponent,
+    DoctorListComponent,
+    PatientfileComponent,
     ListDoctorComponent,
     PatientappointmentlistComponent,
     DoctorappointmentlistComponent,
     DoctorappointmentUpdateComponent
+
   ],
   imports: [
     NgxPaginationModule,
@@ -92,9 +103,7 @@ import { GrammarlyButtonElement, GrammarlyEditorPluginElement } from '@grammarly
     HttpClientModule,
     FormsModule,
     RouterModule,
-    ReactiveFormsModule,
     AppRoutingModule,
-    NgxPaginationModule,
     ReactiveFormsModule,
     ToastrModule.forRoot({
       timeOut: 5000,
@@ -128,7 +137,10 @@ import { GrammarlyButtonElement, GrammarlyEditorPluginElement } from '@grammarly
     {provide: HTTP_INTERCEPTORS,
       useClass: HttpInterceptorService,
       multi: true},
+       PatientService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+
 })
 export class AppModule { }

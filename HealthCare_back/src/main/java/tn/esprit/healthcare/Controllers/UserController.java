@@ -2,6 +2,7 @@ package tn.esprit.healthcare.Controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,7 +17,9 @@ import tn.esprit.healthcare.Services.*;
 
 import javax.transaction.Transactional;
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 // http://localhost:8080/
@@ -82,7 +85,6 @@ public class UserController {
         return accountResponse;
     }
 
-
     // http://localhost:8080/active
     @PostMapping("/active")
     public UserActive getActiveUser(@RequestBody JwtLogin jwtLogin){
@@ -126,13 +128,13 @@ public class UserController {
         return userService.fetchSkieurList();
     }
 
+
+
     @GetMapping("/getDoctors")
     public List<User> fetchDoctorList()
     {
-        return userService.fetchDoctorList();
+        return userService.fetchDoctorsList();
     }
-
-
 
     // http://localhost:8080/checkEmail
     @PostMapping("/checkEmail")
@@ -191,6 +193,20 @@ public class UserController {
     @PutMapping("/updateUser")
     public User updateStudent(@RequestBody User user) {
         return  userService.updateUser(user);
+    }
+
+    @GetMapping("/users")
+    public ResponseEntity<?> getUsers() {
+        Long totalUsers = userRepository.count();
+        Long totalDoctors = userRepository.countByuserRoles1();
+        Long totalPatients = userRepository.countByuserRoles();
+        Long totalAdmins = userRepository.countByuserRoles2();
+        Map<String, Object> data = new HashMap<>();
+        data.put("totalUsers", totalUsers);
+        data.put("totalDoctors", totalDoctors);
+        data.put("totalPatients", totalPatients);
+        data.put("totalAdmins", totalAdmins);
+        return ResponseEntity.ok(data);
     }
 
 }

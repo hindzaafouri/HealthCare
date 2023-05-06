@@ -46,14 +46,15 @@
                 <li><a href="#about" class="st-smooth-move">About</a></li>
                 <li><a href="#department" class="st-smooth-move">Department</a></li>
                 <li><a href="#doctors" class="st-smooth-move">Doctors</a></li>
+                <li><a routerLink="/patient" class="st-smooth-move">Patient file</a></li>
                 <li><a href="#gallery" class="st-smooth-move">Gallery</a></li>
                 <li><a href="#price" class="st-smooth-move">Pricing</a></li>
                 <li class="menu-item-has-children"><a  routerLink="/threads" class="st-smooth-move">Forum</a>
                 </li>
                 <li><a href="#contact" class="st-smooth-move">Contact</a></li>
                 <li *ngIf="!isSignedin"><a routerLink="/login" class="st-smooth-move">login</a></li>
-                <li *ngIf="username"><a (click)="doSignout()" class="st-smooth-move">{{ username }}</a></li>
-                <li > <a routerLink="/" style="text-decoration: underline; cursor: pointer;" (click)="doSignout()" >Signout</a></li>
+                <li *ngIf="isSignedin"><a routerLink="/profile" class="st-smooth-move">Account</a></li>
+                <li  *ngIf="isSignedin"> <a routerLink="/" style="text-decoration: underline; cursor: pointer;" (click)="doSignout()" >Signout</a></li>
 
 
               </ul>

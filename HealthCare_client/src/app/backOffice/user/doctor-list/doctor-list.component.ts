@@ -1,12 +1,12 @@
-import { Component, ElementRef, Renderer2 } from '@angular/core';
+import { Component } from '@angular/core';
 import { UserService } from '../user.service';
 
 @Component({
-  selector: 'app-user-list',
-  templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.css']
+  selector: 'app-doctor-list',
+  templateUrl: './doctor-list.component.html',
+  styleUrls: ['./doctor-list.component.css']
 })
-export class UserListComponent {
+export class DoctorListComponent {
   userDetails = null as any;
   studentToUpdate = {
     username:"",
@@ -21,12 +21,12 @@ export class UserListComponent {
   showForm= false ;
 
 
-  constructor(private renderer: Renderer2, private elRef: ElementRef,private userService: UserService) {
+  constructor(private userService: UserService) {
     this.getUsersDetails();
   }
 
   getUsersDetails() {
-    this.userService.getPatients().subscribe(
+    this.userService.getDoctors().subscribe(
       (resp) => {
         console.log(resp);
         this.userDetails = resp;

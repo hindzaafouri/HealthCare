@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ChartScales,Chart,ChartConfiguration } from 'chart.js';
 
@@ -9,15 +10,29 @@ import { ChartScales,Chart,ChartConfiguration } from 'chart.js';
 })
 export class AllTemplateAdminComponent implements OnInit {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   private pieChart!: Chart;
   private lineChart!: Chart ;
 
+  totalDoctors!: number;
+  totalPatients!: number;
+  totalUsers!: number;
+  totalAdmins!: number;
 
   ngOnInit() {
-    this.pie();
+   
     this.line();
+
+    this.http.get(' http://localhost:8080/healthcare/users').subscribe((data: any) => {
+       this.totalDoctors = data['totalDoctors'];
+       this.totalPatients = data['totalPatients'];
+       this.totalUsers = data['totalUsers'];
+       this.totalAdmins = data['totalAdmins'];
+
+
+      this.pie();
+    });
     }
 
   pie() {
@@ -27,18 +42,19 @@ export class AllTemplateAdminComponent implements OnInit {
       data: {
         datasets: [
           {
-            data: [33, 33, 33],
+            data: [this.totalDoctors, this.totalPatients,this.totalAdmins],
             backgroundColor: ['#0694a2', '#1c64f2', '#7e3af2'],
-            label: 'Dataset 1',
+            label: 'Users',
           },
         ],
-        labels: ['Shoes', 'Shirts', 'Bags'],
+        labels: ['Doctors', 'Patients','Admins'],
       },
       options: {
         responsive: true,
         cutoutPercentage: 80,
         legend: {
           display: false,
+
         },
       },
     };
