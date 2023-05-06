@@ -42,6 +42,7 @@ import { PatientFileComponent } from './backOffice/anas/patient-file/patient-fil
 import { PatientService } from './backOffice/anas/patient.service';
 import { ProfileComponent } from './frontOffice/user/profile/profile.component';
 import { DoctorListComponent } from './backOffice/user/doctor-list/doctor-list.component';
+import { PatientfileComponent } from './frontOffice/anas/patientfile/patientfile.component';
 
 
 @NgModule({
@@ -79,6 +80,7 @@ import { DoctorListComponent } from './backOffice/user/doctor-list/doctor-list.c
     PatientFileComponent,
     ProfileComponent,
     DoctorListComponent,
+    PatientfileComponent,
   ],
   imports: [
     NgxPaginationModule,

@@ -27,6 +27,7 @@ import { PatientFileComponent } from './backOffice/anas/patient-file/patient-fil
 import { ProfileComponent } from './frontOffice/user/profile/profile.component';
 import { DoctorListComponent } from './backOffice/user/doctor-list/doctor-list.component';
 import { AdminGuard } from './backOffice/user/admin-guard';
+import { PatientfileComponent } from './frontOffice/anas/patientfile/patientfile.component';
 
 
 const routes: Routes = [
@@ -53,8 +54,12 @@ const routes: Routes = [
   { path: 'update-thread/:threadId', component: UpdateThreadAdminComponent } ,
   { path: 'comments/:idAnswer', component: CommentAdminComponent },
   { path: 'patient_file', component: PatientFileComponent },
+  {
+    path:'Patient',
+    component:PatientfileComponent
+  },
   { path : "**" , component:NotFoundComponent}
-
+ 
 ];
 
 
