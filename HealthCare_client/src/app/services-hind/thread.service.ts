@@ -34,46 +34,25 @@ export class ThreadService {
     return this.http.get<Thread[]>(`${this.apiUrl}`);
   }
 
-  /*getThreadsByTimeFrame(timeFrame: string) {
-    return this.http.get<any[]>(`${this.apiUrl}/${timeFrame}`).pipe( 
-      map((data) => {
-        const countByTimeFrame: {[key: string]: number} = {}; // key can be day / month or year //value is number of threads
-    
-        data.forEach((thread) => {
-          const date = new Date(thread.createdAt);
-    
-          if (timeFrame === 'day') {
-            const day = date.toLocaleDateString();
-            if (countByTimeFrame[day]) {
-              countByTimeFrame[day] += 1;
-            } else {
-              countByTimeFrame[day] = 1;
-            }
-          } else if (timeFrame === 'month') {
-            const month = date.toLocaleString('default', { month: 'long' });
-            if (countByTimeFrame[month]) {
-              countByTimeFrame[month] += 1;
-            } else {
-              countByTimeFrame[month] = 1;
-            }
-          } else if (timeFrame === 'year') {
-            const year = date.getFullYear();
-            if (countByTimeFrame[year]) {
-              countByTimeFrame[year] += 1;
-            } else {
-              countByTimeFrame[year] = 1;
-            }
-          }
-        });   
-        const result = [];
-        for (const [timeFrame, count] of Object.entries(countByTimeFrame)) {
-          result.push({ timeFrame, count, createdAt: new Date(timeFrame) });
-        }
-        return result;
+  getActiveThreads() : Observable<Thread[]> {
+    return this.http.get<Thread[]>(`${this.apiUrl}/get-active-threads`) ;
+  }
+
+
+  getThreadCountsByMonthInYear(year: number): Observable<any[]> {
+    return this.http.get<any>(`${this.apiUrl}/count-by-month/${year}`).pipe(
+      map((data: { [key: string]: number }) => {
+        const monthCounts: { month: string, count: number }[] = [];
+        Object.entries(data).forEach(([month, count]) => {
+          monthCounts.push({ month, count });
+        });
+        return monthCounts;
       })
     );
-  }*/
+  }
+
   
+
 
   getThreadsSortedByVotes(): Observable<Thread[]> {
     return this.http.get<Thread[]>(`${this.apiUrl}/threads-ByVotes`);

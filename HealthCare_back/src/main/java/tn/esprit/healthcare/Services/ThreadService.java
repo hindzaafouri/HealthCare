@@ -17,10 +17,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Year;
-import java.time.YearMonth;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -129,6 +126,8 @@ public class ThreadService implements IThreadService {
         threadRepository.save(thread) ;
     }
 
+
+
     @Override
     public void downThread(Long id) {
         Thread thread = threadRepository.findById(id).get() ;
@@ -155,29 +154,30 @@ public class ThreadService implements IThreadService {
     }
 
     @Override
-    public List<Thread> getThreadsByTimeFrame(String timeFrame) {
-        List<Thread> threads;
-        if (timeFrame.matches("\\d{4}-\\d{2}-\\d{2}")) {
-            // Fetch threads for a specific day
-            LocalDate date = LocalDate.parse(timeFrame, DateTimeFormatter.ISO_DATE);
-            threads = threadRepository.findThreadByCreatedAtBetween(date.atStartOfDay(), date.plusDays(1).atStartOfDay());
-        } else if (timeFrame.matches("\\d{4}-\\d{2}")) {
-            // Fetch threads for a specific month
-            YearMonth yearMonth = YearMonth.parse(timeFrame, DateTimeFormatter.ofPattern("yyyy-MM"));
-            threads = threadRepository.findThreadByCreatedAtBetween(
-                    yearMonth.atDay(1).atStartOfDay(), yearMonth.atEndOfMonth().plusDays(1).atStartOfDay()
-            );
-        } else if (timeFrame.matches("\\d{4}")) {
-            // Fetch threads for a specific year
-            Year year = Year.parse(timeFrame, DateTimeFormatter.ofPattern("yyyy"));
-            threads = threadRepository.findThreadByCreatedAtBetween(
-                    year.atDay(1).atStartOfDay(), year.plusYears(1).atDay(1).atStartOfDay()
-            );
-        } else {
-            throw new IllegalArgumentException("Invalid timeframe format. Supported formats: yyyy, yyyy-MM, yyyy-MM-dd");
-        }
-        return threads;
+    public List<Thread> getActiveStatus() {
+        boolean status = true;
+        return threadRepository.findThreadByStatus(status);
     }
+
+
+    @Override
+    public Map<String, Integer> getThreadCountsByMonthInYear(int year) {
+        Map<String, Integer> threadCounts = new LinkedHashMap<>();
+        Year inputYear = Year.of(year);
+
+        for (int i = 1; i <= 12; i++) {
+            Month month = Month.of(i);
+            LocalDateTime startOfMonth = LocalDateTime.of(year, month, 1, 0, 0);
+            LocalDateTime endOfMonth = LocalDateTime.of(year, month, month.length(inputYear.isLeap()), 23, 59, 59);
+
+            List<Thread> threads = threadRepository.findThreadByCreatedAtBetween(startOfMonth, endOfMonth);
+            int count = threads.size();
+            threadCounts.put(month.toString(), count);
+        }
+
+        return threadCounts;
+    }
+
 
     @Override
     public List<Thread> getThreadsSortedByVotes() {

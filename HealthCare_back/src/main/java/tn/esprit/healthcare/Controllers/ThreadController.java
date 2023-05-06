@@ -25,6 +25,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -107,6 +108,12 @@ public class ThreadController {
         }
     }
 
+    @GetMapping("/get-active-threads")
+    public ResponseEntity<List<Thread>> getActiveThreads() {
+        List<Thread> activeThreads = threadService.getActiveStatus();
+        return ResponseEntity.ok(activeThreads);
+    }
+
     @PutMapping("/update-thread/{idThread}")
     public ResponseEntity<Void> updateThread (@RequestBody Thread updatedThread, @PathVariable Long idThread) {
         // Set the id of the updated answer to the id in the path variable
@@ -153,7 +160,7 @@ public class ThreadController {
         return ResponseEntity.ok(threads) ;
     }
 
-    @GetMapping("/timeframe/{timeFrame}")
+    /*@GetMapping("/timeframe/{timeFrame}")
     public ResponseEntity<List<Thread>> getThreadsByTimeFrame(@PathVariable String timeFrame) {
         try {
             List<Thread> threads = threadService.getThreadsByTimeFrame(timeFrame);
@@ -161,6 +168,11 @@ public class ThreadController {
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
         }
+    }*/
+
+    @GetMapping("/count-by-month/{year}")
+    public Map<String,Integer> getThreadCountByMonthInYear (@PathVariable int year) {
+        return threadService.getThreadCountsByMonthInYear(year) ;
     }
 
 

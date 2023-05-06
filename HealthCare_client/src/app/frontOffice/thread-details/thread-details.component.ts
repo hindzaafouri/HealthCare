@@ -30,6 +30,8 @@ export class ThreadDetailsComponent implements OnInit {
 
   fbUrl = 'https://www.facebook.com/dialog/share';
   appId = "1283078112286472" ;
+  userId: number = parseInt(sessionStorage.getItem('id') || '');
+
 
   constructor(private http: HttpClient, private route: ActivatedRoute,private router: Router,private threadService : ThreadService) { }
 

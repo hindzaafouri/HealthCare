@@ -8,6 +8,7 @@ import tn.esprit.healthcare.Repositories.ThreadRepository;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public interface IThreadService {
@@ -22,7 +23,11 @@ public interface IThreadService {
 
     public Set<Thread> findThreadByKeyWord (String keyword) ;
 
-    public List<Thread> getThreadsByTimeFrame (String timeFrame) ;
+    //public List<Thread> getThreadsByTimeFrame (String timeFrame) ;
+
+    public List<Thread> getActiveStatus () ;
+
+    public Map<String, Integer>  getThreadCountsByMonthInYear (int year) ;
 
     public Iterable<Thread> findAll () ;
 

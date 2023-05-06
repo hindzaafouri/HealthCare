@@ -15,4 +15,5 @@ public interface ThreadRepository extends CrudRepository<Thread,Long> {
     Set<Thread> findByTopicThread (Topic topic) ;
     List<Thread> findThreadByCreatedAtBetween(LocalDateTime startDate, LocalDateTime endDate) ;
 
+    List<Thread> findThreadByStatus (boolean status) ;
 }

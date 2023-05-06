@@ -50,7 +50,7 @@ export class ThreadComponent implements OnInit {
     const formData = new FormData();
 
     formData.append('title', this.registerForm.get('title')?.value || '');
-    formData.append('userId', this.registerForm.get('userId')?.value || '');
+    formData.append('userId', sessionStorage.getItem('id') || '');
     formData.append('question', this.registerForm.get('question')?.value || '');
     formData.append('topic', this.registerForm.get('topic')?.value || '');
     
@@ -101,7 +101,7 @@ export class ThreadComponent implements OnInit {
 
  // from service
   getThreads(): void {
-    this.threadService.getThreads().subscribe(data => {
+    this.threadService.getActiveThreads().subscribe(data => {
       this.threads = data;
       console.log(this.threads);
     }, error => {

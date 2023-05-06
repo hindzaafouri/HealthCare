@@ -12,6 +12,7 @@ export class CommentService {
   constructor(private http: HttpClient) { }
   private apiUrl = 'http://localhost:8080/healthcare/comment-op';
   private scamWords = ['scam', 'fraud', 'spam'];
+  userId= sessionStorage.getItem('id') ; 
 
   getCommentsByAnswer(idAnswer: number): Observable<Comment[]> {
     return this.http.get<Comment[]>(`${this.apiUrl}/comments-ByAnswer/${idAnswer}`);
@@ -48,19 +49,15 @@ export class CommentService {
       return new Observable<void>();
     } else {
       // Add comment using HTTP POST request
-      const url = `${this.apiUrl}/add-comment/${idAnswer}`;
+      comment.user.id = this.userId ? +this.userId : 0;
+      const url = `${this.apiUrl}/add-comment/${idAnswer}?userId=${this.userId}`;
       return this.http.post<void>(url, comment);
     }
   }
 
 
   deleteComment(commentId: number): Observable<any> {
-    const confirmation = window.confirm('Are you sure you want to delete this comment?');
-    if (confirmation) {
-      // Call Spring Boot endpoint to delete the answer
-      return this.http.delete(`${this.apiUrl}/${commentId}`);
-    }
-    return EMPTY;
+    return this.http.delete(`${this.apiUrl}/${commentId}`);
   }
 
 
