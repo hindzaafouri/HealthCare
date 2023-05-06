@@ -12,7 +12,7 @@ import tn.esprit.healthcare.Services.AppointmentService;
 
 import java.util.Date;
 import java.util.List;
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/appointments")
 public class AppointmentController {
@@ -58,6 +58,10 @@ public class AppointmentController {
             appointmentO.setDate(appointment.getDate());
             appointmentO.setHeure(appointment.getHeure());
             appointmentO.setStateAppointment(appointment.getStateAppointment());
+            appointmentO.setDepartment(appointment.getDepartment());
+            appointmentO.setMessage(appointment.getMessage());
+            appointmentO.setMedecin(appointment.getMedecin());
+
             appointmentO.setUser(appointment.getUser());
             return new ResponseEntity<>(appointmentService.save(appointmentO), HttpStatus.CREATED);
         }catch(DataAccessException e) {

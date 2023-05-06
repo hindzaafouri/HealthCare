@@ -21,6 +21,10 @@ export class AppointmentService {
   getUser(): Observable<User[]> {
     return this._httpClient.get<User[]>(this.getUrl+'/users');
   }
+  
+  getUsers() {
+    return this._httpClient.get<User[]>(this.getUrl + "/all");
+  }
 
   saveAppointment(appointment: Appointment): Observable<Appointment>{
     return this._httpClient.post<Appointment>(this.getUrl+'/liste', appointment);
@@ -36,5 +40,8 @@ export class AppointmentService {
 
   updateAppointment(appointment: Appointment):Observable<Appointment>{
     return this._httpClient.put<Appointment>(this.getUrl+'/update/'+appointment.id_appointment, appointment);
+  }
+  getappointment() {
+    return this._httpClient.get<Appointment[]>(this.getUrl + "/all");
   }
 }

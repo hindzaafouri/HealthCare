@@ -126,6 +126,14 @@ public class UserController {
         return userService.fetchSkieurList();
     }
 
+    @GetMapping("/getDoctors")
+    public List<User> fetchDoctorList()
+    {
+        return userService.fetchDoctorList();
+    }
+
+
+
     // http://localhost:8080/checkEmail
     @PostMapping("/checkEmail")
     public AccountResponse resetPasswordEmail(@RequestBody ResetPassword resetPassword){

@@ -22,6 +22,10 @@ import { CommentAdminComponent } from './backOffice/comment-admin/comment-admin.
 import { ResetPasswordComponent } from './frontOffice/user/reset-password/reset-password.component';
 import { CodeActivationComponent } from './frontOffice/user/code-activation/code-activation.component';
 import { SignupComponent } from './frontOffice/user/signup/signup.component';
+import { ListDoctorComponent } from './frontOffice/list-doctor/list-doctor.component';
+import { PatientappointmentlistComponent } from './frontOffice/Appointment/patientappointmentlist/patientappointmentlist.component';
+import { DoctorappointmentlistComponent } from './frontOffice/doctorappointmentlist/doctorappointmentlist.component';
+import { DoctorappointmentUpdateComponent } from './frontOffice/doctorappointment-update/doctorappointment-update.component';
 
 
 const routes: Routes = [
@@ -43,8 +47,13 @@ const routes: Routes = [
   { path : 'threads/:idThread', component:ThreadDetailsComponent },
   { path: 'threads-admin' , component:ThreadsAdminComponent } ,
   { path: 'update-thread/:threadId', component: UpdateThreadAdminComponent } ,
+  { path: 'patientappointments', component: PatientappointmentlistComponent },
+  { path: 'doctorappointments', component: DoctorappointmentlistComponent },
+  { path: 'doctorappointments/update', component: DoctorappointmentUpdateComponent },
+  { path: "doctors", component: ListDoctorComponent },
   { path: 'comments/:idAnswer', component: CommentAdminComponent },
-  { path : "**" , component:NotFoundComponent}
+  { path: "**", component: NotFoundComponent },
+ 
 
 ];
 

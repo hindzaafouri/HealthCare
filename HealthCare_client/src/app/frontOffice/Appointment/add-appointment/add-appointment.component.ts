@@ -17,103 +17,184 @@ export class AddAppointmentComponent implements OnInit {
 
   addForm!: FormGroup;
   submitted!: boolean;
-  
+
+  selectedValue = "";
+
+  dateValue ! : any;
+
+  selectOptions = ['08:00', '10:00', '14:00', '16:00']
+  selectFilterOptions !:any;
+
+  appoitments !: Appointment[];
+
   users: User[] = [
     {
       id: 1,
-    username: "cycyyy",
-    email: "cyrine@gmail.com",
-    password: "hh",
-    phone_number: "44326011",
-    active:1
+      username: "cyrinea",
+      email: "cyrine@gmail.com",
+      password: "cycy123",
+      phone_number: "55635011",
+      active: 1
     }
   ];
 
   appointment: Appointment = new Appointment();
 
   constructor(private _appointmentService: AppointmentService,
-              private _router: Router,
-              private toastr: ToastrService,
-              private fb : FormBuilder,
-              private _activatedRoute: ActivatedRoute) { }
+    private _router: Router,
+    private toastr: ToastrService,
+    private fb: FormBuilder,
+    private _activatedRoute: ActivatedRoute) { }
 
 
 
 
   ngOnInit(): void {
-    
-      this.users = [
+
+    this.users = [
       {
-        id:2 ,
-      username: "cycyyy",
-      email: "cyrine@gmail.com",
-      password: "hh",
-      phone_number: "44326011",
-      active:1
+        id: 1,
+        username: "cyrinea",
+        email: "cyrine@gmail.com",
+        password: "cycy123",
+        phone_number: "55635011",
+        active: 1
       }
     ];
-  
-    this.buildAddForm();
-   // this._appointmentService.getUser().subscribe(response => this.users = response);
 
-   const isIdPresent = this._activatedRoute.snapshot.paramMap.has('id_appointment');
-    if (isIdPresent){
-      const id_appointment = +this._activatedRoute.snapshot.params['id_appointment'] ;
+    this.buildAddForm();
+    // this._appointmentService.getUser().subscribe(response => this.users = response);
+
+    const isIdPresent = this._activatedRoute.snapshot.paramMap.has('id_appointment');
+    if (isIdPresent) {
+      const id_appointment = +this._activatedRoute.snapshot.params['id_appointment'];
       this._appointmentService.getAppointment(id_appointment).subscribe(
         data => this.appointment = data
       )
     }
+
+
+    this._appointmentService.getAppointments().subscribe((data)=>{
+    this.appoitments=data;
+    })
   }
 
-      /*
-      this._activatedRoute.params.subscribe(params => {
-        let id_rec: number = params['id_rec'];
-        if('id_rec'){
-          this._reclamationService.getReclamation(id_rec).subscribe(response => this.reclamation = response);
-        }
-      })*/
-      onSubmit(){
-        console.log(this.appointment);
-       this.appointment.stateAppointment="Pending";
+  /*
+  this._activatedRoute.params.subscribe(params => {
+    let id_rec: number = params['id_rec'];
+    if('id_rec'){
+      this._reclamationService.getReclamation(id_rec).subscribe(response => this.reclamation = response);
+    }
+  })*/
+  onSubmit() {
+    console.log(this.appointment);
+    this.appointment.stateAppointment = "Pending";
+    this.appointment.heure = this.selectedValue;
+
+
+    this.submitted = true;
+    //stop here if form is invalid
+    /* if(this.addForm.invalid){
+       return;
+     }*/
+     this.appointment.medecin="2";
+    this._appointmentService.saveAppointment(this.appointment).subscribe(
+      //console.log("added");
+
+
+      res => {
+        this.toastr.success('Appointment added successfully', 'Success', { timeOut: 3000, closeButton: true, progressBar: true });
+        this._router.navigate(['/doctors']);
+      },
+      err => {
+        this.toastr.error(err.statusText, 'Error', { timeOut: 3000, closeButton: true, progressBar: true })
+      }
+    );
+  }
+
+  //to access inputs
+  get f() {
+    return this.addForm.controls;
+  }
+
+  buildAddForm() {
+    this.addForm = this.fb.group({
+      date: [null, Validators.required],
+      heure: [null, Validators.required],
+      StateAppointment: [null, Validators.required],
+      department: [null, Validators.required],
+      message: [null, Validators.required],
+      user: [null, Validators.required]
+    });
+  }
+
+
+
+
+
+  selectChangeHandler(arg: any) {
+    this.selectedValue = arg.target.value;
+
+
+  }
+
+  todayDate !: Date;
+
+  dateToday() {
+
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth() + 1;
+    const day = now.getDate();
+
+    return new Date(year, month - 1, day);
+  }
+
+  maxDate !: Date;
+
+  maxDay() {
+
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth() + 1;
+    const day = now.getDate();
+
+    return new Date(year, month + 1, day);
+  }
+
+
+  onKey(arg: any) {
+    this.dateValue=arg.target.value;
+    this.selectOptions = ['08:00', '10:00', '14:00', '16:00']
+    this.selectFilterOptions=['08:00', '10:00', '14:00', '16:00'];
+
+    this.appoitments.filter((data)=>{
+      let a = ""+data.date;
+      if(data.medecin =="2" &&  a == this.dateValue ){
+    
         
+       this.selectFilterOptions= this.selectOptions.filter((s)=>{
         
-        this.submitted = true;
-        //stop here if form is invalid
-       /* if(this.addForm.invalid){
-          return;
-        }*/
-        this._appointmentService.saveAppointment(this.appointment).subscribe(
-          //console.log("added");
+
+         return s != data.heure;
+            
+     
+     
+            
           
-        
-          res => {  
-            this.toastr.success('Appointment added successfully', 'Success', { timeOut: 3000, closeButton: true, progressBar: true});
-            this._router.navigate(['/Appointment/show']);
-          },
-            err => {
-            this.toastr.error(err.statusText, 'Error',  { timeOut: 3000, closeButton: true, progressBar: true})
-          }
-        );
-       }
+        })
+        this.selectOptions=this.selectFilterOptions;
+      }
+    })
+    console.log(this.selectFilterOptions);
   
-       //to access inputs
-       get f(){
-        return this.addForm.controls;
-       }
   
-       buildAddForm(){
-        this.addForm = this.fb.group({
-          date: [null, Validators.required],
-          heure: [null, Validators.required],
-          StateAppointment: [null, Validators.required],
-          department: [null, Validators.required],
-          message: [null, Validators.required],
-          user: [null, Validators.required]
-        });
-       }
-  
+   
+    
 
 
+    
 
 
+  }
 }
