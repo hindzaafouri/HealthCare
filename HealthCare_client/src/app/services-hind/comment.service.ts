@@ -49,7 +49,15 @@ export class CommentService {
       return new Observable<void>();
     } else {
       // Add comment using HTTP POST request
-      comment.user.id = this.userId ? +this.userId : 0;
+
+      comment.user = {
+        id: this.userId ? +this.userId : 0,
+        username: '',
+        email: '',
+        phone_number:'',
+        password:'' ,
+        active:0
+      };
       const url = `${this.apiUrl}/add-comment/${idAnswer}?userId=${this.userId}`;
       return this.http.post<void>(url, comment);
     }
