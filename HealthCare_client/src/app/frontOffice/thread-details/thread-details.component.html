@@ -1,0 +1,92 @@
+<app-all-template-client></app-all-template-client>
+<div class="st-content">
+  <div class="st-page-heading" style="background-image: url('/assets/frontTemplate/img/hero-bg2.jpg')">
+
+    <div class="container">
+      <div class="st-page-heading-in text-center">
+        <h1 class="st-page-heading-title">{{ thread.titleThread }}</h1>
+        <div class="st-post-label">
+          <span>By <a href="#">Jhon Doe</a></span>
+          <span>{{ thread.createdAt | date:'yyyy-MM-dd - HH:mm:ss' }}</span>
+
+        </div>
+        <div class="st-height-b30 st-height-lg-b30"></div>
+        <a href="#" class="delete-post text-white" (click)="shareOnFacebook($event)"><i class="fab fa-facebook"
+            style="color: #2374e1;"></i> Share on facebook | </a>
+        <a href="#" class="delete-post text-white" (click)="shareOnTwitter($event)"><i class="fab fa-twitter"
+            style="color:rgb(29, 155, 240)"></i> Share on Twitter | </a>
+        <a href="#" class="delete-post text-white" (click)="sendOnWhatsApp($event)"><i class="fab fa-whatsapp"
+            style="color:#25d366"></i> Send on WhatsApp</a>
+
+        <div class="st-height-b30 st-height-lg-b30"></div>
+
+
+        <div class="st-post-actions">
+          <a href="#" class="edit-post text-white"
+            (click)="currentThread = thread; openModalUpdateThread(thread,$event)"><i class="fas fa-edit"></i> Edit |
+          </a>
+          <a href="#" class="delete-post text-white" (click)="deleteThread($event)"><i class="fas fa-trash-alt"></i> Delete |
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div><!-- .st-page-heading -->
+
+
+  <div class="container">
+    <div class="mt-5 mb-5" *ngIf="thread">
+      <h2>{{ thread.questionThread }}</h2>
+    </div>
+
+    <div *ngIf="!thread">
+      <p>Loading thread details...</p>
+    </div>
+
+    <app-answer-front [threadId]="threadId"></app-answer-front>
+
+  </div>
+</div>
+
+<div class="modal fade" id="updateThreadModal" tabindex="-1" role="dialog" aria-labelledby="updateThreadModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form (ngSubmit)="updateThread()" #updateThreadForm="ngForm">
+        <div class="modal-header">
+          <h5 class="modal-title" id="updateThreadFormLabel">Update Thread</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="title">Title</label>
+            <textarea class="form-control" id="titleThread" name="titleThread" required
+              [(ngModel)]="threadToUpdate.titleThread"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="question">Question</label>
+            <textarea class="form-control" id="questionThread" name="questionThread" required
+              [(ngModel)]="threadToUpdate.questionThread"></textarea>
+          </div>
+          <div>
+            <label for="topic">Topic</label>
+            <select class="form-select" [(ngModel)]="threadToUpdate.topicThread" name="topicThread">
+              <option *ngFor="let topic of topics" [value]="topic">{{ topic }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal()">Close</button>
+          <button type="submit" class="btn btn-info">Update</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<script async defer crossorigin="anonymous"
+  src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v11.0&appId=<YOUR_APP_ID>&autoLogAppEvents=1"
+  nonce="gGGl1nGJ"></script>
