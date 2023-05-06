@@ -25,7 +25,7 @@ import { SignupComponent } from './frontOffice/user/signup/signup.component';
 
 
 const routes: Routes = [
- { path: "" , component: HomeComponent},
+  { path: "" , component: HomeComponent},
   { path: "admin" , component: DashboardComponent},
   { path : 'threads'  , component:ThreadComponent },
   { path : 'threads/:idThread', component:ThreadDetailsComponent },
@@ -34,11 +34,11 @@ const routes: Routes = [
   { path : 'Appointment/show/details' , component : DetailsShowComponent},
   { path : 'editappointment/:id_appointment' , component : EditAppointmentComponent},
   { path : 'user_list'  , component:UserListComponent },
-    { path : 'user_add'  , component:UserAddComponent },
-    { path : 'login'  , component:LoginComponent },
-    {path: 'reset', component:ResetPasswordComponent},
-  {path: 'active', component:CodeActivationComponent},
-  {path: 'signup', component:SignupComponent},
+  { path : 'user_add'  , component:UserAddComponent },
+  { path : 'login'  , component:LoginComponent },
+  { path: 'reset', component:ResetPasswordComponent},
+  { path: 'active', component:CodeActivationComponent},
+  { path: 'signup', component:SignupComponent},
   { path: 'threads-admin' , component:ThreadsAdminComponent } ,
   { path : 'threads/:idThread', component:ThreadDetailsComponent },
   { path: 'threads-admin' , component:ThreadsAdminComponent } ,

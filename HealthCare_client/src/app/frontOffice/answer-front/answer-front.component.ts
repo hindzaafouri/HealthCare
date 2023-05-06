@@ -62,7 +62,7 @@ export class AnswerFrontComponent implements OnInit {
       );
       Grammarly.init("client_L7TFP6VsBxxK2vAihQQ7Yj");
 
-  
+      this.myForm = new NgForm([], []);
       this.formModalAddComment = new window.bootstrap.Modal(
         document.getElementById("addCommentModal")
       );
@@ -103,32 +103,31 @@ export class AnswerFrontComponent implements OnInit {
 
 //from service
 addAnswer(threadId: number): void {
-  const userId = sessionStorage.getItem('id');
-  this.answer.user.id = parseInt(userId || '0');
+  console.log('userId:', this.userId);
   this.answerService.addAnswer(threadId, this.answer).subscribe(
-  () => {
-    console.log('Answer added successfully');
-    this.showSuccessAlert = true;
-    this.showErrorAlert = false;
-    this.myForm.reset(); // reset the form after the answer is added
-    setTimeout(() => {
-      this.showSuccessAlert = false;
-    }, 3000);
-    this.answer = {} as Answer; // move this line here
-
-    // Manually add the new answer to the displayed list
-    const newAnswer = {...this.answer};
-    this.answers.push(newAnswer);
-  },
-  (error) => {
-    console.error('Error adding answer:', error);
-    this.showSuccessAlert = false;
-    this.showErrorAlert = true;
-    setTimeout(() => {
+    () => {
+      console.log('Answer added successfully');
+      this.showSuccessAlert = true;
       this.showErrorAlert = false;
-    }, 3000);
-  }
-);
+      this.myForm.reset(); // reset the form after the answer is added
+      setTimeout(() => {
+        this.showSuccessAlert = false;
+      }, 3000);
+      this.answer = {} as Answer; // move this line here
+      this.getAnswersByThread() ;
+      // Manually add the new answer to the displayed list
+      /*const newAnswer = {...this.answer};
+      this.answers.push(newAnswer);*/
+    },
+    (error) => {
+      console.error('Error adding answer:', error);
+      this.showSuccessAlert = false;
+      this.showErrorAlert = true;
+      setTimeout(() => {
+        this.showErrorAlert = false;
+      }, 3000);
+    }
+  );
 }
 
   // from service
@@ -218,8 +217,6 @@ addAnswer(threadId: number): void {
 
   //from service 
   addComment(idAnswer: number): void {
-    const userId = sessionStorage.getItem('id');
-    this.comment.user.id = parseInt(userId || '0');
     this.commentService.addComment(idAnswer, this.comment).subscribe(
       () => {
         console.log('Comment added successfully');

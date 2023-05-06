@@ -41,10 +41,18 @@ export class AnswerService {
     return this.http.put(url, answerToUpdate);
   }
 
-  addAnswer(threadId: number, answer: Answer): Observable<void> {
-    answer.user.id = this.userId ? +this.userId : 0;
+  addAnswer(threadId: number, answer: Answer): Observable<Answer> {
+    answer.user = {
+      id: this.userId ? +this.userId : 0,
+      username: '',
+      email: '',
+      phone_number:'',
+      password:'' ,
+      active:0
+    };
     const url = `${this.apiUrl}/add-answer/${threadId}?userId=${this.userId}`;
-    return this.http.post<void>(url, answer);
+    return this.http.post<Answer>(url, answer);
   }
+
 
 }
