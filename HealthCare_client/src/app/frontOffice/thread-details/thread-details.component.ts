@@ -4,9 +4,9 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ThreadService } from 'src/app/services-hind/thread.service';
 import { Answer } from 'src/models/Answer';
-import { Comment } from 'src/models/Comment';
 import { Thread } from 'src/models/Thread';
 import { Topic } from 'src/models/Topic';
+import * as Grammarly from "@grammarly/editor-sdk";
 
 declare var window:any ; 
 
@@ -22,9 +22,7 @@ export class ThreadDetailsComponent implements OnInit {
   thread!: Thread;
   answers: Answer[] = [];
   topics: Topic[] = [];
-  comments: Comment[] = [];
   answer: Answer = {} as Answer;
-  comment: Comment = {} as Comment;
   //update thread
   currentThread: Thread = {} as Thread;
   threadToUpdate: Thread = {} as Thread;
@@ -32,6 +30,8 @@ export class ThreadDetailsComponent implements OnInit {
 
   fbUrl = 'https://www.facebook.com/dialog/share';
   appId = "1283078112286472" ;
+  userId: number = parseInt(sessionStorage.getItem('id') || '');
+
 
   constructor(private http: HttpClient, private route: ActivatedRoute,private router: Router,private threadService : ThreadService) { }
 
@@ -40,6 +40,7 @@ export class ThreadDetailsComponent implements OnInit {
       this.threadId = +params.get('idThread')! // Use type assertion to indicate that params.get('id') will not be null
       this.getThreadDetails(this.threadId);
     });
+    Grammarly.init("client_L7TFP6VsBxxK2vAihQQ7Yj");
     this.getTopics() ;
     this.formModal = new window.bootstrap.Modal(
       document.getElementById("updateThreadModal")

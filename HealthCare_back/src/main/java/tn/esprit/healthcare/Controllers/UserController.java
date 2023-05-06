@@ -129,6 +129,7 @@ public class UserController {
     }
 
 
+
     @GetMapping("/getDoctors")
     public List<User> fetchDoctorList()
     {

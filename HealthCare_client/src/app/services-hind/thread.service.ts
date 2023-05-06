@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Thread } from 'src/models/Thread';
 import { Topic } from 'src/models/Topic';
+import { map } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +33,26 @@ export class ThreadService {
   getThreads(): Observable<Thread[]> {
     return this.http.get<Thread[]>(`${this.apiUrl}`);
   }
+
+  getActiveThreads() : Observable<Thread[]> {
+    return this.http.get<Thread[]>(`${this.apiUrl}/get-active-threads`) ;
+  }
+
+
+  getThreadCountsByMonthInYear(year: number): Observable<any[]> {
+    return this.http.get<any>(`${this.apiUrl}/count-by-month/${year}`).pipe(
+      map((data: { [key: string]: number }) => {
+        const monthCounts: { month: string, count: number }[] = [];
+        Object.entries(data).forEach(([month, count]) => {
+          monthCounts.push({ month, count });
+        });
+        return monthCounts;
+      })
+    );
+  }
+
+  
+
 
   getThreadsSortedByVotes(): Observable<Thread[]> {
     return this.http.get<Thread[]>(`${this.apiUrl}/threads-ByVotes`);

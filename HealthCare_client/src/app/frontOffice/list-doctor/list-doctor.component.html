@@ -1,0 +1,99 @@
+<app-all-template-client></app-all-template-client>
+
+<!-- Start Service Section -->
+<section id="appointment" class="st-shape-wrap st-gray-bg">
+    <div class="st-shape4">
+
+    </div>
+    <div class="st-shape6">
+        <img src="assets/frontTemplate/img/shape/contact-shape3.svg" alt="shape3">
+    </div>
+    <div class="st-height-b120 st-height-lg-b80"></div>
+    <div class="container">
+        <div class="st-section-heading st-style1">
+
+
+            <div class="st-seperator">
+                <div class="st-seperator-left wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.2s"></div>
+                <div class="st-seperator-right wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.2s"></div>
+            </div>
+            <div>
+                <div class="container" style="margin-bottom: 50%;">
+
+                    <div id="stepper1" class="bs-stepper">
+                        <div class="bs-stepper-header">
+                            <div class="step" data-target="#test-l-1">
+                                <button class="step-trigger">
+                                    <span class="bs-stepper-circle">1</span>
+                                    <span class="bs-stepper-label">Choose doctor</span>
+                                </button>
+                            </div>
+                            <div class="line"></div>
+                            <div class="step" data-target="#test-l-2">
+                                <button class="step-trigger">
+                                    <span class="bs-stepper-circle">2</span>
+                                    <span class="bs-stepper-label">Choose appointment</span>
+                                </button>
+                            </div>
+
+                        </div>
+                        <div class="bs-stepper-content">
+
+                            <div id="test-l-1" class="content">
+                                <div class="form-group">
+                                    <div style="text-align: left;">
+
+                                        <a href="/patientappointments" class="st-btn st-style1 st-color2 st-smooth-move">My appointments list</a>
+
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="col py-2" *ngFor="let data  of doctorsData">
+                                            <div class="card" style="width: 18rem;">
+                                                <img class="card-img-top" src="assets/frontTemplate/img/blog10.jpg"
+                                                    alt="Card image cap">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">{{data.username}}</h5>
+                                                    <h6 class="card-title">{{data.phone_number}}</h6>
+                                                    <h6 class="card-title">{{data.email}}</h6>
+                                                    <button class="btn btn-success" (click)="getDoctor(data)"
+                                                        (click)="next()"> Get an
+                                                        appointment</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div id="test-l-2" class="content">
+                                <div class="form-group">
+                                    <div class="add-task">
+
+                                        <a href="/Appointment" class="st-btn st-style1 st-color2 st-smooth-move">+ Add
+                                            Another Appointment</a>
+
+                                    </div>
+                                    <div class=" text " style="max-width: 150%;">
+                                        <full-calendar [options]="calendarOptions"></full-calendar>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div id="test-l-3" class="content text-center">
+                                <button type="submit" class="btn btn-primary mt-5">Submit</button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="st-height-b40 st-height-lg-b40"></div>
+    </div>
+
+
+
+    <router-outlet></router-outlet>

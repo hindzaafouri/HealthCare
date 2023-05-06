@@ -21,7 +21,7 @@
         <div class="st-height-b30 st-height-lg-b30"></div>
 
 
-        <div class="st-post-actions">
+        <div class="st-post-actions" *ngIf="thread.user.id == userId" >
           <a href="#" class="edit-post text-white"
             (click)="currentThread = thread; openModalUpdateThread(thread,$event)"><i class="fas fa-edit"></i> Edit |
           </a>
@@ -62,13 +62,13 @@
         <div class="modal-body">
           <div class="form-group">
             <label for="title">Title</label>
-            <textarea class="form-control" id="titleThread" name="titleThread" required
-              [(ngModel)]="threadToUpdate.titleThread"></textarea>
+            <grammarly-editor-plugin><textarea class="form-control" id="titleThread" name="titleThread" required
+              [(ngModel)]="threadToUpdate.titleThread"></textarea></grammarly-editor-plugin>
           </div>
           <div class="form-group">
             <label for="question">Question</label>
-            <textarea class="form-control" id="questionThread" name="questionThread" required
-              [(ngModel)]="threadToUpdate.questionThread"></textarea>
+            <grammarly-editor-plugin> <textarea class="form-control" id="questionThread" name="questionThread" required
+              [(ngModel)]="threadToUpdate.questionThread"></textarea></grammarly-editor-plugin>
           </div>
           <div>
             <label for="topic">Topic</label>

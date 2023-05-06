@@ -12,7 +12,7 @@ import tn.esprit.healthcare.Services.AppointmentService;
 
 import java.util.Date;
 import java.util.List;
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/appointments")
 public class AppointmentController {
@@ -28,8 +28,8 @@ public class AppointmentController {
     }
 
     @PostMapping("/liste")
-    public ResponseEntity<Appointment> saveAppointment(@RequestBody Appointment appointment){
-        Appointment appointmentO =appointmentService.save(appointment);
+    public ResponseEntity<Appointment> saveAppointment(@RequestBody Appointment appointment, @RequestParam Long userId){
+        Appointment appointmentO =appointmentService.save(appointment,userId);
         return new ResponseEntity<Appointment>(appointmentO, HttpStatus.OK);
     }
 
@@ -44,7 +44,7 @@ public class AppointmentController {
         appointmentService.delete(id_appointment);
         return new ResponseEntity<String>("Appointment is deleted successufully!", HttpStatus.OK);
     }
-
+/*
     @PutMapping("/update/{id_appointment}")
     public ResponseEntity<Appointment> updateAppointment(@PathVariable Long id_appointment, @RequestBody Appointment appointment){
         Appointment appointmentO = appointmentService.findById(id_appointment);
@@ -58,12 +58,16 @@ public class AppointmentController {
             appointmentO.setDate(appointment.getDate());
             appointmentO.setHeure(appointment.getHeure());
             appointmentO.setStateAppointment(appointment.getStateAppointment());
+            appointmentO.setDepartment(appointment.getDepartment());
+            appointmentO.setMessage(appointment.getMessage());
+            appointmentO.setMedecin(appointment.getMedecin());
+
             appointmentO.setUser(appointment.getUser());
-            return new ResponseEntity<>(appointmentService.save(appointmentO), HttpStatus.CREATED);
+            return new ResponseEntity<>(appointmentService.save(appointmentO,userId), HttpStatus.CREATED);
         }catch(DataAccessException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
+    }*/
     // find by date
 
     @GetMapping("/getByDate/{date}")
