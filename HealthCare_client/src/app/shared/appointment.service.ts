@@ -13,6 +13,7 @@ export class AppointmentService {
   private getUrl: string = "http://localhost:8080/healthcare/api/appointments";
 
   constructor(private _httpClient: HttpClient) { }
+  userId= sessionStorage.getItem('id') ; 
   
   getAppointments(): Observable<Appointment[]> {
     return this._httpClient.get<Appointment[]>(this.getUrl+'/liste');
@@ -21,9 +22,22 @@ export class AppointmentService {
   getUser(): Observable<User[]> {
     return this._httpClient.get<User[]>(this.getUrl+'/users');
   }
+  
+  getUsers() {
+    return this._httpClient.get<User[]>(this.getUrl + "/all");
+  }
 
   saveAppointment(appointment: Appointment): Observable<Appointment>{
-    return this._httpClient.post<Appointment>(this.getUrl+'/liste', appointment);
+    appointment.user = {
+      id: this.userId ? +this.userId : 0,
+      username: '',
+      email: '',
+      phone_number:'',
+      password:'' ,
+      active:0
+    };
+    const url = `${this.getUrl}/liste/?userId=${this.userId}`;
+    return this._httpClient.post<Appointment>(url, appointment);
   }
 
   getAppointment(id_appointment: number): Observable<Appointment>{
@@ -36,5 +50,8 @@ export class AppointmentService {
 
   updateAppointment(appointment: Appointment):Observable<Appointment>{
     return this._httpClient.put<Appointment>(this.getUrl+'/update/'+appointment.id_appointment, appointment);
+  }
+  getappointment() {
+    return this._httpClient.get<Appointment[]>(this.getUrl + "/all");
   }
 }

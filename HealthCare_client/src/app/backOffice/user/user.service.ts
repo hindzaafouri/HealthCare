@@ -22,12 +22,17 @@ export class UserService {
     return this.http.get(this.API + '/getPatients');
   }
 
+
   public getPatient(id :number) {
     return this.http.get<User>(this.API + '/patient/'+id);
 }
 
   getUserById(id :number) {
     return this.http.get<User>(this.API +'/user/'+id)
+
+  public getDoctors() {
+    return this.http.get(this.API + '/getDoctors');
+
   }
 
   public deleteUsers(id: any) {

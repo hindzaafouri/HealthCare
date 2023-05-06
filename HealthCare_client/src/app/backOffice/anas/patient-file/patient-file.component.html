@@ -1,0 +1,274 @@
+<app-all-template-admin></app-all-template-admin>
+<html :class="{ 'theme-dark': dark }" x-data="data()" lang="en">
+<div class="flex h-screen bg-gray-50 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }"
+    style="display: flex;">
+    <app-aside></app-aside>
+    <div class="flex flex-col flex-1 w-full">
+        <app-header-back></app-header-back>
+        <!-- Thread admin element -->
+        <main class="h-full pb-16 overflow-y-auto">
+            <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
+                Patient Files List
+            </h4>
+            <div class="row mb-2">
+                <div class="col-sm">
+                    <input type="text" name="search"  id="disabledTextInput" class="form-control"
+                    placeholder="Search...">
+                </div>
+               
+                <div class="col-sm">
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                     class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150  bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">Add + </button>
+                </div>
+              </div>
+            <div class="w-full overflow-hidden rounded-lg shadow-xs">
+                <div class="w-full overflow-x-auto">
+                    <table class="w-full whitespace-no-wrap">
+                      <thead>
+                        <tr
+                          class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
+                        >
+                         <th class="px-4 py-3" scope="col">Username</th>
+                          <th class="px-4 py-3" scope="col">Consutation_nbr</th>
+                          <th class="px-4 py-3" scope="col">Content</th>
+                          <th class="px-4 py-3" scope="col">State</th>
+                          <th class="px-4 py-3" scope="col">Action</th>
+                        </tr>
+                        
+                      </thead>
+                      <tbody
+                        class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
+                      >
+                        <tr class="text-gray-700 dark:text-gray-400" *ngFor="let i of AllPatient ">
+                          <td class="px-4 py-3">
+                            <div class="flex items-center text-sm">
+                              <!-- Avatar with inset shadow -->
+                              <div
+                                class="relative hidden w-8 h-8 mr-3 rounded-full md:block"
+                              >
+                                <img
+                                  class="object-cover w-full h-full rounded-full"
+                                  src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
+                                  alt=""
+                                  loading="lazy"
+                                />
+                                <div
+                                  class="absolute inset-0 rounded-full shadow-inner"
+                                  aria-hidden="true"
+                                ></div>
+                              </div>
+                              <div>
+                                <p class="font-semibold">{{i.username}}</p>
+                                
+                              </div>
+                            </div>
+                          </td>
+                          <td class="px-4 py-3 text-sm">
+                            {{i.consutation_nbr}}
+                          </td>
+                          <td class="px-4 py-3 text-xs">
+                            <span
+                              class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
+                            >
+                            {{i.content}}
+                            </span>
+                          </td>
+                          <td class="px-4 py-3 text-sm">
+                            {{i.state}}
+                          </td>
+          
+          
+                          <td>
+                            <button (click)="delete(i.id_patientfile)" class="btn btn-danger">Supprimer</button>
+                            <button (click)="getId(i.id_patientfile)" data-bs-toggle="modal" data-bs-target="#exampleModal"  class="btn btn-warning">Edit</button>
+          
+                        </td>
+                        </tr>
+          
+                       
+                      </tbody>
+                    </table>
+                  </div>
+                <div
+                    class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
+                    <span class="flex items-center col-span-3">
+                        Showing 21-30 of 100
+                    </span>
+                    <span class="col-span-2"></span>
+                    <!-- Pagination -->
+                    <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
+                        <nav aria-label="Table navigation">
+                            <ul class="inline-flex items-center">
+                                <li>
+                                    <button
+                                        class="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple"
+                                        aria-label="Previous">
+                                        <svg class="w-4 h-4 fill-current" aria-hidden="true" viewBox="0 0 20 20">
+                                            <path
+                                                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                                clip-rule="evenodd" fill-rule="evenodd"></path>
+                                        </svg>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                                        1
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                                        2
+                                    </button>
+                                </li>
+                                <li>
+                                    <button
+                                        class="px-3 py-1 text-white transition-colors duration-150 bg-purple-600 border border-r-0 border-purple-600 rounded-md focus:outline-none focus:shadow-outline-purple">
+                                        3
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                                        4
+                                    </button>
+                                </li>
+                                <li>
+                                    <span class="px-3 py-1">...</span>
+                                </li>
+                                <li>
+                                    <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                                        8
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                                        9
+                                    </button>
+                                </li>
+                                <li>
+                                    <button
+                                        class="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple"
+                                        aria-label="Next">
+                                        <svg class="w-4 h-4 fill-current" aria-hidden="true" viewBox="0 0 20 20">
+                                            <path
+                                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                                clip-rule="evenodd" fill-rule="evenodd"></path>
+                                        </svg>
+                                    </button>
+                                </li>
+                            </ul>
+                        </nav>
+                    </span>
+                </div>
+                <h2
+                class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"
+              >
+                Charts
+              </h2>
+              <div class="grid gap-6 mb-8 md:grid-cols-2">
+                <div
+                  class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800"
+                >
+                  <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
+                    Revenue
+                  </h4>
+                  <canvas id="pie"></canvas>
+                  <div
+                    class="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400"
+                  >
+                    <!-- Chart legend -->
+                    <div class="flex items-center">
+                      <span
+                        class="inline-block w-3 h-3 mr-1 bg-blue-500 rounded-full"
+                      ></span>
+                      <span>Malade</span>
+                    </div>
+                    
+                    <div class="flex items-center">
+                      <span
+                        class="inline-block w-3 h-3 mr-1 bg-purple-600 rounded-full"
+                      ></span>
+                      <span>Gueri</span>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800"
+                >
+                  <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
+                    Traffic
+                  </h4>
+                  <canvas id="line"></canvas>
+                  <div
+                    class="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400"
+                  >
+                    <!-- Chart legend -->
+                    <div class="flex items-center">
+                      <span
+                        class="inline-block w-3 h-3 mr-1 bg-teal-600 rounded-full"
+                      ></span>
+                      <span>Organic</span>
+                    </div>
+                    <div class="flex items-center">
+                      <span
+                        class="inline-block w-3 h-3 mr-1 bg-purple-600 rounded-full"
+                      ></span>
+                      <span>Paid</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+            </div>
+        </main>
+        <!-- Thread admin element -->
+    </div>
+    
+</div>
+
+
+<div class="modal fade" id="exampleModal" data-bs-keyboard="false" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Patient file</h5>
+        </div>
+        <div class="modal-body">
+
+            <div class="mb-3">
+                <label for="disabledTextInput" class="form-label">Username</label>
+                <input type="text" name="username" [(ngModel)]="username" id="disabledTextInput" class="form-control"
+                    placeholder="Enter Username">
+            </div>
+            <div class="mb-3">
+                <label for="disabledTextInput" class="form-label">Consultation N°</label>
+                <input type="text" name="consutation_nbr" [(ngModel)]="consutation_nbr" id="disabledTextInput"
+                    class="form-control" placeholder="Enter consutation nomber">
+            </div>
+            <div class="mb-3">
+                <label for="disabledTextInput" class="form-label">Content</label>
+                <input type="text" name="content" [(ngModel)]="content" id="disabledTextInput" class="form-control"
+                    placeholder="Enter Content">
+            </div>
+        
+            <div class="mb-3">
+                <label for="disabledSelect" class="form-label">select state menu</label>
+                <select name="state" [(ngModel)]="state" id="disabledSelect" class="form-select">
+                    <option disabled selected>Disabled select</option>
+                    <option value="malade">malade</option>
+                    <option value="gueri">Gueri</option>
+                </select>
+            </div>
+        
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="clear()" data-bs-dismiss="modal">Close</button>
+          <button *ngIf="!upbtn" type="button" class="btn btn-primary" (click)="ajoutPatient()" data-bs-dismiss="modal">Save changes</button>
+          <button *ngIf="upbtn" type="button" class="btn btn-warning" (click)="update()" data-bs-dismiss="modal">update changes</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</html>

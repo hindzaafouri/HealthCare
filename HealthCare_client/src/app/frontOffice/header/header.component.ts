@@ -17,10 +17,11 @@ export class HeaderComponent implements OnInit {
 
 	greeting: any[] = [];
 
-	constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, public authService: AuthService) {}
+	constructor(private route: ActivatedRoute,private auth: AuthService,private router: Router, private http: HttpClient, public authService: AuthService) {}
 
 	ngOnInit() {
-	
+		this.isSignedin = this.auth.isUserSignedin();
+
 		
 	}
 

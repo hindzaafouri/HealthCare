@@ -22,8 +22,11 @@ export class AuthService {
 		return this.http.post<any>(this.baseUrl + 'signin', {email,password}, {headers: new HttpHeaders({ 'Content-Type': 'application/json' })}).pipe(map((resp) => {
 			sessionStorage.setItem("email",resp.email)
 this.setId(resp.user.id)
-this.setUsername(resp.user.username)
-          sessionStorage.setItem("token",`Bearer ${resp.token}`)
+sessionStorage.setItem("username",resp.user.username)
+sessionStorage.setItem("phone_number",resp.user.phone_number)
+sessionStorage.setItem("role",resp.user.userRoles[0].roleName)
+
+sessionStorage.setItem("token",`Bearer ${resp.token}`)
 
 		  this.setRoles(resp.user.userRoles)
 
@@ -140,6 +143,10 @@ this.setUsername(resp.user.username)
 		sessionStorage.removeItem('token');
 sessionStorage.removeItem('roles');
 sessionStorage.removeItem('username');
+sessionStorage.removeItem('role');
+sessionStorage.removeItem('phone_number');
+
+
 
 		this.router.navigateByUrl('/login');
 

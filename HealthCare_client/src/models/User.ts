@@ -7,5 +7,6 @@ export class User {
     password!: string;
     phone_number!: string;
     active!:number;
+   
     //code!: Code ;
 }
