@@ -121,4 +121,8 @@ public class User {
     @JsonIgnore
     private Set<Appointment> appointments;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonIgnore
+    private Set<Complaint> complaints;
+
 }
