@@ -5,7 +5,7 @@ public enum Topic {
     Mental_health ,
     Nutrition ,
 
-    Dermatology , 
+    Dermatology ,
     Vaccinations ,
     Menopause ,
     Pediatrics ,
