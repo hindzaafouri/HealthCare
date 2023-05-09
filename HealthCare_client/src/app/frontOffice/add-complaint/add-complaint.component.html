@@ -1,0 +1,41 @@
+<app-all-template-client></app-all-template-client>
+<br>
+<br>
+<br>
+<br>
+
+<div class="container mt-5 pb-3 shadow card">
+
+
+
+
+  <div class="row mb-2">
+
+
+    <div class="col-sm">
+      <div class="w-full max-w-xs">
+        <h1 class="text-center font-bold text-xl">Add Complaint</h1>
+
+        <form (ngSubmit)="OnSubmit(recForm)" #recForm="ngForm">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Subject</label>
+            <input type="text" [ngModel]="complaint.subject" #subject="ngModel" name="subject" class="form-control">
+
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Content</label>
+            <input type="text" class="form-control" [ngModel]="complaint.content" #content="ngModel" name="content"
+              required>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+
+
+      </div>
+
+    </div>
+  </div>
+
+</div>

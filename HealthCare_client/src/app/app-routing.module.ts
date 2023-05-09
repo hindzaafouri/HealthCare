@@ -46,6 +46,8 @@ import { PatientappointmentlistComponent } from './frontOffice/Appointment/patie
 import { DoctorappointmentlistComponent } from './frontOffice/doctorappointmentlist/doctorappointmentlist.component';
 import { DoctorappointmentUpdateComponent } from './frontOffice/doctorappointment-update/doctorappointment-update.component';
 import { PatientfileAdminComponent } from './backOffice/anas/patientfile-admin/patientfile-admin.component';
+import { AddComplaintComponent } from './frontOffice/add-complaint/add-complaint.component';
+import { ComplaintComponent } from './backOffice/complaint/complaint.component';
 
 
 const routes: Routes = [
@@ -100,6 +102,9 @@ const routes: Routes = [
 
     ]
   },
+       { path: 'addcomplaints', component: AddComplaintComponent},
+       { path: 'complaints', component: ComplaintComponent},
+
   { path: "**", component: NotFoundComponent }
 ];
 
