@@ -87,6 +87,8 @@ public class SocialController {
             roles.add(newRole); // add the new role to the set
             user.setUserRoles(roles); // update the roles set in the user object
           //  user.getUserRoles().add(authorities.get(0));
+            String username = email.substring(0, email.indexOf("@"));
+            user.setUsername(username);
             userService.addUser(user);
         }
         JwtLogin jwtLogin = new JwtLogin();

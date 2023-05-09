@@ -7,7 +7,7 @@ import { AuthService } from 'src/app/frontOffice/user/auth.service';
 })
 export class AdminGuard implements CanActivate {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(/*private router: Router*/) { }
   role= sessionStorage.getItem('role') ; 
 
   canActivate(): boolean {
@@ -15,7 +15,7 @@ export class AdminGuard implements CanActivate {
     if (this.role==="Admin") {
       return true;
     } else {
-      this.router.navigate(['/']);
+      //this.router.navigate(['/']);
       return false;
     }
   }

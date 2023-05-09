@@ -37,7 +37,6 @@ import { PatientInterfaceComponent } from './frontOffice/amani/patient/patient-i
 import { PatientInfosComponent } from './frontOffice/amani/patient/patient-infos/patient-infos.component';
 import { ConsultationsPatientComponent } from './frontOffice/amani/patient/consultations-patient/consultations-patient.component';
 import { ProfilePatientComponent } from './frontOffice/amani/patient/profile-patient/profile-patient.component';
-import { ProfileComponent } from './frontOffice/user/profile/profile.component';
 import { DoctorListComponent } from './backOffice/user/doctor-list/doctor-list.component';
 import { AdminGuard } from './backOffice/user/admin-guard';
 import { PatientfileComponent } from './frontOffice/anas/patientfile/patientfile.component';
@@ -48,6 +47,8 @@ import { DoctorappointmentUpdateComponent } from './frontOffice/doctorappointmen
 import { PatientfileAdminComponent } from './backOffice/anas/patientfile-admin/patientfile-admin.component';
 import { AddComplaintComponent } from './frontOffice/add-complaint/add-complaint.component';
 import { ComplaintComponent } from './backOffice/complaint/complaint.component';
+import { UserprofileComponent } from './frontOffice/user/userprofile/userprofile.component';
+import { ProfileComponent } from './frontOffice/amani/doctor/profile/profile.component';
 
 
 const routes: Routes = [
@@ -66,7 +67,7 @@ const routes: Routes = [
   { path: 'reset', component: ResetPasswordComponent },
   { path: 'active', component: CodeActivationComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'profile', component: ProfileComponent },
+  { path: 'user_profile', component: UserprofileComponent },
   { path: 'threads-admin', component: ThreadsAdminComponent },
   { path: 'threads/:idThread', component: ThreadDetailsComponent },
   { path: 'threads-admin', component: ThreadsAdminComponent },

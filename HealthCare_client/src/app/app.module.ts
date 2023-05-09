@@ -67,6 +67,7 @@ import { GrammarlyButtonElement, GrammarlyEditorPluginElement } from '@grammarly
 import { PatientfileAdminComponent } from './backOffice/anas/patientfile-admin/patientfile-admin.component';
 import { AddComplaintComponent } from './frontOffice/add-complaint/add-complaint.component';
 import { ComplaintComponent } from './backOffice/complaint/complaint.component';
+import { UserprofileComponent } from './frontOffice/user/userprofile/userprofile.component';
 
 
 
@@ -119,7 +120,6 @@ import { ComplaintComponent } from './backOffice/complaint/complaint.component';
     TableConsultationsComponent,
     TablePatientsComponent,
     PatientfileComponent,
-    ProfileComponent,
     DoctorListComponent,
     ListDoctorComponent,
     PatientappointmentlistComponent,
@@ -128,7 +128,7 @@ import { ComplaintComponent } from './backOffice/complaint/complaint.component';
     PatientfileAdminComponent,
     AddComplaintComponent,
     ComplaintComponent
-
+    UserprofileComponent
 
   ],
   imports: [

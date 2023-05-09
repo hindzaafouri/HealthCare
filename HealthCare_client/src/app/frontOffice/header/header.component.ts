@@ -11,10 +11,10 @@ import { AuthService } from '../user/auth.service';
 export class HeaderComponent implements OnInit {
 
   isSignedin = false;
-
+role=sessionStorage.getItem('role');
 	signedinUser: string = '';
 	username:any []= [];
-
+    name=sessionStorage.getItem("username");
 	greeting: any[] = [];
 
 	constructor(private route: ActivatedRoute,private auth: AuthService,private router: Router, private http: HttpClient, public authService: AuthService) {}

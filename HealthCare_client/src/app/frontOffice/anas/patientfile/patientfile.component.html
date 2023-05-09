@@ -19,7 +19,31 @@
                     <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-secondary">Add + </button>
                 </div>
               </div>
-    <table class="table">
+
+              <div>
+                <div class="container" style="margin-bottom: 50%;">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col py-2" *ngFor="let data of AllPatient">
+                                <div class="card" style="width: 18rem;">
+                                    <div class="card-body">
+                                        <h5 class="card-title"> {{data.username}} </h5>
+                                        <h6 class="card-title">{{data.consutation_nbr}}</h6>
+                                     
+                                        <p class="card-text">{{data.content}} </p>
+                                        <p class="card-text">{{data.state}}</p>
+
+                                        <button (click)="delete(data.id_patientfile)" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i>                                        </button>
+                                        <button (click)="getId(data.id_patientfile)" data-bs-toggle="modal" data-bs-target="#exampleModal"  class="btn btn-warning">Edit
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+   <!--  <table class="table">
         <thead>
             <tr>
                 <th scope="col">Username</th>
@@ -43,7 +67,7 @@
             </tr>
 
         </tbody>
-    </table>
+    </table> -->
 </div>
 
 <div class="modal fade" id="exampleModal" data-bs-keyboard="false" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
