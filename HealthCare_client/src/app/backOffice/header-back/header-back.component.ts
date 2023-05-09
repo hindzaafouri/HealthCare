@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/frontOffice/user/auth.service';
 
 @Component({
   selector: 'app-header-back',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderBackComponent implements OnInit {
 
-  constructor() { }
+  constructor(private auth:AuthService) { }
 
   ngOnInit(): void {
+  }
+
+  logout(){
+    this.auth.signout();
   }
 
 }

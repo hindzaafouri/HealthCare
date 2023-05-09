@@ -43,6 +43,9 @@ public class UserService implements UserDetailsService {
     public boolean ifEmailExist(String email){
         return userRepository.existsByEmail(email);
     }
+    public boolean ifUsernameExist(String username){
+        return userRepository.existsByUsername(username);
+    }
 
     @Transactional
     public int getUserActive(String email){

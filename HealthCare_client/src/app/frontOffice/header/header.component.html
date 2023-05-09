@@ -71,8 +71,9 @@
                 </li>
                 <li><a routerLink="/patient/consultations-patient" class="st-smooth-move">Consultation</a></li>
                 <li *ngIf="!isSignedin"><a routerLink="/login" class="st-smooth-move">login</a></li>
-                <li *ngIf="isSignedin"><a routerLink="/profile" class="st-smooth-move">Account</a></li>
+                <li *ngIf="isSignedin"><a routerLink="/user_profile" class="st-smooth-move">{{name}}</a></li>
                 <li  *ngIf="isSignedin"> <a routerLink="/" style="text-decoration: underline; cursor: pointer;" (click)="doSignout()" >Signout</a></li>
+                <li  *ngIf="role=='Admin'"> <a routerLink="/admin" style="text-decoration: underline; cursor: pointer;" >Admin Dashboard</a></li>
 
 
               </ul>

@@ -1,5 +1,6 @@
 import { Component, ElementRef, Renderer2 } from '@angular/core';
 import { UserService } from '../user.service';
+import { User } from 'src/models/User';
 
 @Component({
   selector: 'app-user-list',
@@ -16,13 +17,25 @@ export class UserListComponent {
     id:null
   }
 
+  filteredUsers: User[] = [];
 
+  users: any[] = [];
 
   showForm= false ;
-
+  searchByKeyWord : string = '';
+  selectedTopic: string = '';
 
   constructor(private renderer: Renderer2, private elRef: ElementRef,private userService: UserService) {
     this.getUsersDetails();
+  }
+
+  
+  onTopicChange() {
+    if (this.selectedTopic) {
+      this.filteredUsers = this.users.filter(userDetails => userDetails.username === this.selectedTopic);
+    } else {
+      this.filteredUsers = this.users;
+    }
   }
 
   getUsersDetails() {

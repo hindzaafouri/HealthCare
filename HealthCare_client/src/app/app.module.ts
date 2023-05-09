@@ -65,6 +65,7 @@ import { DoctorappointmentlistComponent } from './frontOffice/doctorappointmentl
 import { DoctorappointmentUpdateComponent } from './frontOffice/doctorappointment-update/doctorappointment-update.component';
 import { GrammarlyButtonElement, GrammarlyEditorPluginElement } from '@grammarly/editor-sdk';
 import { PatientfileAdminComponent } from './backOffice/anas/patientfile-admin/patientfile-admin.component';
+import { UserprofileComponent } from './frontOffice/user/userprofile/userprofile.component';
 
 
 
@@ -117,13 +118,13 @@ import { PatientfileAdminComponent } from './backOffice/anas/patientfile-admin/p
     TableConsultationsComponent,
     TablePatientsComponent,
     PatientfileComponent,
-    ProfileComponent,
     DoctorListComponent,
     ListDoctorComponent,
     PatientappointmentlistComponent,
     DoctorappointmentlistComponent,
     DoctorappointmentUpdateComponent,
-    PatientfileAdminComponent
+    PatientfileAdminComponent,
+    UserprofileComponent
 
   ],
   imports: [

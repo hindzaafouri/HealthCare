@@ -20,10 +20,12 @@ export class SocialService {
           sessionStorage.setItem("email",response.email)
           sessionStorage.setItem("token",`Bearer ${response.token}`)
           this.setId(response.user.id)
-          this.setRoles(response.user.userRoles)
+          sessionStorage.setItem("username",response.user.username)
+          sessionStorage.setItem("phone_number",response.user.phone_number)
+          sessionStorage.setItem("role",response.user.userRoles[0].roleName)
 
+          this.setId(response.user.id)
 
-        
           return response;
         }
       )
@@ -35,8 +37,11 @@ export class SocialService {
       map(
         response => {
           sessionStorage.setItem("email",response.email)
+          this.setId(response.user.id)
           sessionStorage.setItem("token",`Bearer ${response.token}`)
-          
+          sessionStorage.setItem("username",response.user.username)
+          sessionStorage.setItem("phone_number",response.user.phone_number)
+          sessionStorage.setItem("role",response.user.userRoles[0].roleName)
           return response;
         }
       )

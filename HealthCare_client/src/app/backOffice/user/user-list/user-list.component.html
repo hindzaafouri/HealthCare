@@ -15,6 +15,16 @@
                   Add Patient
                 </button>
               </div>
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="st-form-field st-style1">
+                    <label>Search Client </label>
+                    <div>
+                    <input type="text" id="keyword" name="keyword" placeholder="Key Word" [(ngModel)]="searchByKeyWord">
+                  </div>
+                  </div>
+                </div>
+              </div>
               <div class="w-full overflow-hidden rounded-lg shadow-xs">
                 <div class="w-full overflow-x-auto">
                   <table class="w-full whitespace-no-wrap">
@@ -28,13 +38,20 @@
                         <th class="px-4 py-3">Actions</th>
                       </tr>
                     </thead>
-                    <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                        <tr *ngFor="let user of userDetails">
+                    <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800" *ngFor= "let user of (selectedTopic ? filteredUsers : userDetails) ">
+                          <tr *ngIf="(user.username.toLowerCase().includes(searchByKeyWord.toLowerCase()) || user.email.toLowerCase().includes(searchByKeyWord.toLowerCase())|| searchByKeyWord == '')">
                             <td class="px-4 py-3 text-sm">{{user.id}}</td>
                             <td class="px-4 py-3 text-sm">{{user.username}}</td>
                             <td class="px-4 py-3 text-sm">{{user.email}}</td>
                             <td class="px-4 py-3 text-sm">{{user.phone_number}}</td>
-                            <td class="px-4 py-3 text-sm">{{user.active}}</td>
+                            <td class="px-4 py-3 text-sm"> <span *ngIf="user.active == 0"
+                              class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:bg-red-700 dark:text-red-100">
+                              Inactive
+                          </span>
+                          <span *ngIf="user.active == 1"
+                              class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
+                              Active
+                          </span></td>
                             <td class="px-4 py-3">
                                 <div class="flex items-center space-x-4 text-sm">
                                   <button (click)="openForm(user)" class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray" aria-label="Edit">

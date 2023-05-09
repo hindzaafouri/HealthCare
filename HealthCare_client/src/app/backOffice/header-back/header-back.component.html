@@ -44,6 +44,7 @@
                         </template>
                     </button>
                 </li>
+                
                 <!-- Notifications menu -->
                 <li class="relative">
                     <button class="relative align-middle rounded-md focus:outline-none focus:shadow-outline-purple"
@@ -143,6 +144,9 @@
                     </template>
                 </li>
             </ul>
+            <div><ul><a (click)="logout()">logout</a></ul></div>
+            <div><ul><a routerLink="/">Go to Dashboard</a></ul></div>
+
         </div>
     </header>
     </div>
