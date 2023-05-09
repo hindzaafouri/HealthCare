@@ -58,7 +58,7 @@ public class UserController {
     @PostMapping("/signup")
     public AccountResponse createUser(@RequestBody JwtSignup jwtLogin){
         AccountResponse accountResponse = new AccountResponse();
-        boolean result = userService.ifEmailExist(jwtLogin.getEmail());
+        boolean result = userService.ifEmailExist(jwtLogin.getEmail()) || userService.ifUsernameExist(jwtLogin.getUsername());
         if(result){
             accountResponse.setResult(0);
         } else {
