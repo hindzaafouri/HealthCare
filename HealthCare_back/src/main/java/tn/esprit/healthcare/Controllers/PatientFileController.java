@@ -27,8 +27,7 @@ public class PatientFileController {
  private EmailService emailService;
     @GetMapping("/all")
     public List<PatientFile> getAll(){
-        String body="test";
-        emailService.sendMail("anaslamiri07@gmail.com","Le patient est encore malade",body);
+
         return iPatientFileServiceimpl.getAllPatientFile();
 
     }
@@ -42,7 +41,8 @@ public class PatientFileController {
     }
     @PostMapping("/add")
     public PatientFile addPatient(@RequestBody PatientFile patientFile, HttpServletResponse response) throws IOException {
-
+        String body="Merci de contacter votre doctor";
+        emailService.sendMail("anaslamiri07@gmail.com","Le patient est encore malade",body);
         return iPatientFileServiceimpl.addPatientFile(patientFile,response);
 
     }
